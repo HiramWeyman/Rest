@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="steujedo_sindicatoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actividades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="actividad_desc" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Lista_Asistencia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="ruta_img" Type="nvarchar" MaxLength="200" />
+          <Property Name="entrada" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menu_descrip" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="menu_orden" Type="int" Nullable="false" />
+          <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol_desc" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Ures">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ures_desc" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matricula" Type="bigint" Nullable="false" />
+          <Property Name="nombre_completo" Type="nvarchar" MaxLength="150" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+          <Property Name="celular" Type="nvarchar" MaxLength="12" />
+          <Property Name="trabajador_base_rec" Type="nvarchar" MaxLength="150" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+          <Property Name="act_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Act">
+          <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="act_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Lista_Asistencia" Type="Self.Lista_Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lista_Asistencia">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="steujedo_sindicatoModelStoreContainer">
+          <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Ures" EntityType="Self.Ures" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="steujedo_sindicato" store:Type="Tables" />
+          <AssociationSet Name="fk_Act" Association="Self.fk_Act">
+            <End Role="Actividades" EntitySet="Actividades" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users" Association="Self.fk_Users">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Lista_Asistencia" EntitySet="Lista_Asistencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="steujedo_sindicatoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actividade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="actividad_desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Act" FromRole="Actividades" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Lista_Asistencia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="ruta_img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="entrada" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuario" Relationship="Self.fk_Users" FromRole="Lista_Asistencia" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="menu_id" />
+          </Key>
+          <Property Name="menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menu_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="menu_orden" Type="Int32" Nullable="false" />
+          <Property Name="menu_cancelar" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol_desc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Roles" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Ure">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ures_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricula" Type="Int64" Nullable="false" />
+          <Property Name="nombre_completo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="celular" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="trabajador_base_rec" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="act_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actividade" Relationship="Self.fk_Act" FromRole="Usuarios" ToRole="Actividades" />
+          <NavigationProperty Name="Lista_Asistencia" Relationship="Self.fk_Users" FromRole="Usuarios" ToRole="Lista_Asistencia" />
+          <NavigationProperty Name="Role" Relationship="Self.fk_Roles" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <Association Name="fk_Act">
+          <End Role="Actividades" Type="Self.Actividade" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actividades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="act_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users">
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Lista_Asistencia" Type="Self.Lista_Asistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lista_Asistencia">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="steujedo_sindicatoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actividades" EntityType="Self.Actividade" />
+          <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Ures" EntityType="Self.Ure" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="fk_Act" Association="Self.fk_Act">
+            <End Role="Actividades" EntitySet="Actividades" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users" Association="Self.fk_Users">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Lista_Asistencia" EntitySet="Lista_Asistencia" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="steujedo_sindicatoModelStoreContainer" CdmEntityContainer="steujedo_sindicatoEntities">
+          <EntitySetMapping Name="Actividades">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Actividade">
+              <MappingFragment StoreEntitySet="Actividades">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="actividad_desc" ColumnName="actividad_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lista_Asistencia">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Lista_Asistencia">
+              <MappingFragment StoreEntitySet="Lista_Asistencia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="ruta_img" ColumnName="ruta_img" />
+                <ScalarProperty Name="entrada" ColumnName="entrada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+                <ScalarProperty Name="menu_descrip" ColumnName="menu_descrip" />
+                <ScalarProperty Name="menu_orden" ColumnName="menu_orden" />
+                <ScalarProperty Name="menu_cancelar" ColumnName="menu_cancelar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ures">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Ure">
+              <MappingFragment StoreEntitySet="Ures">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ures_desc" ColumnName="ures_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="trabajador_base_rec" ColumnName="trabajador_base_rec" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="act_id" ColumnName="act_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="steujedo_sindicatoModelStoreContainer" CdmEntityContainer="steujedo_sindicatoEntities">
+    <EntitySetMapping Name="Actividades">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Actividade">
+        <MappingFragment StoreEntitySet="Actividades">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="actividad_desc" ColumnName="actividad_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lista_Asistencia">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Lista_Asistencia">
+        <MappingFragment StoreEntitySet="Lista_Asistencia">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="ruta_img" ColumnName="ruta_img" />
+          <ScalarProperty Name="entrada" ColumnName="entrada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+          <ScalarProperty Name="menu_descrip" ColumnName="menu_descrip" />
+          <ScalarProperty Name="menu_orden" ColumnName="menu_orden" />
+          <ScalarProperty Name="menu_cancelar" ColumnName="menu_cancelar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ures">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Ure">
+        <MappingFragment StoreEntitySet="Ures">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ures_desc" ColumnName="ures_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="trabajador_base_rec" ColumnName="trabajador_base_rec" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="act_id" ColumnName="act_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
