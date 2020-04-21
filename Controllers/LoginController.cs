@@ -35,7 +35,7 @@ namespace Rest.Controllers
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con Id" + id.ToString() + " no encontrado");
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con Id " + id.ToString() + " no encontrado");
                 }
 
             }

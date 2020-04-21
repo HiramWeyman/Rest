@@ -9,7 +9,7 @@ using Rest.Models;
 
 namespace Rest.Controllers
 {
-    //[EnableCors("http://localhost:4200", "X-Custom-Header", "GET,POST,PUT,OPTIONS")]
+    //[EnableCors("*", "*", "*")]
     public class UsuariosController : ApiController
     {
         [HttpGet]
