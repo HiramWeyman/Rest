@@ -27,19 +27,17 @@ namespace Rest.Controllers
                     postedFile.SaveAs(filePath);
                     docfiles.Add(filePath);
 
-
-
                     try
                     {
                         
                         //Create a FTP Request Object and Specfiy a Complete Path
-                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/"+ruta);
+                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/" + ruta);
 
                         //Call A FileUpload Method of FTP Request Object
                         reqObj.Method = WebRequestMethods.Ftp.UploadFile;
 
                         //If you want to access Resourse Protected,give UserName and PWD
-                        reqObj.Credentials = new NetworkCredential("uploadImages", "Sindicato#1586");
+                        reqObj.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
 
                         // Copy the contents of the file to the byte array.
                         byte[] fileContents = File.ReadAllBytes(filePath);
@@ -51,6 +49,8 @@ namespace Rest.Controllers
                         requestStream.Close();
                         FtpWebResponse response = (FtpWebResponse)reqObj.GetResponse();
                         response.Close();
+
+                        File.Delete(filePath);
                     }
 
                     catch (Exception Ex)
