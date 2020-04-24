@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -103,7 +103,7 @@ namespace Rest.Controllers
 
         }
 
-        [HttpPut]
+
         public HttpResponseMessage Put(int id,UsuariosCLS userCLS)
         {
 
