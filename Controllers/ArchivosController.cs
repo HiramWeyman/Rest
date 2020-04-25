@@ -40,7 +40,7 @@ namespace Rest.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Post(ArchivosCLS archivosCLS)
+        public HttpResponseMessage Post(string nombreArchivo, ArchivosCLS archivosCLS)
         {
 
             try
@@ -50,7 +50,7 @@ namespace Rest.Controllers
 
                     Archivo archivo = new Archivo();
                     archivo.archivo_descrip = archivosCLS.archivo_descrip;
-                    archivo.archivo_ruta = archivosCLS.archivo_ruta;
+                    archivo.archivo_ruta = "assets/archivos/" + nombreArchivo;
                     archivo.archivo_cancela = "N";
 
                     db.Archivos.Add(archivo);
