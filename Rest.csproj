@@ -177,12 +177,16 @@
     <Compile Include="Models\Actividade.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Archivo.cs">
+      <DependentUpon>SindicatoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Lista_Asistencia.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuCLS.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
@@ -208,6 +212,9 @@
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsuariosCLS.cs" />
+    <Compile Include="Models\Usuarios_Base.cs">
+      <DependentUpon>SindicatoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

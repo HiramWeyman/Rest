@@ -12,12 +12,19 @@ namespace Rest.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class Usuarios_Base
     {
-        public int menu_id { get; set; }
-        public string menu_descrip { get; set; }
-        public int menu_orden { get; set; }
-        public string menu_cancelar { get; set; }
-        public string menu_routerLink { get; set; }
+        public int id { get; set; }
+        public long matricula { get; set; }
+        public string nombre_completo { get; set; }
+        public string direccion { get; set; }
+        public string telefono { get; set; }
+        public string celular { get; set; }
+        public string observaciones { get; set; }
+        public int act_id { get; set; }
+        public int role_id { get; set; }
+    
+        public virtual Actividade Actividade { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

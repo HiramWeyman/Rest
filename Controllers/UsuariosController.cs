@@ -18,7 +18,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Usuarios.ToList();
+                return db.Usuarios.OrderBy(x => x.nombre_completo).ToList();
 
             }
         }
@@ -30,7 +30,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Actividades.ToList();
+                return db.Actividades.OrderBy(x => x.actividad_desc).ToList();
 
             }
         }
@@ -42,7 +42,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Roles.ToList();
+                return db.Roles.OrderBy(x=>x.rol_desc).ToList();
 
             }
         }

@@ -17,11 +17,13 @@ namespace Rest.Models
         public Role()
         {
             this.Usuarios = new HashSet<Usuario>();
+            this.Usuarios_Base = new HashSet<Usuarios_Base>();
         }
     
         public int id { get; set; }
         public string rol_desc { get; set; }
     
         public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuarios_Base> Usuarios_Base { get; set; }
     }
 }

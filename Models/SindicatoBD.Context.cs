@@ -31,5 +31,7 @@ namespace Rest.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Ure> Ures { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Archivo> Archivos { get; set; }
+        public DbSet<Usuarios_Base> Usuarios_Base { get; set; }
     }
 }

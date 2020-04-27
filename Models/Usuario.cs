@@ -29,6 +29,7 @@ namespace Rest.Models
         public string observaciones { get; set; }
         public int act_id { get; set; }
         public int role_id { get; set; }
+        public Nullable<System.DateTime> fecho_ingreso { get; set; }
     
         public virtual Actividade Actividade { get; set; }
         public virtual ICollection<Lista_Asistencia> Lista_Asistencia { get; set; }

@@ -7,6 +7,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="actividad_desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Usuarios" Relationship="Self.fk_Act" FromRole="Actividades" ToRole="Usuarios" />
+    <NavigationProperty Name="Usuarios_Base" Relationship="steujedo_sindicatoModel.fk_Act_Base" FromRole="Actividade" ToRole="Usuarios_Base" />
   </EntityType>
   <EntityType Name="Lista_Asistencia">
     <Key>
@@ -27,6 +28,7 @@
     <Property Name="menu_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="menu_orden" Type="Int32" Nullable="false" />
     <Property Name="menu_cancelar" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="menu_routerLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -35,6 +37,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="rol_desc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="Usuarios" Relationship="Self.fk_Roles" FromRole="Roles" ToRole="Usuarios" />
+    <NavigationProperty Name="Usuarios_Base" Relationship="steujedo_sindicatoModel.fk_Roles_Base" FromRole="Role" ToRole="Usuarios_Base" />
   </EntityType>
   <EntityType Name="Ure">
     <Key>
@@ -60,6 +63,7 @@
     <NavigationProperty Name="Actividade" Relationship="Self.fk_Act" FromRole="Usuarios" ToRole="Actividades" />
     <NavigationProperty Name="Lista_Asistencia" Relationship="Self.fk_Users" FromRole="Usuarios" ToRole="Lista_Asistencia" />
     <NavigationProperty Name="Role" Relationship="Self.fk_Roles" FromRole="Usuarios" ToRole="Roles" />
+    <Property Name="fecho_ingreso" Type="DateTime" Precision="0" />
   </EntityType>
   <Association Name="fk_Act">
     <End Role="Actividades" Type="Self.Actividade" Multiplicity="1" />
@@ -116,5 +120,64 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
+    <EntitySet Name="Archivos" EntityType="steujedo_sindicatoModel.Archivo" />
+    <EntitySet Name="Usuarios_Base" EntityType="steujedo_sindicatoModel.Usuarios_Base" />
+    <AssociationSet Name="fk_Act_Base" Association="steujedo_sindicatoModel.fk_Act_Base">
+      <End Role="Actividade" EntitySet="Actividades" />
+      <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Roles_Base" Association="steujedo_sindicatoModel.fk_Roles_Base">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Archivo">
+    <Key>
+      <PropertyRef Name="archivo_id" />
+    </Key>
+    <Property Name="archivo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="archivo_descrip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="archivo_ruta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="archivo_cancela" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Usuarios_Base">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matricula" Type="Int64" Nullable="false" />
+    <Property Name="nombre_completo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="celular" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="act_id" Type="Int32" Nullable="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Actividade" Relationship="steujedo_sindicatoModel.fk_Act_Base" FromRole="Usuarios_Base" ToRole="Actividade" />
+    <NavigationProperty Name="Role" Relationship="steujedo_sindicatoModel.fk_Roles_Base" FromRole="Usuarios_Base" ToRole="Role" />
+  </EntityType>
+  <Association Name="fk_Act_Base">
+    <End Type="steujedo_sindicatoModel.Actividade" Role="Actividade" Multiplicity="1" />
+    <End Type="steujedo_sindicatoModel.Usuarios_Base" Role="Usuarios_Base" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividade">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios_Base">
+        <PropertyRef Name="act_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Roles_Base">
+    <End Type="steujedo_sindicatoModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="steujedo_sindicatoModel.Usuarios_Base" Role="Usuarios_Base" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios_Base">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

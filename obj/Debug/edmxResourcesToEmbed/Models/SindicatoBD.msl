@@ -23,6 +23,7 @@
     <EntitySetMapping Name="Menus">
       <EntityTypeMapping TypeName="steujedo_sindicatoModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="menu_routerLink" ColumnName="menu_routerLink" />
           <ScalarProperty Name="menu_id" ColumnName="menu_id" />
           <ScalarProperty Name="menu_descrip" ColumnName="menu_descrip" />
           <ScalarProperty Name="menu_orden" ColumnName="menu_orden" />
@@ -49,6 +50,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="fecho_ingreso" ColumnName="fecho_ingreso" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="matricula" ColumnName="matricula" />
           <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
@@ -59,6 +61,31 @@
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="act_id" ColumnName="act_id" />
           <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Archivos">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Archivo">
+        <MappingFragment StoreEntitySet="Archivos">
+          <ScalarProperty Name="archivo_cancela" ColumnName="archivo_cancela" />
+          <ScalarProperty Name="archivo_ruta" ColumnName="archivo_ruta" />
+          <ScalarProperty Name="archivo_descrip" ColumnName="archivo_descrip" />
+          <ScalarProperty Name="archivo_id" ColumnName="archivo_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios_Base">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuarios_Base">
+        <MappingFragment StoreEntitySet="Usuarios_Base">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="act_id" ColumnName="act_id" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
