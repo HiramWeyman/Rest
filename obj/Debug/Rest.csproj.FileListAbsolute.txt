@@ -1,3 +1,4 @@
+C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.csproj.CoreCompileInputs.cache
 C:\Users\papaj\source\repos\Rest\bin\Rest.dll.config
 C:\Users\papaj\source\repos\Rest\bin\Rest.dll
 C:\Users\papaj\source\repos\Rest\bin\Rest.pdb
@@ -51,6 +52,7 @@ C:\Users\papaj\source\repos\Rest\bin\roslyn\vbc.rsp
 C:\Users\papaj\source\repos\Rest\bin\roslyn\VBCSCompiler.exe
 C:\Users\papaj\source\repos\Rest\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\papaj\source\repos\Rest\bin\Antlr3.Runtime.dll
+C:\Users\papaj\source\repos\Rest\bin\EntityFramework.dll
 C:\Users\papaj\source\repos\Rest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\papaj\source\repos\Rest\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\papaj\source\repos\Rest\bin\Newtonsoft.Json.dll
@@ -67,6 +69,7 @@ C:\Users\papaj\source\repos\Rest\bin\System.Web.WebPages.Deployment.dll
 C:\Users\papaj\source\repos\Rest\bin\System.Web.WebPages.dll
 C:\Users\papaj\source\repos\Rest\bin\System.Web.WebPages.Razor.dll
 C:\Users\papaj\source\repos\Rest\bin\WebGrease.dll
+C:\Users\papaj\source\repos\Rest\bin\EntityFramework.xml
 C:\Users\papaj\source\repos\Rest\bin\System.Web.Http.Cors.xml
 C:\Users\papaj\source\repos\Rest\bin\Newtonsoft.Json.xml
 C:\Users\papaj\source\repos\Rest\bin\System.Net.Http.Formatting.xml
@@ -91,10 +94,7 @@ C:\Users\papaj\source\repos\Rest\bin\es\System.Web.Razor.resources.dll
 C:\Users\papaj\source\repos\Rest\bin\es\System.Web.WebPages.resources.dll
 C:\Users\papaj\source\repos\Rest\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\papaj\source\repos\Rest\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.csprojAssemblyReference.cache
-C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.csproj.CoreCompileInputs.cache
 C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.csproj.CopyComplete
 C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.dll
 C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.pdb
-C:\Users\papaj\source\repos\Rest\bin\EntityFramework.dll
-C:\Users\papaj\source\repos\Rest\bin\EntityFramework.xml
+C:\Users\papaj\source\repos\Rest\obj\Debug\Rest.csprojAssemblyReference.cache

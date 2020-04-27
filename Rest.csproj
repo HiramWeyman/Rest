@@ -166,9 +166,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ArchivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\UploadBannerController.cs" />
+    <Compile Include="Controllers\UploadFilesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -180,6 +183,7 @@
     <Compile Include="Models\Archivo.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArchivosCLS.cs" />
     <Compile Include="Models\Lista_Asistencia.cs">
       <DependentUpon>SindicatoBD.tt</DependentUpon>
     </Compile>
@@ -264,6 +268,7 @@
     <Content Include="Models\SindicatoBD.edmx.diagram">
       <DependentUpon>SindicatoBD.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

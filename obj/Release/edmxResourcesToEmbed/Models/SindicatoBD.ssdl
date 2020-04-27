@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="steujedo_sindicatoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actividades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="actividad_desc" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Archivos">
+    <Key>
+      <PropertyRef Name="archivo_id" />
+    </Key>
+    <Property Name="archivo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="archivo_descrip" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="archivo_ruta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="archivo_cancela" Type="nvarchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lista_Asistencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="date" />
+    <Property Name="ruta_img" Type="nvarchar" MaxLength="200" />
+    <Property Name="entrada" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="menu_id" />
+    </Key>
+    <Property Name="menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menu_descrip" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="menu_orden" Type="int" Nullable="false" />
+    <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="menu_routerLink" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rol_desc" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Ures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ures_desc" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="bigint" Nullable="false" />
+    <Property Name="nombre_completo" Type="nvarchar" MaxLength="150" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="celular" Type="nvarchar" MaxLength="12" />
+    <Property Name="trabajador_base_rec" Type="nvarchar" MaxLength="150" />
+    <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+    <Property Name="act_id" Type="int" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="fecho_ingreso" Type="date" />
+  </EntityType>
+  <EntityType Name="Usuarios_Base">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="bigint" Nullable="false" />
+    <Property Name="nombre_completo" Type="nvarchar" MaxLength="150" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="celular" Type="nvarchar" MaxLength="12" />
+    <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+    <Property Name="act_id" Type="int" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Act">
+    <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="act_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Act_Base">
+    <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
+    <End Role="Usuarios_Base" Type="Self.Usuarios_Base" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios_Base">
+        <PropertyRef Name="act_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Roles_Base">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios_Base" Type="Self.Usuarios_Base" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios_Base">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Users">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Lista_Asistencia" Type="Self.Lista_Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lista_Asistencia">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="steujedo_sindicatoModelStoreContainer">
+    <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Ures" EntityType="Self.Ures" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Usuarios_Base" EntityType="Self.Usuarios_Base" Schema="steujedo_sindicato" store:Type="Tables" />
+    <AssociationSet Name="fk_Act" Association="Self.fk_Act">
+      <End Role="Actividades" EntitySet="Actividades" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Act_Base" Association="Self.fk_Act_Base">
+      <End Role="Actividades" EntitySet="Actividades" />
+      <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Roles_Base" Association="Self.fk_Roles_Base">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Users" Association="Self.fk_Users">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Lista_Asistencia" EntitySet="Lista_Asistencia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
