@@ -22,6 +22,7 @@ namespace Rest.Models
         public System.DateTime pub_f_publica { get; set; }
         public string pub_cancela { get; set; }
         public int pub_id_categoria { get; set; }
+        public string pub_ruta { get; set; }
     
         public virtual Pub_Categoria Pub_Categoria { get; set; }
     }
