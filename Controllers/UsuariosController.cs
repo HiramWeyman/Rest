@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Rest.Models;
+using System.IO;
 
 namespace Rest.Controllers
 {
@@ -13,12 +17,31 @@ namespace Rest.Controllers
     public class UsuariosController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Usuario> Get()
+        public IEnumerable<UsuariosCLS> Get()
         {
+            List<UsuariosCLS> listaEmpleado = null;
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Usuarios.OrderBy(x => x.nombre_completo).ToList();
+                listaEmpleado = (from usr in db.Usuarios
+                                 join act in db.Actividades
+                                 on usr.act_id equals act.id
+                                
+                                 select new UsuariosCLS
+                                 {
+                                     id = usr.id,
+                                     matricula =(long)usr.matricula,
+                                     nombre_completo =usr.nombre_completo,
+                                     direccion = usr.direccion,
+                                     telefono = usr.telefono,
+                                     celular = usr.celular,
+                                     trabajador_base_rec =usr.trabajador_base_rec,
+                                     observaciones =usr.observaciones,
+                                     act_id = (int)usr.act_id,
+                                     role_id = (int)usr.role_id,
+                                     actividad_desc = act.actividad_desc
+                                 }).ToList();
+                return listaEmpleado;
 
             }
         }
@@ -46,6 +69,7 @@ namespace Rest.Controllers
 
             }
         }
+
         public HttpResponseMessage Get(int id)
         {
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
@@ -65,13 +89,14 @@ namespace Rest.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Post(UsuariosCLS userCLS)
+        public HttpResponseMessage Post(string usr,UsuariosCLS userCLS)
         {
 
             try
             {
                 using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
                 {
+                    Console.WriteLine(usr);
                     Random rdn = new Random();
                     int a = rdn.Next(100, 900);
                     int b = rdn.Next(100, 900);
@@ -87,8 +112,20 @@ namespace Rest.Controllers
                     usuarios.observaciones = userCLS.observaciones;
                     usuarios.act_id = userCLS.act_id;
                     usuarios.role_id = userCLS.role_id;
-
-
+                    usuarios.user_login = userCLS.user_login;
+                    if (userCLS.password != null)
+                    {
+                        SHA256Managed sha = new SHA256Managed();
+                        byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
+                        byte[] byteContraCifrado = sha.ComputeHash(byteContra);
+                        string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
+                        usuarios.password = contraCifrada;
+                    }
+                    else {
+                        usuarios.password = "";
+                    }
+                    usuarios.user_add = usr;
+                 
                     db.Usuarios.Add(usuarios);
                     db.SaveChanges();
                     var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
@@ -127,6 +164,21 @@ namespace Rest.Controllers
                         usuario.observaciones = userCLS.observaciones;
                         usuario.act_id = userCLS.act_id;
                         usuario.role_id = userCLS.role_id;
+                        usuario.user_login = userCLS.user_login;
+                        if (userCLS.password.Equals("") || userCLS.password.Equals(null))
+                        {
+                            usuario.password =null;
+                        }
+                        else
+                        {
+                            SHA256Managed sha = new SHA256Managed();
+                            byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
+                            byte[] byteContraCifrado = sha.ComputeHash(byteContra);
+                            string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
+                            usuario.password = contraCifrada;
+                            
+                        }
+                        usuario.user_mod = userCLS.usr_mod;
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -173,5 +225,7 @@ namespace Rest.Controllers
             }
 
         }
+
+
     }
 }

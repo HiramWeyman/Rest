@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Http;
 using Rest.Models;
 using System.Net.Http;
-using System.Web.Http;
 using System.Net;
 
 namespace Rest.Controllers

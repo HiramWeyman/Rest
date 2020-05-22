@@ -6,6 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Rest.Models;
+using System.Security.Cryptography;
+using System.Text;
+using System.Data.SqlClient;
 
 namespace Rest.Controllers
 {
@@ -23,19 +26,61 @@ namespace Rest.Controllers
         //    }
         //}
 
-        public HttpResponseMessage GetLogin(int id)
+        //public HttpResponseMessage GetLogin(Login log)
+        //{
+        //    //string user_login = "";
+        //    using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+        //    {
+        //        SHA256Managed sha = new SHA256Managed();
+        //        byte[] byteContra = Encoding.Default.GetBytes(log.password);
+        //        byte[] byteContraCifrado = sha.ComputeHash(byteContra);
+        //        string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
+        //        db.Configuration.LazyLoadingEnabled = false;
+        //        var user = db.Usuarios.FirstOrDefault(e => e.user_login == log.user_login && e.password == log.password && e.role_id == 1);
+        //        if (user != null)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, user);
+        //            //user_login = db.Database.SqlQuery<string>("Select user_login from Usuarios where user_login=@usuario and password=@password adnd role_id=1", new SqlParameter("@usuario", usr), new SqlParameter("@password", password)).FirstOrDefault();
+        //            //Session["Usuario"] = user_login;
+        //        }
+        //        else
+        //        {
+        //            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  " + log.user_login.ToString() + " no encontrado");
+        //        }
+
+        //    }
+        //}
+
+        public HttpResponseMessage Post(Login log)
         {
+            //string user_login = "";
+            Console.WriteLine(log);
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
+                string contraCifrada = "";
+                if (log.password != null)
+                {
+                    SHA256Managed sha = new SHA256Managed();
+                    byte[] byteContra = Encoding.Default.GetBytes(log.password);
+                    byte[] byteContraCifrado = sha.ComputeHash(byteContra);
+                    contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
+                }
+                else {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Falta  Ingresar password  " + log.user_login.ToString());
+                }
+               
                 db.Configuration.LazyLoadingEnabled = false;
-                var user = db.Usuarios.FirstOrDefault(e => e.matricula == id && e.role_id==1);
+                var user = db.Usuarios.FirstOrDefault(e => e.user_login == log.user_login && e.password == contraCifrada && e.role_id == 1);
                 if (user != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, user);
+                    //user_login = db.Database.SqlQuery<string>("Select user_login from Usuarios where user_login=@usuario and password=@password adnd role_id=1", new SqlParameter("@usuario", usr), new SqlParameter("@password", password)).FirstOrDefault();
+                    //Session["Usuario"] = user_login;
+
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con Id " + id.ToString() + " no encontrado");
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  " + log.user_login.ToString() + " no encontrado");
                 }
 
             }

@@ -19,5 +19,6 @@ namespace Rest.Models
         public string int_puesto { get; set; }
         public string int_ruta_imagen { get; set; }
         public string int_cancelado { get; set; }
+        public string int_class { get; set; }
     }
 }

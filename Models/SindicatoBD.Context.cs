@@ -33,5 +33,8 @@ namespace Rest.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Archivo> Archivos { get; set; }
         public DbSet<Usuarios_Base> Usuarios_Base { get; set; }
+        public DbSet<Integrante> Integrantes { get; set; }
+        public DbSet<Pub_Categoria> Pub_Categoria { get; set; }
+        public DbSet<Publicacione> Publicaciones { get; set; }
     }
 }

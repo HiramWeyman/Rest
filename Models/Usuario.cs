@@ -30,6 +30,10 @@ namespace Rest.Models
         public int act_id { get; set; }
         public int role_id { get; set; }
         public Nullable<System.DateTime> fecho_ingreso { get; set; }
+        public string password { get; set; }
+        public string user_add { get; set; }
+        public string user_mod { get; set; }
+        public string user_login { get; set; }
     
         public virtual Actividade Actividade { get; set; }
         public virtual ICollection<Lista_Asistencia> Lista_Asistencia { get; set; }

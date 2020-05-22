@@ -11,7 +11,7 @@ namespace Rest.Models
         public int id { get; set; }
 
         [Display(Name = "Matricula")]
-        public string matricula { get; set; }
+        public long matricula { get; set; }
 
         [Display(Name = "Nombre Completo")]
         public string nombre_completo { get; set; }
@@ -31,5 +31,9 @@ namespace Rest.Models
         public string observaciones { get; set; }
         public int act_id { get; set; }
         public int role_id { get; set; }
+        public string actividad_desc { get; set; }
+        public string user_login { get; set; }
+        public string password { get; set; }
+        public string usr_mod { get; set; }
     }
 }

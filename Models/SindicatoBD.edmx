@@ -21,6 +21,17 @@
           <Property Name="archivo_ruta" Type="nvarchar(max)" Nullable="false" />
           <Property Name="archivo_cancela" Type="nvarchar" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="Integrantes">
+          <Key>
+            <PropertyRef Name="int_id" />
+          </Key>
+          <Property Name="int_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="int_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="int_puesto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="int_ruta_imagen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="int_cancelado" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="int_class" Type="nvarchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="Lista_Asistencia">
           <Key>
             <PropertyRef Name="id" />
@@ -40,6 +51,27 @@
           <Property Name="menu_orden" Type="int" Nullable="false" />
           <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="menu_routerLink" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pub_Categoria">
+          <Key>
+            <PropertyRef Name="catpub_id" />
+          </Key>
+          <Property Name="catpub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catpub_categoria" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publicaciones">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pub_titulo" Type="varchar(max)" Nullable="false" />
+          <Property Name="pub_subtitulo" Type="varchar(max)" />
+          <Property Name="pub_texto" Type="varchar(max)" Nullable="false" />
+          <Property Name="pub_u_publica" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="pub_f_publica" Type="date" Nullable="false" />
+          <Property Name="pub_cancela" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="pub_id_categoria" Type="int" Nullable="false" />
+          <Property Name="pub_ruta" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -70,6 +102,10 @@
           <Property Name="act_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
           <Property Name="fecho_ingreso" Type="date" />
+          <Property Name="password" Type="varchar(max)" />
+          <Property Name="user_add" Type="varchar" MaxLength="20" />
+          <Property Name="user_mod" Type="varchar" MaxLength="20" />
+          <Property Name="user_login" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Usuarios_Base">
           <Key>
@@ -106,6 +142,18 @@
             </Principal>
             <Dependent Role="Usuarios_Base">
               <PropertyRef Name="act_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_publicaciones">
+          <End Role="Pub_Categoria" Type="Self.Pub_Categoria" Multiplicity="1" />
+          <End Role="Publicaciones" Type="Self.Publicaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pub_Categoria">
+              <PropertyRef Name="catpub_id" />
+            </Principal>
+            <Dependent Role="Publicaciones">
+              <PropertyRef Name="pub_id_categoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -148,8 +196,11 @@
         <EntityContainer Name="steujedo_sindicatoModelStoreContainer">
           <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Integrantes" EntityType="Self.Integrantes" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Pub_Categoria" EntityType="Self.Pub_Categoria" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Publicaciones" EntityType="Self.Publicaciones" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Ures" EntityType="Self.Ures" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="steujedo_sindicato" store:Type="Tables" />
@@ -161,6 +212,10 @@
           <AssociationSet Name="fk_Act_Base" Association="Self.fk_Act_Base">
             <End Role="Actividades" EntitySet="Actividades" />
             <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
+          </AssociationSet>
+          <AssociationSet Name="FK_publicaciones" Association="Self.FK_publicaciones">
+            <End Role="Pub_Categoria" EntitySet="Pub_Categoria" />
+            <End Role="Publicaciones" EntitySet="Publicaciones" />
           </AssociationSet>
           <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -243,6 +298,10 @@
           <NavigationProperty Name="Lista_Asistencia" Relationship="Self.fk_Users" FromRole="Usuarios" ToRole="Lista_Asistencia" />
           <NavigationProperty Name="Role" Relationship="Self.fk_Roles" FromRole="Usuarios" ToRole="Roles" />
           <Property Name="fecho_ingreso" Type="DateTime" Precision="0" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_Act">
           <End Role="Actividades" Type="Self.Actividade" Multiplicity="1" />
@@ -309,6 +368,13 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="Usuarios_Base" EntitySet="Usuarios_Base" />
           </AssociationSet>
+          <EntitySet Name="Integrantes" EntityType="steujedo_sindicatoModel.Integrante" />
+          <EntitySet Name="Pub_Categoria" EntityType="steujedo_sindicatoModel.Pub_Categoria" />
+          <EntitySet Name="Publicaciones" EntityType="steujedo_sindicatoModel.Publicacione" />
+          <AssociationSet Name="FK_publicaciones" Association="steujedo_sindicatoModel.FK_publicaciones">
+            <End Role="Pub_Categoria" EntitySet="Pub_Categoria" />
+            <End Role="Publicacione" EntitySet="Publicaciones" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Archivo">
           <Key>
@@ -356,6 +422,52 @@
             </Principal>
             <Dependent Role="Usuarios_Base">
               <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Integrante">
+          <Key>
+            <PropertyRef Name="int_id" />
+          </Key>
+          <Property Name="int_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="int_nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="int_puesto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="int_ruta_imagen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="int_cancelado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="int_class" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pub_Categoria">
+          <Key>
+            <PropertyRef Name="catpub_id" />
+          </Key>
+          <Property Name="catpub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catpub_categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Publicaciones" Relationship="steujedo_sindicatoModel.FK_publicaciones" FromRole="Pub_Categoria" ToRole="Publicacione" />
+        </EntityType>
+        <EntityType Name="Publicacione">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pub_titulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pub_subtitulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pub_texto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pub_u_publica" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="pub_f_publica" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pub_cancela" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="pub_id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="pub_ruta" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pub_Categoria" Relationship="steujedo_sindicatoModel.FK_publicaciones" FromRole="Publicacione" ToRole="Pub_Categoria" />
+        </EntityType>
+        <Association Name="FK_publicaciones">
+          <End Type="steujedo_sindicatoModel.Pub_Categoria" Role="Pub_Categoria" Multiplicity="1" />
+          <End Type="steujedo_sindicatoModel.Publicacione" Role="Publicacione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pub_Categoria">
+              <PropertyRef Name="catpub_id" />
+            </Principal>
+            <Dependent Role="Publicacione">
+              <PropertyRef Name="pub_id_categoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -414,6 +526,10 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+                <ScalarProperty Name="user_add" ColumnName="user_add" />
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="fecho_ingreso" ColumnName="fecho_ingreso" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="matricula" ColumnName="matricula" />
@@ -450,6 +566,41 @@
                 <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
                 <ScalarProperty Name="matricula" ColumnName="matricula" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Integrantes">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Integrante">
+              <MappingFragment StoreEntitySet="Integrantes">
+                <ScalarProperty Name="int_class" ColumnName="int_class" />
+                <ScalarProperty Name="int_cancelado" ColumnName="int_cancelado" />
+                <ScalarProperty Name="int_ruta_imagen" ColumnName="int_ruta_imagen" />
+                <ScalarProperty Name="int_puesto" ColumnName="int_puesto" />
+                <ScalarProperty Name="int_nombre" ColumnName="int_nombre" />
+                <ScalarProperty Name="int_id" ColumnName="int_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pub_Categoria">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Pub_Categoria">
+              <MappingFragment StoreEntitySet="Pub_Categoria">
+                <ScalarProperty Name="catpub_categoria" ColumnName="catpub_categoria" />
+                <ScalarProperty Name="catpub_id" ColumnName="catpub_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publicaciones">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Publicacione">
+              <MappingFragment StoreEntitySet="Publicaciones">
+                <ScalarProperty Name="pub_ruta" ColumnName="pub_ruta" />
+                <ScalarProperty Name="pub_id_categoria" ColumnName="pub_id_categoria" />
+                <ScalarProperty Name="pub_cancela" ColumnName="pub_cancela" />
+                <ScalarProperty Name="pub_f_publica" ColumnName="pub_f_publica" />
+                <ScalarProperty Name="pub_u_publica" ColumnName="pub_u_publica" />
+                <ScalarProperty Name="pub_texto" ColumnName="pub_texto" />
+                <ScalarProperty Name="pub_subtitulo" ColumnName="pub_subtitulo" />
+                <ScalarProperty Name="pub_titulo" ColumnName="pub_titulo" />
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

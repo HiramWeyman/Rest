@@ -18,6 +18,10 @@
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Usuarios_Base" Width="1.5" PointX="5" PointY="7.375" />
         <AssociationConnector Association="steujedo_sindicatoModel.fk_Act_Base" />
         <AssociationConnector Association="steujedo_sindicatoModel.fk_Roles_Base" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Integrante" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Pub_Categoria" Width="1.5" PointX="7.75" PointY="8.625" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Publicacione" Width="1.5" PointX="10" PointY="8" />
+        <AssociationConnector Association="steujedo_sindicatoModel.FK_publicaciones" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
