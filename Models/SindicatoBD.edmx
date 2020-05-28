@@ -52,6 +52,13 @@
           <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="menu_routerLink" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perfil_desc" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="Pub_Categoria">
           <Key>
             <PropertyRef Name="catpub_id" />
@@ -106,6 +113,7 @@
           <Property Name="user_add" Type="varchar" MaxLength="20" />
           <Property Name="user_mod" Type="varchar" MaxLength="20" />
           <Property Name="user_login" Type="varchar" MaxLength="20" />
+          <Property Name="perfil_id" Type="int" />
         </EntityType>
         <EntityType Name="Usuarios_Base">
           <Key>
@@ -121,6 +129,18 @@
           <Property Name="act_id" Type="int" Nullable="false" />
           <Property Name="role_id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Usuarios__perfil__756D6ECB">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="perfil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Act">
           <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -199,12 +219,17 @@
           <EntitySet Name="Integrantes" EntityType="Self.Integrantes" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Pub_Categoria" EntityType="Self.Pub_Categoria" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Publicaciones" EntityType="Self.Publicaciones" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Ures" EntityType="Self.Ures" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Usuarios_Base" EntityType="Self.Usuarios_Base" Schema="steujedo_sindicato" store:Type="Tables" />
+          <AssociationSet Name="FK__Usuarios__perfil__756D6ECB" Association="Self.FK__Usuarios__perfil__756D6ECB">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="fk_Act" Association="Self.fk_Act">
             <End Role="Actividades" EntitySet="Actividades" />
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -302,6 +327,8 @@
           <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="user_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="perfil_id" Type="Int32" />
+          <NavigationProperty Name="Perfil" Relationship="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" FromRole="Usuario" ToRole="Perfil" />
         </EntityType>
         <Association Name="fk_Act">
           <End Role="Actividades" Type="Self.Actividade" Multiplicity="1" />
@@ -374,6 +401,11 @@
           <AssociationSet Name="FK_publicaciones" Association="steujedo_sindicatoModel.FK_publicaciones">
             <End Role="Pub_Categoria" EntitySet="Pub_Categoria" />
             <End Role="Publicacione" EntitySet="Publicaciones" />
+          </AssociationSet>
+          <EntitySet Name="Perfils" EntityType="steujedo_sindicatoModel.Perfil" />
+          <AssociationSet Name="FK__Usuarios__perfil__756D6ECB" Association="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB">
+            <End Role="Perfil" EntitySet="Perfils" />
+            <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Archivo">
@@ -471,6 +503,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perfil_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Usuarios__perfil__756D6ECB">
+          <End Type="steujedo_sindicatoModel.Perfil" Role="Perfil" Multiplicity="0..1" />
+          <End Type="steujedo_sindicatoModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="perfil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -526,6 +578,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
                 <ScalarProperty Name="user_login" ColumnName="user_login" />
                 <ScalarProperty Name="user_mod" ColumnName="user_mod" />
                 <ScalarProperty Name="user_add" ColumnName="user_add" />
@@ -601,6 +654,14 @@
                 <ScalarProperty Name="pub_subtitulo" ColumnName="pub_subtitulo" />
                 <ScalarProperty Name="pub_titulo" ColumnName="pub_titulo" />
                 <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfils">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="perfil_desc" ColumnName="perfil_desc" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

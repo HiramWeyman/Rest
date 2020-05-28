@@ -24,8 +24,10 @@ namespace Rest.Controllers
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 listaEmpleado = (from usr in db.Usuarios
+                                 join per in db.Perfils
+                                 on usr.perfil_id equals per.id 
                                  join act in db.Actividades
-                                 on usr.act_id equals act.id
+                                 on usr.act_id equals act.id orderby usr.nombre_completo
                                 
                                  select new UsuariosCLS
                                  {
@@ -39,6 +41,7 @@ namespace Rest.Controllers
                                      observaciones =usr.observaciones,
                                      act_id = (int)usr.act_id,
                                      role_id = (int)usr.role_id,
+                                     perfil_desc=per.perfil_desc ?? "default",
                                      actividad_desc = act.actividad_desc
                                  }).ToList();
                 return listaEmpleado;
@@ -54,6 +57,18 @@ namespace Rest.Controllers
             {
                 db.Configuration.LazyLoadingEnabled = false;
                 return db.Actividades.OrderBy(x => x.actividad_desc).ToList();
+
+            }
+        }
+
+        [Route("api/Perfil")]
+        [HttpGet]
+        public IEnumerable<Perfil> GetPerfil()
+        {
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.Perfils.OrderBy(x => x.perfil_desc).ToList();
 
             }
         }
@@ -110,6 +125,7 @@ namespace Rest.Controllers
                     usuarios.celular = userCLS.celular;
                     usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
                     usuarios.observaciones = userCLS.observaciones;
+                    usuarios.perfil_id = userCLS.perfil_id;
                     usuarios.act_id = userCLS.act_id;
                     usuarios.role_id = userCLS.role_id;
                     usuarios.user_login = userCLS.user_login;
@@ -162,13 +178,13 @@ namespace Rest.Controllers
                         usuario.celular = userCLS.celular;
                         usuario.trabajador_base_rec = userCLS.trabajador_base_rec;
                         usuario.observaciones = userCLS.observaciones;
+                        usuario.perfil_id = userCLS.perfil_id;
                         usuario.act_id = userCLS.act_id;
                         usuario.role_id = userCLS.role_id;
                         usuario.user_login = userCLS.user_login;
-                        if (userCLS.password.Equals("") || userCLS.password.Equals(null))
-                        {
-                            usuario.password =null;
-                        }
+                        if (userCLS.password == null|| userCLS.password =="") {
+                            usuario.password = null;
+                        }  
                         else
                         {
                             SHA256Managed sha = new SHA256Managed();

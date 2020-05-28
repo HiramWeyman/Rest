@@ -22,6 +22,8 @@
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Pub_Categoria" Width="1.5" PointX="7.75" PointY="8.625" />
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Publicacione" Width="1.5" PointX="10" PointY="8" />
         <AssociationConnector Association="steujedo_sindicatoModel.FK_publicaciones" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Perfil" Width="1.5" PointX="8.375" PointY="3.875" />
+        <AssociationConnector Association="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

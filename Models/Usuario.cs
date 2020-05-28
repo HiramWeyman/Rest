@@ -34,9 +34,11 @@ namespace Rest.Models
         public string user_add { get; set; }
         public string user_mod { get; set; }
         public string user_login { get; set; }
+        public Nullable<int> perfil_id { get; set; }
     
         public virtual Actividade Actividade { get; set; }
         public virtual ICollection<Lista_Asistencia> Lista_Asistencia { get; set; }
         public virtual Role Role { get; set; }
+        public virtual Perfil Perfil { get; set; }
     }
 }

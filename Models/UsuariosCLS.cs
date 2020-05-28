@@ -29,8 +29,10 @@ namespace Rest.Models
 
         [Display(Name = "Observaciones")]
         public string observaciones { get; set; }
+        public int perfil_id { get; set; }
         public int act_id { get; set; }
         public int role_id { get; set; }
+        public string perfil_desc { get; set; }
         public string actividad_desc { get; set; }
         public string user_login { get; set; }
         public string password { get; set; }
