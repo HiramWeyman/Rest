@@ -21,6 +21,8 @@ namespace Rest.Models
     
         public int id { get; set; }
         public string perfil_desc { get; set; }
+        public string user_add { get; set; }
+        public string user_mod { get; set; }
     
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }

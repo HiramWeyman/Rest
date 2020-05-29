@@ -11,6 +11,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="actividad_desc" Type="nvarchar" MaxLength="150" />
+          <Property Name="user_add" Type="varchar" MaxLength="20" />
+          <Property Name="user_mod" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Archivos">
           <Key>
@@ -58,6 +60,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="perfil_desc" Type="nvarchar" MaxLength="200" />
+          <Property Name="user_add" Type="varchar" MaxLength="20" />
+          <Property Name="user_mod" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Pub_Categoria">
           <Key>
@@ -267,6 +271,8 @@
           <Property Name="actividad_desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Usuarios" Relationship="Self.fk_Act" FromRole="Actividades" ToRole="Usuarios" />
           <NavigationProperty Name="Usuarios_Base" Relationship="steujedo_sindicatoModel.fk_Act_Base" FromRole="Actividade" ToRole="Usuarios_Base" />
+          <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Lista_Asistencia">
           <Key>
@@ -510,6 +516,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="perfil_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Usuarios" Relationship="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" FromRole="Perfil" ToRole="Usuario" />
+          <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Usuarios__perfil__756D6ECB">
           <End Type="steujedo_sindicatoModel.Perfil" Role="Perfil" Multiplicity="0..1" />
@@ -532,6 +540,8 @@
           <EntitySetMapping Name="Actividades">
             <EntityTypeMapping TypeName="steujedo_sindicatoModel.Actividade">
               <MappingFragment StoreEntitySet="Actividades">
+                <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+                <ScalarProperty Name="user_add" ColumnName="user_add" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="actividad_desc" ColumnName="actividad_desc" />
               </MappingFragment>
@@ -660,6 +670,8 @@
           <EntitySetMapping Name="Perfils">
             <EntityTypeMapping TypeName="steujedo_sindicatoModel.Perfil">
               <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+                <ScalarProperty Name="user_add" ColumnName="user_add" />
                 <ScalarProperty Name="perfil_desc" ColumnName="perfil_desc" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

@@ -49,41 +49,6 @@ namespace Rest.Controllers
             }
         }
 
-        [Route("api/Actividades")]
-        [HttpGet]
-        public IEnumerable<Actividade> GetActividades()
-        {
-            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                return db.Actividades.OrderBy(x => x.actividad_desc).ToList();
-
-            }
-        }
-
-        [Route("api/Perfil")]
-        [HttpGet]
-        public IEnumerable<Perfil> GetPerfil()
-        {
-            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                return db.Perfils.OrderBy(x => x.perfil_desc).ToList();
-
-            }
-        }
-
-        [Route("api/Roles")]
-        [HttpGet]
-        public IEnumerable<Role> GetRoles()
-        {
-            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                return db.Roles.OrderBy(x=>x.rol_desc).ToList();
-
-            }
-        }
 
         public HttpResponseMessage Get(int id)
         {
@@ -241,6 +206,268 @@ namespace Rest.Controllers
             }
 
         }
+
+
+
+        [Route("api/Actividades")]
+        [HttpGet]
+        public IEnumerable<Actividade> GetActividades()
+        {
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.Actividades.OrderBy(x => x.actividad_desc).ToList();
+
+            }
+        }
+
+        [Route("api/Actividades/{id}")]
+        [HttpGet]
+        public HttpResponseMessage GetActividades(int id) {
+
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                var act = db.Actividades.FirstOrDefault(e => e.id == id);
+                if (act != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, act);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Actividad con Id" + id.ToString() + " no encontrado");
+                }
+
+            }
+        }
+
+        [Route("api/Actividades")]
+        [HttpPost]
+        public HttpResponseMessage PostAct(string usr,ActividadCLS actCLS) {
+            try
+            {
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                   
+                    Actividade actividad = new Actividade();
+                    actividad.actividad_desc = actCLS.actividad_desc;
+                    actividad.user_add = usr;
+                    db.Actividades.Add(actividad);
+                    db.SaveChanges();
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, actCLS);
+                    return Mensaje;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
+
+        [Route("api/Actividades/{id}")]
+        [HttpPut]
+        public HttpResponseMessage PutAct(int id, ActividadCLS actCLS) {
+            try
+            {
+                id = actCLS.id;
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    Actividade act = db.Actividades.Where(p => p.id.Equals(id)).First();
+                    if (act == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Actividad con ID " + id.ToString() + " no encontrada");
+                    }
+                    else
+                    {
+                        act.actividad_desc = actCLS.actividad_desc;
+                        act.user_mod = actCLS.user_mod;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+        [Route("api/Actividades/{id}")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteAct(int id)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    var act = db.Actividades.FirstOrDefault(e => e.id == id);
+                    if (act == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Actividad con Id" + id.ToString() + " no encontrada");
+
+                    }
+                    else
+                    {
+                        db.Actividades.Remove(act);
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK, act);
+                    }
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+        [Route("api/Perfil")]
+        [HttpGet]
+        public IEnumerable<Perfil> GetPerfil()
+        {
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.Perfils.OrderBy(x => x.perfil_desc).ToList();
+
+            }
+        }
+
+        [Route("api/Perfil/{id}")]
+        [HttpGet]
+        public HttpResponseMessage GetPerfil(int id) {
+
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                var per = db.Perfils.FirstOrDefault(e => e.id == id);
+                if (per != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, per);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Perfil con Id" + id.ToString() + " no encontrado");
+                }
+
+            }
+        }
+
+        [Route("api/Perfil")]
+        [HttpPost]
+        public HttpResponseMessage PostPer(string usr, PerfilCLS perCLS)
+        {
+            try
+            {
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    Perfil per = new Perfil();
+                    per.perfil_desc = perCLS.perfil_desc;
+                    per.user_add = usr;
+                    db.Perfils.Add(per);
+                    db.SaveChanges();
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, perCLS);
+                    return Mensaje;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
+
+        [Route("api/Perfil/{id}")]
+        [HttpPut]
+        public HttpResponseMessage PutPer(int id, PerfilCLS perCLS)
+        {
+            try
+            {
+                id = perCLS.id;
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    Perfil per = db.Perfils.Where(p => p.id.Equals(id)).First();
+                    if (per == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Perfil con ID " + id.ToString() + " no encontrado");
+                    }
+                    else
+                    {
+                        per.perfil_desc = perCLS.perfil_desc;
+                        perCLS.user_mod = perCLS.user_mod;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+        [Route("api/Perfil/{id}")]
+        [HttpDelete]
+        public HttpResponseMessage DeletePer(int id)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    var per = db.Perfils.FirstOrDefault(e => e.id == id);
+                    if (per == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Perfil con Id" + id.ToString() + " no encontrado");
+
+                    }
+                    else
+                    {
+                        db.Perfils.Remove(per);
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK, per);
+                    }
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+        [Route("api/Roles")]
+        [HttpGet]
+        public IEnumerable<Role> GetRoles()
+        {
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.Roles.OrderBy(x => x.rol_desc).ToList();
+
+            }
+        }
+
 
 
     }
