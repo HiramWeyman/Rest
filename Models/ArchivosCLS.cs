@@ -13,6 +13,7 @@ namespace Rest.Models
         public string archivo_descrip { get; set; }
         public string archivo_ruta { get; set; }
         public string archivo_cancela { get; set; }
+        public string archivo_seccion { get; set; }
 
     }
 }
