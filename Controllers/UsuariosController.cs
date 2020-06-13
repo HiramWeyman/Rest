@@ -27,7 +27,9 @@ namespace Rest.Controllers
                                  join per in db.Perfils
                                  on usr.perfil_id equals per.id 
                                  join act in db.Actividades
-                                 on usr.act_id equals act.id orderby usr.nombre_completo
+                                 on usr.act_id equals act.id
+                                 where usr.role_id==2
+                                 orderby usr.nombre_completo
                                 
                                  select new UsuariosCLS
                                  {
@@ -41,7 +43,7 @@ namespace Rest.Controllers
                                      observaciones =usr.observaciones,
                                      act_id = (int)usr.act_id,
                                      role_id = (int)usr.role_id,
-                                     perfil_desc=per.perfil_desc ?? "default",
+                                     perfil_desc=per.perfil_desc,
                                      actividad_desc = act.actividad_desc
                                  }).ToList();
                 return listaEmpleado;
@@ -49,6 +51,41 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/Integrante")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetIntegrante()
+        {
+            List<UsuariosCLS> listaEmpleado = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleado = (from usr in db.Usuarios
+                                 join per in db.Perfils
+                                 on usr.perfil_id equals per.id
+                                 join act in db.Actividades
+                                 on usr.act_id equals act.id
+                                 where usr.role_id != 2
+                                 orderby usr.nombre_completo
+
+                                 select new UsuariosCLS
+                                 {
+                                     id = usr.id,
+                                     matricula = (long)usr.matricula,
+                                     nombre_completo = usr.nombre_completo,
+                                     direccion = usr.direccion,
+                                     telefono = usr.telefono,
+                                     celular = usr.celular,
+                                     trabajador_base_rec = usr.trabajador_base_rec,
+                                     observaciones = usr.observaciones,
+                                     act_id = (int)usr.act_id,
+                                     role_id = (int)usr.role_id,
+                                     perfil_desc = per.perfil_desc,
+                                     actividad_desc = act.actividad_desc
+                                 }).ToList();
+                return listaEmpleado;
+
+            }
+        }
 
         public HttpResponseMessage Get(int id)
         {
@@ -64,6 +101,81 @@ namespace Rest.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con Id" + id.ToString() + " no encontrado");
                 }
+
+            }
+        }
+
+        [Route("api/usuariosNombre/{nombre}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersNombre(string nombre)
+        {
+            List<UsuariosCLS> listaEmpleadoNombre = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoNombre = (from usr in db.Usuarios
+                                       join per in db.Perfils
+                                       on usr.perfil_id equals per.id
+                                       join act in db.Actividades
+                                       on usr.act_id equals act.id
+                                       where usr.nombre_completo.Contains(nombre)
+                                       && usr.role_id == 2
+                                       orderby usr.nombre_completo
+
+                                       select new UsuariosCLS
+                                       {
+                                           id = usr.id,
+                                           matricula = (long)usr.matricula,
+                                           nombre_completo = usr.nombre_completo,
+                                           direccion = usr.direccion,
+                                           telefono = usr.telefono,
+                                           celular = usr.celular,
+                                           trabajador_base_rec = usr.trabajador_base_rec,
+                                           observaciones = usr.observaciones,
+                                           act_id = (int)usr.act_id,
+                                           role_id = (int)usr.role_id,
+                                           perfil_desc = per.perfil_desc,
+                                           actividad_desc = act.actividad_desc
+                                       }).ToList();
+                return listaEmpleadoNombre;
+
+            }
+        }
+
+
+        [Route("api/usuariosNombreInt/{nombre}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersNombreInt(string nombre)
+        {
+            List<UsuariosCLS> listaEmpleadoNombre = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoNombre = (from usr in db.Usuarios
+                                       join per in db.Perfils
+                                       on usr.perfil_id equals per.id
+                                       join act in db.Actividades
+                                       on usr.act_id equals act.id
+                                       where usr.nombre_completo.Contains(nombre)
+                                       && usr.role_id != 2
+                                       orderby usr.nombre_completo
+
+                                       select new UsuariosCLS
+                                       {
+                                           id = usr.id,
+                                           matricula = (long)usr.matricula,
+                                           nombre_completo = usr.nombre_completo,
+                                           direccion = usr.direccion,
+                                           telefono = usr.telefono,
+                                           celular = usr.celular,
+                                           trabajador_base_rec = usr.trabajador_base_rec,
+                                           observaciones = usr.observaciones,
+                                           act_id = (int)usr.act_id,
+                                           role_id = (int)usr.role_id,
+                                           perfil_desc = per.perfil_desc,
+                                           actividad_desc = act.actividad_desc
+                                       }).ToList();
+                return listaEmpleadoNombre;
 
             }
         }
@@ -241,6 +353,80 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/usuariosActividad/{id}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersActividad(int id)
+        {
+            List<UsuariosCLS> listaEmpleadoAct = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoAct = (from usr in db.Usuarios
+                                       join per in db.Perfils
+                                       on usr.perfil_id equals per.id
+                                       join act in db.Actividades
+                                       on usr.act_id equals act.id
+                                       where usr.act_id == id
+                                       && usr.role_id==2
+                                       orderby usr.nombre_completo
+
+                                       select new UsuariosCLS
+                                       {
+                                           id = usr.id,
+                                           matricula = (long)usr.matricula,
+                                           nombre_completo = usr.nombre_completo,
+                                           direccion = usr.direccion,
+                                           telefono = usr.telefono,
+                                           celular = usr.celular,
+                                           trabajador_base_rec = usr.trabajador_base_rec,
+                                           observaciones = usr.observaciones,
+                                           act_id = (int)usr.act_id,
+                                           role_id = (int)usr.role_id,
+                                           perfil_desc = per.perfil_desc,
+                                           actividad_desc = act.actividad_desc
+                                       }).ToList();
+                return listaEmpleadoAct;
+
+            }
+        }
+
+        [Route("api/usuariosActividadInt/{id}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersActividadInt(int id)
+        {
+            List<UsuariosCLS> listaEmpleadoAct = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoAct = (from usr in db.Usuarios
+                                    join per in db.Perfils
+                                    on usr.perfil_id equals per.id
+                                    join act in db.Actividades
+                                    on usr.act_id equals act.id
+                                    where usr.act_id == id
+                                    && usr.role_id != 2
+                                    orderby usr.nombre_completo
+
+                                    select new UsuariosCLS
+                                    {
+                                        id = usr.id,
+                                        matricula = (long)usr.matricula,
+                                        nombre_completo = usr.nombre_completo,
+                                        direccion = usr.direccion,
+                                        telefono = usr.telefono,
+                                        celular = usr.celular,
+                                        trabajador_base_rec = usr.trabajador_base_rec,
+                                        observaciones = usr.observaciones,
+                                        act_id = (int)usr.act_id,
+                                        role_id = (int)usr.role_id,
+                                        perfil_desc = per.perfil_desc,
+                                        actividad_desc = act.actividad_desc
+                                    }).ToList();
+                return listaEmpleadoAct;
+
+            }
+        }
+
         [Route("api/Actividades")]
         [HttpPost]
         public HttpResponseMessage PostAct(string usr,ActividadCLS actCLS) {
@@ -364,6 +550,80 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/usuariosPerfil/{id}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersPerfil(int id)
+        {
+            List<UsuariosCLS> listaEmpleadoPerfil = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoPerfil = (from usr in db.Usuarios
+                                 join per in db.Perfils
+                                 on usr.perfil_id equals per.id
+                                 join act in db.Actividades
+                                 on usr.act_id equals act.id
+                                 where usr.perfil_id==id
+                                 && usr.role_id==2
+                                 orderby usr.nombre_completo
+
+                                 select new UsuariosCLS
+                                 {
+                                     id = usr.id,
+                                     matricula = (long)usr.matricula,
+                                     nombre_completo = usr.nombre_completo,
+                                     direccion = usr.direccion,
+                                     telefono = usr.telefono,
+                                     celular = usr.celular,
+                                     trabajador_base_rec = usr.trabajador_base_rec,
+                                     observaciones = usr.observaciones,
+                                     act_id = (int)usr.act_id,
+                                     role_id = (int)usr.role_id,
+                                     perfil_desc = per.perfil_desc,
+                                     actividad_desc = act.actividad_desc
+                                 }).ToList();
+                return listaEmpleadoPerfil;
+
+            }
+        }
+
+
+        [Route("api/usuariosPerfilInt/{id}")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> GetUsersPerfilInt(int id)
+        {
+            List<UsuariosCLS> listaEmpleadoPerfil = null;
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleadoPerfil = (from usr in db.Usuarios
+                                       join per in db.Perfils
+                                       on usr.perfil_id equals per.id
+                                       join act in db.Actividades
+                                       on usr.act_id equals act.id
+                                       where usr.perfil_id == id
+                                       && usr.role_id != 2
+                                       orderby usr.nombre_completo
+
+                                       select new UsuariosCLS
+                                       {
+                                           id = usr.id,
+                                           matricula = (long)usr.matricula,
+                                           nombre_completo = usr.nombre_completo,
+                                           direccion = usr.direccion,
+                                           telefono = usr.telefono,
+                                           celular = usr.celular,
+                                           trabajador_base_rec = usr.trabajador_base_rec,
+                                           observaciones = usr.observaciones,
+                                           act_id = (int)usr.act_id,
+                                           role_id = (int)usr.role_id,
+                                           perfil_desc = per.perfil_desc,
+                                           actividad_desc = act.actividad_desc
+                                       }).ToList();
+                return listaEmpleadoPerfil;
+
+            }
+        }
         [Route("api/Perfil")]
         [HttpPost]
         public HttpResponseMessage PostPer(string usr, PerfilCLS perCLS)
