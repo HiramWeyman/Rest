@@ -37,5 +37,6 @@ namespace Rest.Models
         public DbSet<Pub_Categoria> Pub_Categoria { get; set; }
         public DbSet<Publicacione> Publicaciones { get; set; }
         public DbSet<Perfil> Perfils { get; set; }
+        public DbSet<Contactano> Contactanos { get; set; }
     }
 }

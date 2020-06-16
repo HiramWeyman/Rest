@@ -24,6 +24,7 @@
         <AssociationConnector Association="steujedo_sindicatoModel.FK_publicaciones" />
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Perfil" Width="1.5" PointX="8.375" PointY="3.875" />
         <AssociationConnector Association="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Contactano" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
