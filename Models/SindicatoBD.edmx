@@ -129,6 +129,7 @@
           <Property Name="user_mod" Type="varchar" MaxLength="20" />
           <Property Name="user_login" Type="varchar" MaxLength="20" />
           <Property Name="perfil_id" Type="int" />
+          <Property Name="user_baja" Type="date" />
         </EntityType>
         <EntityType Name="Usuarios_Base">
           <Key>
@@ -347,6 +348,7 @@
           <Property Name="user_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="perfil_id" Type="Int32" />
           <NavigationProperty Name="Perfil" Relationship="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" FromRole="Usuario" ToRole="Perfil" />
+          <Property Name="user_baja" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="fk_Act">
           <End Role="Actividades" Type="Self.Actividade" Multiplicity="1" />
@@ -612,6 +614,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuario">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="user_baja" ColumnName="user_baja" />
                 <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
                 <ScalarProperty Name="user_login" ColumnName="user_login" />
                 <ScalarProperty Name="user_mod" ColumnName="user_mod" />

@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Rest.Models;
 using System.IO;
+using System.Globalization;
 
 namespace Rest.Controllers
 {
@@ -29,6 +30,7 @@ namespace Rest.Controllers
                                  join act in db.Actividades
                                  on usr.act_id equals act.id
                                  where usr.role_id==2
+                                 && usr.user_baja.Equals(null)
                                  orderby usr.nombre_completo
                                 
                                  select new UsuariosCLS
@@ -37,6 +39,7 @@ namespace Rest.Controllers
                                      matricula =(long)usr.matricula,
                                      nombre_completo =usr.nombre_completo,
                                      direccion = usr.direccion,
+                                     fecho_ingreso = usr.fecho_ingreso,
                                      telefono = usr.telefono,
                                      celular = usr.celular,
                                      trabajador_base_rec =usr.trabajador_base_rec,
@@ -65,6 +68,7 @@ namespace Rest.Controllers
                                  join act in db.Actividades
                                  on usr.act_id equals act.id
                                  where usr.role_id != 2
+                                 && usr.user_baja.Equals(null)
                                  orderby usr.nombre_completo
 
                                  select new UsuariosCLS
@@ -73,6 +77,7 @@ namespace Rest.Controllers
                                      matricula = (long)usr.matricula,
                                      nombre_completo = usr.nombre_completo,
                                      direccion = usr.direccion,
+                                     fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                      telefono = usr.telefono,
                                      celular = usr.celular,
                                      trabajador_base_rec = usr.trabajador_base_rec,
@@ -92,7 +97,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                var user = db.Usuarios.FirstOrDefault(e => e.id == id);
+                var user = db.Usuarios.FirstOrDefault(e => e.id == id && e.user_baja.Equals(null));
                 if (user != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, user);
@@ -120,6 +125,7 @@ namespace Rest.Controllers
                                        on usr.act_id equals act.id
                                        where usr.nombre_completo.Contains(nombre)
                                        && usr.role_id == 2
+                                       && usr.user_baja.Equals(null)
                                        orderby usr.nombre_completo
 
                                        select new UsuariosCLS
@@ -128,6 +134,7 @@ namespace Rest.Controllers
                                            matricula = (long)usr.matricula,
                                            nombre_completo = usr.nombre_completo,
                                            direccion = usr.direccion,
+                                           fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                            telefono = usr.telefono,
                                            celular = usr.celular,
                                            trabajador_base_rec = usr.trabajador_base_rec,
@@ -158,6 +165,7 @@ namespace Rest.Controllers
                                        on usr.act_id equals act.id
                                        where usr.nombre_completo.Contains(nombre)
                                        && usr.role_id != 2
+                                       && usr.user_baja.Equals(null)
                                        orderby usr.nombre_completo
 
                                        select new UsuariosCLS
@@ -166,6 +174,7 @@ namespace Rest.Controllers
                                            matricula = (long)usr.matricula,
                                            nombre_completo = usr.nombre_completo,
                                            direccion = usr.direccion,
+                                           fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                            telefono = usr.telefono,
                                            celular = usr.celular,
                                            trabajador_base_rec = usr.trabajador_base_rec,
@@ -194,10 +203,15 @@ namespace Rest.Controllers
                     int b = rdn.Next(100, 900);
                     string c = a + "" + b;
 
+                    string x = userCLS.fecho_ingreso.ToString();
+                    Console.WriteLine(x);
+                    DateTime date = Convert.ToDateTime(x);
+                    Console.WriteLine(date);
                     Usuario usuarios = new Usuario();
                     usuarios.matricula = long.Parse(c);
                     usuarios.nombre_completo = userCLS.nombre_completo;
                     usuarios.direccion = userCLS.direccion;
+                    usuarios.fecho_ingreso = date;
                     usuarios.telefono = userCLS.telefono;
                     usuarios.celular = userCLS.celular;
                     usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
@@ -242,25 +256,27 @@ namespace Rest.Controllers
                 id = userCLS.id;
                 using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
                 {
-                    Usuario usuario = db.Usuarios.Where(p => p.id.Equals(id)).First();
-                    if (usuario == null)
+                    Usuario usuarios = new Usuario();
+                    usuarios = db.Usuarios.Where(p => p.id.Equals(id)).First();
+                    if (usuarios == null)
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con ID " + id.ToString() + " no encontrado");
                     }
                     else
                     {
-                        usuario.nombre_completo = userCLS.nombre_completo;
-                        usuario.direccion = userCLS.direccion;
-                        usuario.telefono = userCLS.telefono;
-                        usuario.celular = userCLS.celular;
-                        usuario.trabajador_base_rec = userCLS.trabajador_base_rec;
-                        usuario.observaciones = userCLS.observaciones;
-                        usuario.perfil_id = userCLS.perfil_id;
-                        usuario.act_id = userCLS.act_id;
-                        usuario.role_id = userCLS.role_id;
-                        usuario.user_login = userCLS.user_login;
+                        usuarios.nombre_completo = userCLS.nombre_completo;
+                        usuarios.direccion = userCLS.direccion;
+                        usuarios.fecho_ingreso = userCLS.fecho_ingreso;
+                        usuarios.telefono = userCLS.telefono;
+                        usuarios.celular = userCLS.celular;
+                        usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                        usuarios.observaciones = userCLS.observaciones;
+                        usuarios.perfil_id = userCLS.perfil_id;
+                        usuarios.act_id = userCLS.act_id;
+                        usuarios.role_id = userCLS.role_id;
+                        usuarios.user_login = userCLS.user_login;
                         if (userCLS.password == null|| userCLS.password =="") {
-                            usuario.password = null;
+                            usuarios.password = null;
                         }  
                         else
                         {
@@ -268,10 +284,10 @@ namespace Rest.Controllers
                             byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
                             byte[] byteContraCifrado = sha.ComputeHash(byteContra);
                             string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
-                            usuario.password = contraCifrada;
+                            usuarios.password = contraCifrada;
                             
                         }
-                        usuario.user_mod = userCLS.usr_mod;
+                        usuarios.user_mod = userCLS.usr_mod;
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -287,27 +303,29 @@ namespace Rest.Controllers
 
         }
 
-        public HttpResponseMessage Delete(int id)
+        [Route("api/userDelete/{id}")]
+        [HttpPut]
+        public HttpResponseMessage deleteUser(int id, UsuariosCLS userCLS)
         {
 
             try
             {
-
+                id = userCLS.id;
                 using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
                 {
-                    var user = db.Usuarios.FirstOrDefault(e => e.id == id);
-                    if (user == null)
+                    Usuario usuario = db.Usuarios.Where(p => p.id.Equals(id)).First();
+                    if (usuario == null)
                     {
-                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con Id" + id.ToString() + " no encontrado");
-
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador con ID " + id.ToString() + " no encontrado");
                     }
                     else
                     {
-                        db.Usuarios.Remove(user);
+                        usuario.user_baja = DateTime.Now;
+                        usuario.user_mod = userCLS.usr_mod;
                         db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK, user);
-                    }
+                        return Request.CreateResponse(HttpStatusCode.OK);
 
+                    }
 
                 }
 
@@ -368,7 +386,8 @@ namespace Rest.Controllers
                                        on usr.act_id equals act.id
                                        where usr.act_id == id
                                        && usr.role_id==2
-                                       orderby usr.nombre_completo
+                                       && usr.user_baja.Equals(null)
+                                    orderby usr.nombre_completo
 
                                        select new UsuariosCLS
                                        {
@@ -376,6 +395,7 @@ namespace Rest.Controllers
                                            matricula = (long)usr.matricula,
                                            nombre_completo = usr.nombre_completo,
                                            direccion = usr.direccion,
+                                           fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                            telefono = usr.telefono,
                                            celular = usr.celular,
                                            trabajador_base_rec = usr.trabajador_base_rec,
@@ -405,6 +425,7 @@ namespace Rest.Controllers
                                     on usr.act_id equals act.id
                                     where usr.act_id == id
                                     && usr.role_id != 2
+                                    && usr.user_baja.Equals(null)
                                     orderby usr.nombre_completo
 
                                     select new UsuariosCLS
@@ -413,6 +434,7 @@ namespace Rest.Controllers
                                         matricula = (long)usr.matricula,
                                         nombre_completo = usr.nombre_completo,
                                         direccion = usr.direccion,
+                                        fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                         telefono = usr.telefono,
                                         celular = usr.celular,
                                         trabajador_base_rec = usr.trabajador_base_rec,
@@ -565,6 +587,7 @@ namespace Rest.Controllers
                                  on usr.act_id equals act.id
                                  where usr.perfil_id==id
                                  && usr.role_id==2
+                                 && usr.user_baja.Equals(null)
                                  orderby usr.nombre_completo
 
                                  select new UsuariosCLS
@@ -573,6 +596,7 @@ namespace Rest.Controllers
                                      matricula = (long)usr.matricula,
                                      nombre_completo = usr.nombre_completo,
                                      direccion = usr.direccion,
+                                     fecho_ingreso = (DateTime)usr.fecho_ingreso,
                                      telefono = usr.telefono,
                                      celular = usr.celular,
                                      trabajador_base_rec = usr.trabajador_base_rec,
@@ -603,6 +627,7 @@ namespace Rest.Controllers
                                        on usr.act_id equals act.id
                                        where usr.perfil_id == id
                                        && usr.role_id != 2
+                                       && usr.user_baja.Equals(null)
                                        orderby usr.nombre_completo
 
                                        select new UsuariosCLS

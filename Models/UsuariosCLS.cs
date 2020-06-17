@@ -19,6 +19,9 @@ namespace Rest.Models
         [Display(Name = "Dirección")]
         public string direccion { get; set; }
 
+        [Display(Name = "F_ingreso")]
+        public DateTime? fecho_ingreso { get; set; }
+
         [Display(Name = "Telefono")]
         public string telefono { get; set; }
 

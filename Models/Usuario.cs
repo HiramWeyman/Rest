@@ -35,6 +35,7 @@ namespace Rest.Models
         public string user_mod { get; set; }
         public string user_login { get; set; }
         public Nullable<int> perfil_id { get; set; }
+        public Nullable<System.DateTime> user_baja { get; set; }
     
         public virtual Actividade Actividade { get; set; }
         public virtual ICollection<Lista_Asistencia> Lista_Asistencia { get; set; }
