@@ -753,7 +753,74 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/pruebas")]
+        [HttpGet]
+        public IEnumerable<UsuariosCLS> Pruebas()
+        {
+            List<UsuariosCLS> listaEmpleado = null;
 
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                Usuario usuarios = new Usuario();
+                db.Configuration.LazyLoadingEnabled = false;
+                listaEmpleado = (from usr in db.Usuarios
+                                 where usr.role_id == 2
+                                 orderby usr.nombre_completo
+
+                                 select new UsuariosCLS
+                                 {
+                                     id = usr.id,
+                                     matricula = (long)usr.matricula,
+                                     nombre_completo = usr.nombre_completo.Substring(1),
+                                     direccion = usr.direccion.Substring(1),
+                                     telefono = usr.telefono.Substring(1),
+                                     act_id = (int)usr.act_id,
+                                     role_id = (int)usr.role_id,
+                             
+                                 }).ToList();
+                foreach (UsuariosCLS i in listaEmpleado)
+                {
+                    Console.WriteLine(i.nombre_completo);
+                    usuarios = db.Usuarios.Where(p => p.id.Equals(i.id)).First();
+                    if (usuarios == null)
+                    {
+                        Console.WriteLine("No actualizo nada");
+                    }
+                    else
+                    {
+                        usuarios.nombre_completo = i.nombre_completo;
+                        usuarios.direccion = i.direccion;
+                        usuarios.telefono = i.telefono;
+                        usuarios.act_id = i.act_id;
+                        usuarios.role_id =i.role_id;
+                        db.SaveChanges();
+
+
+                    }
+                }
+                //for (int i = 0; i < listaEmpleado.Count; i++) {
+
+                //    usuarios = db.Usuarios.Where(p => p.id.Equals(listaEmpleado[i].id)).First();
+                //    if (usuarios == null)
+                //    {
+                //        Console.WriteLine("No actualizo nada");
+                //    }
+                //    else
+                //    {
+                //        usuarios.nombre_completo = listaEmpleado[i].nombre_completo;
+                //        usuarios.direccion = listaEmpleado[i].direccion;
+                //        usuarios.telefono = listaEmpleado[i].telefono;
+                //        usuarios.act_id = listaEmpleado[i].act_id;
+                //        usuarios.role_id = listaEmpleado[i].role_id;
+                //        db.SaveChanges();
+
+
+                //    }
+                //}
+                return listaEmpleado;
+
+            }
+        }
 
     }
 }

@@ -38,5 +38,6 @@ namespace Rest.Models
         public DbSet<Publicacione> Publicaciones { get; set; }
         public DbSet<Perfil> Perfils { get; set; }
         public DbSet<Contactano> Contactanos { get; set; }
+        public DbSet<Audioteca> Audiotecas { get; set; }
     }
 }
