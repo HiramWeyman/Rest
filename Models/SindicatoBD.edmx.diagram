@@ -26,6 +26,10 @@
         <AssociationConnector Association="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" />
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Contactano" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="steujedo_sindicatoModel.Audioteca" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Cat_Plazas" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Cat_Servicios" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Concurso_Plazas" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Padron_advo" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

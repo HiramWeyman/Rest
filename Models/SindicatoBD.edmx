@@ -34,6 +34,51 @@
           <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cat_Plazas">
+          <Key>
+            <PropertyRef Name="catp_id" />
+          </Key>
+          <Property Name="catp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catp_descrip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="catp_status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="catp_u_captura" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="catp_f_captura" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cat_Servicios">
+          <Key>
+            <PropertyRef Name="cats_id" />
+          </Key>
+          <Property Name="cats_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cats_descrip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cats_status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="cats_u_captura" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cats_f_captura" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Concurso_Plazas">
+          <Key>
+            <PropertyRef Name="pad_id" />
+          </Key>
+          <Property Name="pad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pad_plaza_id" Type="int" Nullable="false" />
+          <Property Name="pad_mat" Type="bigint" Nullable="false" />
+          <Property Name="pad_nombre" Type="varchar" MaxLength="200" />
+          <Property Name="pad_adscripcion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_categoria" Type="varchar" MaxLength="200" />
+          <Property Name="pad_sueldo" Type="varchar" MaxLength="200" />
+          <Property Name="pad_funcion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_situacion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_permanencia" Type="varchar" MaxLength="200" />
+          <Property Name="pad_f_ingreso" Type="varchar" MaxLength="50" />
+          <Property Name="pad_permisos" Type="varchar" MaxLength="200" />
+          <Property Name="pad_f_antig" Type="varchar" MaxLength="200" />
+          <Property Name="pad_n_insaluble" Type="varchar" MaxLength="200" />
+          <Property Name="pad_adscrip_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_catego_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_funcion_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_situacion_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_num_contacto" Type="varchar" MaxLength="200" />
+          <Property Name="pad_observaciones" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Contactanos">
           <Key>
             <PropertyRef Name="con_id" />
@@ -74,6 +119,30 @@
           <Property Name="menu_orden" Type="int" Nullable="false" />
           <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="menu_routerLink" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Padron_advo">
+          <Key>
+            <PropertyRef Name="pad_id" />
+          </Key>
+          <Property Name="pad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pad_mat" Type="bigint" Nullable="false" />
+          <Property Name="pad_nombre" Type="varchar" MaxLength="200" />
+          <Property Name="pad_adscripcion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_categoria" Type="varchar" MaxLength="200" />
+          <Property Name="pad_sueldo" Type="varchar" MaxLength="200" />
+          <Property Name="pad_funcion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_situacion" Type="varchar" MaxLength="200" />
+          <Property Name="pad_permanencia" Type="varchar" MaxLength="200" />
+          <Property Name="pad_f_ingreso" Type="varchar" MaxLength="50" />
+          <Property Name="pad_permisos" Type="varchar" MaxLength="200" />
+          <Property Name="pad_f_antig" Type="varchar" MaxLength="200" />
+          <Property Name="pad_n_insaluble" Type="varchar" MaxLength="200" />
+          <Property Name="pad_adscrip_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_catego_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_funcion_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_situacion_base" Type="varchar" MaxLength="200" />
+          <Property Name="pad_num_contacto" Type="varchar" MaxLength="200" />
+          <Property Name="pad_observaciones" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -243,10 +312,14 @@
           <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Audioteca" EntityType="Self.Audioteca" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Cat_Plazas" EntityType="Self.Cat_Plazas" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Cat_Servicios" EntityType="Self.Cat_Servicios" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Concurso_Plazas" EntityType="Self.Concurso_Plazas" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Contactanos" EntityType="Self.Contactanos" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Integrantes" EntityType="Self.Integrantes" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+          <EntitySet Name="Padron_advo" EntityType="Self.Padron_advo" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Pub_Categoria" EntityType="Self.Pub_Categoria" Schema="steujedo_sindicato" store:Type="Tables" />
           <EntitySet Name="Publicaciones" EntityType="Self.Publicaciones" Schema="steujedo_sindicato" store:Type="Tables" />
@@ -440,6 +513,10 @@
           </AssociationSet>
           <EntitySet Name="Contactanos" EntityType="steujedo_sindicatoModel.Contactano" />
           <EntitySet Name="Audiotecas" EntityType="steujedo_sindicatoModel.Audioteca" />
+          <EntitySet Name="Cat_Plazas" EntityType="steujedo_sindicatoModel.Cat_Plazas" />
+          <EntitySet Name="Cat_Servicios" EntityType="steujedo_sindicatoModel.Cat_Servicios" />
+          <EntitySet Name="Concurso_Plazas" EntityType="steujedo_sindicatoModel.Concurso_Plazas" />
+          <EntitySet Name="Padron_advo" EntityType="steujedo_sindicatoModel.Padron_advo" />
         </EntityContainer>
         <EntityType Name="Archivo">
           <Key>
@@ -578,6 +655,75 @@
           <Property Name="link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Cat_Plazas">
+          <Key>
+            <PropertyRef Name="catp_id" />
+          </Key>
+          <Property Name="catp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catp_descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="catp_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="catp_u_captura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="catp_f_captura" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Cat_Servicios">
+          <Key>
+            <PropertyRef Name="cats_id" />
+          </Key>
+          <Property Name="cats_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cats_descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cats_status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="cats_u_captura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cats_f_captura" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Concurso_Plazas">
+          <Key>
+            <PropertyRef Name="pad_id" />
+          </Key>
+          <Property Name="pad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pad_plaza_id" Type="Int32" Nullable="false" />
+          <Property Name="pad_mat" Type="Int64" Nullable="false" />
+          <Property Name="pad_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_adscripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_sueldo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_funcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_situacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_permanencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_f_ingreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pad_permisos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_f_antig" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_n_insaluble" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_adscrip_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_catego_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_funcion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_situacion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_num_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Padron_advo">
+          <Key>
+            <PropertyRef Name="pad_id" />
+          </Key>
+          <Property Name="pad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pad_mat" Type="Int64" Nullable="false" />
+          <Property Name="pad_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_adscripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_sueldo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_funcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_situacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_permanencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_f_ingreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pad_permisos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_f_antig" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_n_insaluble" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_adscrip_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_catego_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_funcion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_situacion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_num_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pad_observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -746,6 +892,79 @@
                 <ScalarProperty Name="link" ColumnName="link" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Plazas">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Cat_Plazas">
+              <MappingFragment StoreEntitySet="Cat_Plazas">
+                <ScalarProperty Name="catp_f_captura" ColumnName="catp_f_captura" />
+                <ScalarProperty Name="catp_u_captura" ColumnName="catp_u_captura" />
+                <ScalarProperty Name="catp_status" ColumnName="catp_status" />
+                <ScalarProperty Name="catp_descrip" ColumnName="catp_descrip" />
+                <ScalarProperty Name="catp_id" ColumnName="catp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Servicios">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Cat_Servicios">
+              <MappingFragment StoreEntitySet="Cat_Servicios">
+                <ScalarProperty Name="cats_f_captura" ColumnName="cats_f_captura" />
+                <ScalarProperty Name="cats_u_captura" ColumnName="cats_u_captura" />
+                <ScalarProperty Name="cats_status" ColumnName="cats_status" />
+                <ScalarProperty Name="cats_descrip" ColumnName="cats_descrip" />
+                <ScalarProperty Name="cats_id" ColumnName="cats_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concurso_Plazas">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Concurso_Plazas">
+              <MappingFragment StoreEntitySet="Concurso_Plazas">
+                <ScalarProperty Name="pad_observaciones" ColumnName="pad_observaciones" />
+                <ScalarProperty Name="pad_num_contacto" ColumnName="pad_num_contacto" />
+                <ScalarProperty Name="pad_situacion_base" ColumnName="pad_situacion_base" />
+                <ScalarProperty Name="pad_funcion_base" ColumnName="pad_funcion_base" />
+                <ScalarProperty Name="pad_catego_base" ColumnName="pad_catego_base" />
+                <ScalarProperty Name="pad_adscrip_base" ColumnName="pad_adscrip_base" />
+                <ScalarProperty Name="pad_n_insaluble" ColumnName="pad_n_insaluble" />
+                <ScalarProperty Name="pad_f_antig" ColumnName="pad_f_antig" />
+                <ScalarProperty Name="pad_permisos" ColumnName="pad_permisos" />
+                <ScalarProperty Name="pad_f_ingreso" ColumnName="pad_f_ingreso" />
+                <ScalarProperty Name="pad_permanencia" ColumnName="pad_permanencia" />
+                <ScalarProperty Name="pad_situacion" ColumnName="pad_situacion" />
+                <ScalarProperty Name="pad_funcion" ColumnName="pad_funcion" />
+                <ScalarProperty Name="pad_sueldo" ColumnName="pad_sueldo" />
+                <ScalarProperty Name="pad_categoria" ColumnName="pad_categoria" />
+                <ScalarProperty Name="pad_adscripcion" ColumnName="pad_adscripcion" />
+                <ScalarProperty Name="pad_nombre" ColumnName="pad_nombre" />
+                <ScalarProperty Name="pad_mat" ColumnName="pad_mat" />
+                <ScalarProperty Name="pad_plaza_id" ColumnName="pad_plaza_id" />
+                <ScalarProperty Name="pad_id" ColumnName="pad_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Padron_advo">
+            <EntityTypeMapping TypeName="steujedo_sindicatoModel.Padron_advo">
+              <MappingFragment StoreEntitySet="Padron_advo">
+                <ScalarProperty Name="pad_observaciones" ColumnName="pad_observaciones" />
+                <ScalarProperty Name="pad_num_contacto" ColumnName="pad_num_contacto" />
+                <ScalarProperty Name="pad_situacion_base" ColumnName="pad_situacion_base" />
+                <ScalarProperty Name="pad_funcion_base" ColumnName="pad_funcion_base" />
+                <ScalarProperty Name="pad_catego_base" ColumnName="pad_catego_base" />
+                <ScalarProperty Name="pad_adscrip_base" ColumnName="pad_adscrip_base" />
+                <ScalarProperty Name="pad_n_insaluble" ColumnName="pad_n_insaluble" />
+                <ScalarProperty Name="pad_f_antig" ColumnName="pad_f_antig" />
+                <ScalarProperty Name="pad_permisos" ColumnName="pad_permisos" />
+                <ScalarProperty Name="pad_f_ingreso" ColumnName="pad_f_ingreso" />
+                <ScalarProperty Name="pad_permanencia" ColumnName="pad_permanencia" />
+                <ScalarProperty Name="pad_situacion" ColumnName="pad_situacion" />
+                <ScalarProperty Name="pad_funcion" ColumnName="pad_funcion" />
+                <ScalarProperty Name="pad_sueldo" ColumnName="pad_sueldo" />
+                <ScalarProperty Name="pad_categoria" ColumnName="pad_categoria" />
+                <ScalarProperty Name="pad_adscripcion" ColumnName="pad_adscripcion" />
+                <ScalarProperty Name="pad_nombre" ColumnName="pad_nombre" />
+                <ScalarProperty Name="pad_mat" ColumnName="pad_mat" />
+                <ScalarProperty Name="pad_id" ColumnName="pad_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

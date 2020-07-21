@@ -39,5 +39,9 @@ namespace Rest.Models
         public DbSet<Perfil> Perfils { get; set; }
         public DbSet<Contactano> Contactanos { get; set; }
         public DbSet<Audioteca> Audiotecas { get; set; }
+        public DbSet<Cat_Plazas> Cat_Plazas { get; set; }
+        public DbSet<Cat_Servicios> Cat_Servicios { get; set; }
+        public DbSet<Concurso_Plazas> Concurso_Plazas { get; set; }
+        public DbSet<Padron_advo> Padron_advo { get; set; }
     }
 }
