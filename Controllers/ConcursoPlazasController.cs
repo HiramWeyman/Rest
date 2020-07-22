@@ -69,6 +69,16 @@ namespace Rest.Controllers
             }
         }
 
+        public IEnumerable<Concurso_Plazas> Get(int id, string bandera)
+        {
+            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                return db.Concurso_Plazas.Where(x => x.pad_plaza_id == id).ToList();
+
+            }
+        }
+
         public HttpResponseMessage Get(int id)
         {
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
