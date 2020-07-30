@@ -77,7 +77,8 @@ namespace Rest.Controllers
             }
         }
 
-        public HttpResponseMessage Post(string nombreArchivo,int IDCategoria,string Usuario, PublicacionesCLS publicacionesCLS)
+        
+        public HttpResponseMessage Post(string nombreArchivo,int IDCategoria,string IDUsuario, PublicacionesCLS publicacionesCLS)
         {
 
             try
@@ -86,10 +87,14 @@ namespace Rest.Controllers
                 {
 
                     Publicacione publicacion = new Publicacione();
+                    //publicacion.pub_u_publica = "OSCAR";
+                    //publicacion.pub_f_publica = DateTime.Now;
+                    //publicacion.pub_cancela = "N";
+
                     publicacion.pub_titulo = publicacionesCLS.pub_titulo;
                     publicacion.pub_subtitulo = publicacionesCLS.pub_subtitulo;
                     publicacion.pub_texto = publicacionesCLS.pub_texto;
-                    publicacion.pub_u_publica = Usuario;
+                    publicacion.pub_u_publica = IDUsuario;
                     publicacion.pub_f_publica = DateTime.Now;
                     publicacion.pub_cancela = "N";
                     publicacion.pub_id_categoria = IDCategoria;
@@ -104,7 +109,8 @@ namespace Rest.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                Console.WriteLine(ex.InnerException);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException);
             }
 
         }
@@ -129,6 +135,37 @@ namespace Rest.Controllers
                         publicacion.pub_texto = publicacionesCLS.pub_texto;
                         publicacion.pub_u_publica = publicacionesCLS.pub_u_publica;
                         publicacion.pub_f_publica = DateTime.Now;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+        public HttpResponseMessage Put(int id, string nombreArchivo, PublicacionesCLS publicacionesCLS)
+        {
+
+            try
+            {
+                id = publicacionesCLS.pub_id;
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    Publicacione publicacion = db.Publicaciones.Where(p => p.pub_id.Equals(id)).First();
+                    if (publicacion == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Publicacion no encontrada");
+                    }
+                    else
+                    {
+                        publicacion.pub_ruta = publicacion.pub_ruta = "assets/images/noticias/" + nombreArchivo;
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
 
