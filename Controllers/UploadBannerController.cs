@@ -29,7 +29,7 @@ namespace Rest.Controllers
 
                     try
                     {
-                        
+
                         //Create a FTP Request Object and Specfiy a Complete Path
                         FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/" + ruta);
 

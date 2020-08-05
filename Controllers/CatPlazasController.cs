@@ -52,6 +52,9 @@ namespace Rest.Controllers
                     catplazas.catp_status = catplazasCLS.catp_status;
                     catplazas.catp_u_captura = Usuario;
                     catplazas.catp_f_captura = DateTime.Now;
+                    catplazas.catp_categoria = catplazasCLS.catp_categoria;
+                    catplazas.catp_funcion = catplazasCLS.catp_funcion;
+                    catplazas.catp_adscripcion = catplazasCLS.catp_adscripcion;
 
                     db.Cat_Plazas.Add(catplazas);
                     db.SaveChanges();
@@ -84,6 +87,10 @@ namespace Rest.Controllers
                     {
                         catplazas.catp_descrip = catplazasCLS.catp_descrip;
                         catplazas.catp_status = catplazasCLS.catp_status;
+                        catplazas.catp_categoria = catplazasCLS.catp_categoria;
+                        catplazas.catp_funcion = catplazasCLS.catp_funcion;
+                        catplazas.catp_adscripcion = catplazasCLS.catp_adscripcion;
+
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
 

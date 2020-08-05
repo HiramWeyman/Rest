@@ -102,7 +102,16 @@ namespace Rest.Controllers
 
                     db.Publicaciones.Add(publicacion);
                     db.SaveChanges();
-                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, publicacionesCLS);
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, publicacion);
+
+                    WebRequest request = WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/noticias/" + publicacion.pub_id);
+                    request.Method = WebRequestMethods.Ftp.MakeDirectory;
+                    request.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+                    using (var resp = (FtpWebResponse)request.GetResponse())
+                    {
+                        //return Request.CreateResponse(resp.StatusCode);
+                    }
+
                     return Mensaje;
                 }
 
@@ -145,7 +154,7 @@ namespace Rest.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.StackTrace);
             }
 
         }

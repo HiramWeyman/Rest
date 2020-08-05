@@ -14,5 +14,8 @@ namespace Rest.Models
         public string catp_status { get; set; }
         public string catp_u_captura { get; set; }
         public System.DateTime catp_f_captura { get; set; }
+        public string catp_categoria { get; set; }
+        public string catp_funcion { get; set; }
+        public string catp_adscripcion { get; set; }
     }
 }
