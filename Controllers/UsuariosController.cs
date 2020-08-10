@@ -197,46 +197,115 @@ namespace Rest.Controllers
             {
                 using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
                 {
-                    Console.WriteLine(usr);
-                    Random rdn = new Random();
-                    int a = rdn.Next(100, 900);
-                    int b = rdn.Next(100, 900);
-                    string c = a + "" + b;
-
-                    string x = userCLS.fecho_ingreso.ToString();
-                    Console.WriteLine(x);
-                    DateTime date = Convert.ToDateTime(x);
-                    Console.WriteLine(date);
+                    //Console.WriteLine(usr);
+                    //Random rdn = new Random();
+                    //int a = rdn.Next(100, 900);
+                    //int b = rdn.Next(100, 900);
+                    //string c = a + "" + b;
+                    DateTime? date;
                     Usuario usuarios = new Usuario();
-                    usuarios.matricula = long.Parse(c);
-                    usuarios.nombre_completo = userCLS.nombre_completo;
-                    usuarios.direccion = userCLS.direccion;
-                    usuarios.fecho_ingreso = date;
-                    usuarios.telefono = userCLS.telefono;
-                    usuarios.celular = userCLS.celular;
-                    usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
-                    usuarios.observaciones = userCLS.observaciones;
-                    usuarios.perfil_id = userCLS.perfil_id;
-                    usuarios.act_id = userCLS.act_id;
-                    usuarios.role_id = userCLS.role_id;
-                    usuarios.user_login = userCLS.user_login;
-                    if (userCLS.password != null)
+                    //if (userCLS.fecho_ingreso != null)
+                    //{
+                    //    string x = userCLS.fecho_ingreso.ToString();
+                    //    Console.WriteLine(x);
+                    //    date = Convert.ToDateTime(x);
+                    //    Console.WriteLine(date);
+
+                    //    usuarios.matricula = userCLS.matricula;
+                    //    usuarios.nombre_completo = userCLS.nombre_completo;
+                    //    usuarios.direccion = userCLS.direccion;
+                    //    usuarios.fecho_ingreso = date;
+                    //    usuarios.telefono = userCLS.telefono;
+                    //    usuarios.celular = userCLS.celular;
+                    //    usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                    //    usuarios.observaciones = userCLS.observaciones;
+                    //    usuarios.perfil_id = userCLS.perfil_id;
+                    //    usuarios.act_id = userCLS.act_id;
+                    //    usuarios.role_id = userCLS.role_id;
+                    //    usuarios.user_login = userCLS.user_login;
+                    //    usuarios.user_add = usr;
+
+                    //    db.Usuarios.Add(usuarios);
+                    //    db.SaveChanges();
+                    //    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
+                    //    return Mensaje;
+                    //}
+                    if (userCLS.password != null && userCLS.password != "")
                     {
+                        usuarios.matricula = userCLS.matricula;
+                        usuarios.nombre_completo = userCLS.nombre_completo;
+                        usuarios.direccion = userCLS.direccion;
+                        usuarios.telefono = userCLS.telefono;
+                        usuarios.celular = userCLS.celular;
+                        usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                        usuarios.observaciones = userCLS.observaciones;
+                        usuarios.perfil_id = userCLS.perfil_id;
+                        usuarios.act_id = userCLS.act_id;
+                        usuarios.role_id = userCLS.role_id;
+                        usuarios.user_login = userCLS.user_login;
+                        usuarios.user_add = usr;
                         SHA256Managed sha = new SHA256Managed();
                         byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
                         byte[] byteContraCifrado = sha.ComputeHash(byteContra);
                         string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
                         usuarios.password = contraCifrada;
+                        db.Usuarios.Add(usuarios);
+                        db.SaveChanges();
+                        var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
+                        return Mensaje;
+                    }
+                    else if (userCLS.fecho_ingreso != null && userCLS.password != null && userCLS.password != "")
+                    {
+                        string x = userCLS.fecho_ingreso.ToString();
+                        Console.WriteLine(x);
+                        date = Convert.ToDateTime(x);
+                        Console.WriteLine(date);
+
+                        usuarios.matricula = userCLS.matricula;
+                        usuarios.nombre_completo = userCLS.nombre_completo;
+                        usuarios.direccion = userCLS.direccion;
+                        usuarios.fecho_ingreso = date;
+                        usuarios.telefono = userCLS.telefono;
+                        usuarios.celular = userCLS.celular;
+                        usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                        usuarios.observaciones = userCLS.observaciones;
+                        usuarios.perfil_id = userCLS.perfil_id;
+                        usuarios.act_id = userCLS.act_id;
+                        usuarios.role_id = userCLS.role_id;
+                        usuarios.user_login = userCLS.user_login;
+                        usuarios.user_add = usr;
+                        SHA256Managed sha = new SHA256Managed();
+                        byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
+                        byte[] byteContraCifrado = sha.ComputeHash(byteContra);
+                        string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
+                        usuarios.password = contraCifrada;
+                        db.Usuarios.Add(usuarios);
+                        db.SaveChanges();
+                        var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
+                        return Mensaje;
                     }
                     else {
-                        usuarios.password = "";
+                        usuarios.matricula = userCLS.matricula;
+                        usuarios.nombre_completo = userCLS.nombre_completo;
+                        usuarios.direccion = userCLS.direccion;
+                        usuarios.telefono = userCLS.telefono;
+                        usuarios.celular = userCLS.celular;
+                        usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                        usuarios.observaciones = userCLS.observaciones;
+                        usuarios.perfil_id = userCLS.perfil_id;
+                        usuarios.act_id = userCLS.act_id;
+                        usuarios.role_id = userCLS.role_id;
+                        usuarios.user_login = userCLS.user_login;
+                        usuarios.user_add = usr;
+
+                        db.Usuarios.Add(usuarios);
+                        db.SaveChanges();
+                        var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
+                        return Mensaje;
                     }
-                    usuarios.user_add = usr;
                  
-                    db.Usuarios.Add(usuarios);
-                    db.SaveChanges();
-                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userCLS);
-                    return Mensaje;
+               
+             
                 }
 
             }
@@ -264,32 +333,48 @@ namespace Rest.Controllers
                     }
                     else
                     {
-                        usuarios.nombre_completo = userCLS.nombre_completo;
-                        usuarios.direccion = userCLS.direccion;
-                        usuarios.fecho_ingreso = userCLS.fecho_ingreso;
-                        usuarios.telefono = userCLS.telefono;
-                        usuarios.celular = userCLS.celular;
-                        usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
-                        usuarios.observaciones = userCLS.observaciones;
-                        usuarios.perfil_id = userCLS.perfil_id;
-                        usuarios.act_id = userCLS.act_id;
-                        usuarios.role_id = userCLS.role_id;
-                        usuarios.user_login = userCLS.user_login;
-                        if (userCLS.password == null|| userCLS.password =="") {
-                            usuarios.password = null;
-                        }  
-                        else
+                        Console.WriteLine(userCLS.password);
+                        if (userCLS.password != null && userCLS.password != "")
                         {
+
+                            usuarios.nombre_completo = userCLS.nombre_completo;
+                            usuarios.direccion = userCLS.direccion;
+                            usuarios.fecho_ingreso = userCLS.fecho_ingreso;
+                            usuarios.telefono = userCLS.telefono;
+                            usuarios.celular = userCLS.celular;
+                            usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                            usuarios.observaciones = userCLS.observaciones;
+                            usuarios.perfil_id = userCLS.perfil_id;
+                            usuarios.act_id = userCLS.act_id;
+                            usuarios.role_id = userCLS.role_id;
+                            usuarios.user_login = userCLS.user_login;
                             SHA256Managed sha = new SHA256Managed();
                             byte[] byteContra = Encoding.Default.GetBytes(userCLS.password);
                             byte[] byteContraCifrado = sha.ComputeHash(byteContra);
                             string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
                             usuarios.password = contraCifrada;
-                            
+                            usuarios.user_mod = userCLS.usr_mod;
+                            db.SaveChanges();
+                            return Request.CreateResponse(HttpStatusCode.OK);
                         }
-                        usuarios.user_mod = userCLS.usr_mod;
-                        db.SaveChanges();
-                        return Request.CreateResponse(HttpStatusCode.OK);
+                        else {
+
+                            usuarios.nombre_completo = userCLS.nombre_completo;
+                            usuarios.direccion = userCLS.direccion;
+                            usuarios.fecho_ingreso = userCLS.fecho_ingreso;
+                            usuarios.telefono = userCLS.telefono;
+                            usuarios.celular = userCLS.celular;
+                            usuarios.trabajador_base_rec = userCLS.trabajador_base_rec;
+                            usuarios.observaciones = userCLS.observaciones;
+                            usuarios.perfil_id = userCLS.perfil_id;
+                            usuarios.act_id = userCLS.act_id;
+                            usuarios.role_id = userCLS.role_id;
+                            usuarios.user_login = userCLS.user_login;
+                            usuarios.user_mod = userCLS.usr_mod;
+                            db.SaveChanges();
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        }
+                       
 
                     }
 
@@ -346,7 +431,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Actividades.OrderBy(x => x.actividad_desc).ToList();
+                return db.Actividades.Where(x => x.actividad_desc!=null).OrderBy(x => x.actividad_desc).ToList();
 
             }
         }
@@ -547,7 +632,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Perfils.OrderBy(x => x.perfil_desc).ToList();
+                return db.Perfils.Where(x => x.perfil_desc != null).OrderBy(x => x.perfil_desc).ToList();
 
             }
         }
@@ -753,74 +838,74 @@ namespace Rest.Controllers
             }
         }
 
-        [Route("api/pruebas")]
-        [HttpGet]
-        public IEnumerable<UsuariosCLS> Pruebas()
-        {
-            List<UsuariosCLS> listaEmpleado = null;
+        //[Route("api/pruebas")]
+        //[HttpGet]
+        //public IEnumerable<UsuariosCLS> Pruebas()
+        //{
+        //    List<UsuariosCLS> listaEmpleado = null;
 
-            using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
-            {
-                Usuario usuarios = new Usuario();
-                db.Configuration.LazyLoadingEnabled = false;
-                listaEmpleado = (from usr in db.Usuarios
-                                 where usr.role_id == 2
-                                 orderby usr.nombre_completo
+        //    using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+        //    {
+        //        Usuario usuarios = new Usuario();
+        //        db.Configuration.LazyLoadingEnabled = false;
+        //        listaEmpleado = (from usr in db.Usuarios
+        //                         where usr.role_id == 2
+        //                         orderby usr.nombre_completo
 
-                                 select new UsuariosCLS
-                                 {
-                                     id = usr.id,
-                                     matricula = (long)usr.matricula,
-                                     nombre_completo = usr.nombre_completo.Substring(1),
-                                     direccion = usr.direccion.Substring(1),
-                                     telefono = usr.telefono.Substring(1),
-                                     act_id = (int)usr.act_id,
-                                     role_id = (int)usr.role_id,
+        //                         select new UsuariosCLS
+        //                         {
+        //                             id = usr.id,
+        //                             matricula = (long)usr.matricula,
+        //                             nombre_completo = usr.nombre_completo.Substring(1),
+        //                             direccion = usr.direccion.Substring(1),
+        //                             telefono = usr.telefono.Substring(1),
+        //                             act_id = (int)usr.act_id,
+        //                             role_id = (int)usr.role_id,
                              
-                                 }).ToList();
-                foreach (UsuariosCLS i in listaEmpleado)
-                {
-                    Console.WriteLine(i.nombre_completo);
-                    usuarios = db.Usuarios.Where(p => p.id.Equals(i.id)).First();
-                    if (usuarios == null)
-                    {
-                        Console.WriteLine("No actualizo nada");
-                    }
-                    else
-                    {
-                        usuarios.nombre_completo = i.nombre_completo;
-                        usuarios.direccion = i.direccion;
-                        usuarios.telefono = i.telefono;
-                        usuarios.act_id = i.act_id;
-                        usuarios.role_id =i.role_id;
-                        db.SaveChanges();
+        //                         }).ToList();
+        //        foreach (UsuariosCLS i in listaEmpleado)
+        //        {
+        //            Console.WriteLine(i.nombre_completo);
+        //            usuarios = db.Usuarios.Where(p => p.id.Equals(i.id)).First();
+        //            if (usuarios == null)
+        //            {
+        //                Console.WriteLine("No actualizo nada");
+        //            }
+        //            else
+        //            {
+        //                usuarios.nombre_completo = i.nombre_completo;
+        //                usuarios.direccion = i.direccion;
+        //                usuarios.telefono = i.telefono;
+        //                usuarios.act_id = i.act_id;
+        //                usuarios.role_id =i.role_id;
+        //                db.SaveChanges();
 
 
-                    }
-                }
-                //for (int i = 0; i < listaEmpleado.Count; i++) {
+        //            }
+        //        }
+        //        //for (int i = 0; i < listaEmpleado.Count; i++) {
 
-                //    usuarios = db.Usuarios.Where(p => p.id.Equals(listaEmpleado[i].id)).First();
-                //    if (usuarios == null)
-                //    {
-                //        Console.WriteLine("No actualizo nada");
-                //    }
-                //    else
-                //    {
-                //        usuarios.nombre_completo = listaEmpleado[i].nombre_completo;
-                //        usuarios.direccion = listaEmpleado[i].direccion;
-                //        usuarios.telefono = listaEmpleado[i].telefono;
-                //        usuarios.act_id = listaEmpleado[i].act_id;
-                //        usuarios.role_id = listaEmpleado[i].role_id;
-                //        db.SaveChanges();
+        //        //    usuarios = db.Usuarios.Where(p => p.id.Equals(listaEmpleado[i].id)).First();
+        //        //    if (usuarios == null)
+        //        //    {
+        //        //        Console.WriteLine("No actualizo nada");
+        //        //    }
+        //        //    else
+        //        //    {
+        //        //        usuarios.nombre_completo = listaEmpleado[i].nombre_completo;
+        //        //        usuarios.direccion = listaEmpleado[i].direccion;
+        //        //        usuarios.telefono = listaEmpleado[i].telefono;
+        //        //        usuarios.act_id = listaEmpleado[i].act_id;
+        //        //        usuarios.role_id = listaEmpleado[i].role_id;
+        //        //        db.SaveChanges();
 
 
-                //    }
-                //}
-                return listaEmpleado;
+        //        //    }
+        //        //}
+        //        return listaEmpleado;
 
-            }
-        }
+        //    }
+        //}
 
     }
 }
