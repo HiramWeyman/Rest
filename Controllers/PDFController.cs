@@ -18,7 +18,7 @@ using System.Drawing;
 using Font = iTextSharp.text.Font;
 using System.Net.Http.Headers;
 using System.Web.Http.Results;
-using Grpc.Core;
+//using Grpc.Core;
 
 namespace Rest.Controllers
 {

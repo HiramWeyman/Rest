@@ -74,8 +74,7 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Concurso_Plazas.Where(x => x.pad_plaza_id == id).ToList();
-
+                return db.Concurso_Plazas.Where(x => x.pad_plaza_id == id).OrderBy(x => x.pad_f_antig).ToList();
             }
         }
 
