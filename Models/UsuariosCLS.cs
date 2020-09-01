@@ -40,5 +40,6 @@ namespace Rest.Models
         public string user_login { get; set; }
         public string password { get; set; }
         public string usr_mod { get; set; }
+        public string entrada { get; set; }
     }
 }
