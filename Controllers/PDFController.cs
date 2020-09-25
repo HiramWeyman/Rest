@@ -556,7 +556,7 @@ namespace Rest.Controllers
 
         [Route("api/Asistenciaeventuales")]
         [HttpGet]
-        public HttpResponseMessage ReporteAsistencia( String fecha1,String fecha2,int tipo)
+        public HttpResponseMessage ReporteAsistencia( String fecha1,String fecha2,string trabajador, int tipo)
         {
             String ruta_img = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "imagenes\\logoSteujed.png");
             iTextSharp.text.Font font1 = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
@@ -652,7 +652,7 @@ namespace Rest.Controllers
                                 doc.Add(title1);
                                 doc.Add(espacio);
 
-                                Paragraph title = new Paragraph("Lista de Asistencia de trabajadores Eventuales al día " + dia+" de "+mes_+" de "+anio, font1);
+                                Paragraph title = new Paragraph("Lista de Asistencia de Trabajadores Eventuales al día " + dia+" de "+mes_+" de "+anio, font1);
                                 title.Alignment = Element.ALIGN_CENTER;
                                 doc.Add(title);
                                 doc.Add(espacio);
@@ -864,7 +864,384 @@ namespace Rest.Controllers
                                 doc.Add(title1);
                                 doc.Add(espacio);
 
-                                Paragraph title = new Paragraph("Lista de Asistencia de trabajadores Eventuales del día " + dia_1 + " de " + mes_1_ + " de " + anio_1 + " al día " + dia_2 + " de " + mes_2_ + " de " + anio_2, font1);
+                                Paragraph title = new Paragraph("Lista de Asistencia de Trabajadores Eventuales del día " + dia_1 + " de " + mes_1_ + " de " + anio_1 + " al día " + dia_2 + " de " + mes_2_ + " de " + anio_2, font1);
+                                title.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(title);
+                                doc.Add(espacio);
+
+
+
+                                ////Creando la tabla
+                                PdfPTable tabla = new PdfPTable(5);
+                                tabla.WidthPercentage = 80f;
+                                ////Asignando los anchos de las columnas
+                                float[] valores = new float[5] { 13, 42, 24, 24, 31 };
+                                tabla.SetWidths(valores);
+
+                                ////Creando celdas agregando contenido
+                                PdfPCell celda1 = new PdfPCell(new Phrase("Matricula", font));
+                                celda1.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda1.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda1);
+
+                                PdfPCell celda2 = new PdfPCell(new Phrase("Nombre Completo", font));
+                                celda2.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda2.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda2);
+
+                                PdfPCell celda3 = new PdfPCell(new Phrase("Perfil", font));
+                                celda3.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda3.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda3);
+
+                                PdfPCell celda4 = new PdfPCell(new Phrase("Actividad", font));
+                                celda4.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda4.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda4);
+
+                                PdfPCell celda5 = new PdfPCell(new Phrase("Entrada", font));
+                                celda5.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda5.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda5);
+
+                                int nroregistros = listaEmpleado.Count();
+                                for (int i = 0; i < nroregistros; i++)
+                                {
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].matricula.ToString(), font)));
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].nombre_completo.ToString(), font)));
+                                    if (listaEmpleado[i].perfil_desc != null)
+                                    {
+                                        tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].perfil_desc.ToString(), font)));
+                                    }
+                                    else
+                                    {
+                                        tabla.AddCell(new PdfPCell(new Phrase("", font)));
+                                    }
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].actividad_desc.ToString(), font)));
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].entrada.ToString(), font))).HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+
+                                }
+
+                                doc.Add(tabla);
+                                doc.Add(espacio);
+
+
+                                doc.Close();
+                                buffer = stream.ToArray();
+                                var contentLength = buffer.Length;
+
+                                var statuscode = HttpStatusCode.OK;
+                                response = Request.CreateResponse(statuscode);
+                                response.Content = new StreamContent(new MemoryStream(buffer));
+                                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                                response.Content.Headers.ContentLength = contentLength;
+                                ContentDispositionHeaderValue contentDisposition = null;
+                                if (ContentDispositionHeaderValue.TryParse("inline; filename=Reporte.pdf", out contentDisposition))
+                                {
+                                    response.Content.Headers.ContentDisposition = contentDisposition;
+                                }
+                                else
+                                {
+                                    //var statuscode = HttpStatusCode.NotFound;
+                                    // var message = String.Format("Unable to find file. file \"{0}\" may not exist.");
+                                    // var responseData = responseDataFactory.CreateWithOnlyMetadata(statuscode, message);
+                                    response = Request.CreateResponse((HttpStatusCode.NotFound));
+                                }
+                            }
+
+                        }
+                        break;
+
+                    case 3:
+                        string[] val_fe = fecha1.Split('-');
+                        mes_ = "";
+                        dia = val_fe[2];
+                        mes = val_fe[1];
+                        anio = val_fe[0];
+                        int mat = Int32.Parse(trabajador);
+                        switch (mes)
+                        {
+                            case "01":
+                                mes_ = "Enero";
+                                break;
+                            case "02":
+                                mes_ = "Febrero";
+                                break;
+                            case "03":
+                                mes_ = "Marzo";
+                                break;
+                            case "04":
+                                mes_ = "Abril";
+                                break;
+                            case "05":
+                                mes_ = "Mayo";
+                                break;
+                            case "06":
+                                mes_ = "Junio";
+                                break;
+                            case "07":
+                                mes_ = "Julio";
+                                break;
+                            case "08":
+                                mes_ = "Agosto";
+                                break;
+                            case "09":
+                                mes_ = "Septiembre";
+                                break;
+                            case "10":
+                                mes_ = "Octubre";
+                                break;
+                            case "11":
+                                mes_ = "Noviembre";
+                                break;
+                            case "12":
+                                mes_ = "Diciembre";
+                                break;
+
+                        }
+
+                        using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                        {
+                            db.Configuration.LazyLoadingEnabled = false;
+                            //convert(char, fecha, 103) as fecha
+
+                            string query = "   select   matricula,nombre_completo, perfil_desc,actividad_desc,entrada from Usuarios,Lista_Asistencia,Perfil,Actividades   where Usuarios.id = Lista_Asistencia.usuario_id  and Usuarios.perfil_id = Perfil.id  and Usuarios.act_id = Actividades.id and Lista_Asistencia.fecha ='" + fecha1 + "' and Usuarios.matricula='"+mat+"' order by entrada";
+                            listaEmpleado = db.Database.SqlQuery<UsuariosCLS>(query).ToList();
+
+
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                PdfWriter.GetInstance(doc, stream);
+                                doc.Open();
+
+                                iTextSharp.text.Image image1 = iTextSharp.text.Image.GetInstance(ruta_img);
+                                //image1.ScalePercent(50f);
+                                image1.ScaleAbsoluteWidth(70);
+                                image1.ScaleAbsoluteHeight(60);
+                                image1.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(image1);
+                                Paragraph espacio = new Paragraph(" ");
+                                doc.Add(espacio);
+
+                                Paragraph title1 = new Paragraph(" SINDICATO DE TRABAJADORES Y EMPLEADOS DE LA UNIVERSIDAD JUÁREZ DEL ESTADO DE DURANGO", font2);
+                                title1.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(title1);
+                                doc.Add(espacio);
+
+                                Paragraph title = new Paragraph("Lista de Asistencia de Trabajadores Eventuales al día " + dia + " de " + mes_ + " de " + anio, font1);
+                                title.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(title);
+                                doc.Add(espacio);
+
+
+
+                                ////Creando la tabla
+                                PdfPTable tabla = new PdfPTable(5);
+                                tabla.WidthPercentage = 80f;
+                                ////Asignando los anchos de las columnas
+                                float[] valores = new float[5] { 13, 42, 24, 24, 31 };
+                                tabla.SetWidths(valores);
+
+                                ////Creando celdas agregando contenido
+                                PdfPCell celda1 = new PdfPCell(new Phrase("Matricula", font));
+                                celda1.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda1.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda1);
+
+                                PdfPCell celda2 = new PdfPCell(new Phrase("Nombre Completo", font));
+                                celda2.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda2.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda2);
+
+                                PdfPCell celda3 = new PdfPCell(new Phrase("Perfil", font));
+                                celda3.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda3.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda3);
+
+                                PdfPCell celda4 = new PdfPCell(new Phrase("Actividad", font));
+                                celda4.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda4.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                tabla.AddCell(celda4);
+
+                                PdfPCell celda5 = new PdfPCell(new Phrase("Entrada", font));
+                                celda5.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda5.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda5);
+
+                                int nroregistros = listaEmpleado.Count();
+                                for (int i = 0; i < nroregistros; i++)
+                                {
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].matricula.ToString(), font)));
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].nombre_completo.ToString(), font)));
+                                    if (listaEmpleado[i].perfil_desc != null)
+                                    {
+                                        tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].perfil_desc.ToString(), font)));
+                                    }
+                                    else
+                                    {
+                                        tabla.AddCell(new PdfPCell(new Phrase("", font)));
+                                    }
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].actividad_desc.ToString(), font)));
+                                    tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].entrada.ToString(), font))).HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+
+                                }
+
+                                doc.Add(tabla);
+                                doc.Add(espacio);
+
+
+                                doc.Close();
+                                buffer = stream.ToArray();
+                                var contentLength = buffer.Length;
+
+                                var statuscode = HttpStatusCode.OK;
+                                response = Request.CreateResponse(statuscode);
+                                response.Content = new StreamContent(new MemoryStream(buffer));
+                                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                                response.Content.Headers.ContentLength = contentLength;
+                                ContentDispositionHeaderValue contentDisposition = null;
+                                if (ContentDispositionHeaderValue.TryParse("inline; filename=Reporte.pdf", out contentDisposition))
+                                {
+                                    response.Content.Headers.ContentDisposition = contentDisposition;
+                                }
+                                else
+                                {
+                                    //var statuscode = HttpStatusCode.NotFound;
+                                    // var message = String.Format("Unable to find file. file \"{0}\" may not exist.");
+                                    // var responseData = responseDataFactory.CreateWithOnlyMetadata(statuscode, message);
+                                    response = Request.CreateResponse((HttpStatusCode.NotFound));
+                                }
+                            }
+
+                        }
+                        break;
+
+                    case 4:
+
+                        string[] val_fe4 = fecha1.Split('-');
+                        string mes4_ = "";
+                        string dia4_ = val_fe4[2];
+                        string mesx_ = val_fe4[1];
+                        string anio4_ = val_fe4[0];
+
+                        string[] val_fe4_2 = fecha2.Split('-');
+                        string mesy = "";
+                        string dia_2_ = val_fe4_2[2];
+                        string mes_2x = val_fe4_2[1];
+                        string anio_2_= val_fe4_2[0];
+
+                        int mat2 = Int32.Parse(trabajador);
+                        switch (mesx_)
+                        {
+                            case "01":
+                                mesx_ = "Enero";
+                                break;
+                            case "02":
+                                mesx_ = "Febrero";
+                                break;
+                            case "03":
+                                mesx_ = "Marzo";
+                                break;
+                            case "04":
+                                mesx_ = "Abril";
+                                break;
+                            case "05":
+                                mesx_ = "Mayo";
+                                break;
+                            case "06":
+                                mesx_ = "Junio";
+                                break;
+                            case "07":
+                                mesx_ = "Julio";
+                                break;
+                            case "08":
+                                mesx_ = "Agosto";
+                                break;
+                            case "09":
+                                mesx_ = "Septiembre";
+                                break;
+                            case "10":
+                                mesx_ = "Octubre";
+                                break;
+                            case "11":
+                                mesx_ = "Noviembre";
+                                break;
+                            case "12":
+                                mesx_ = "Diciembre";
+                                break;
+
+                        }
+
+                        switch (mes_2x)
+                        {
+                            case "01":
+                                mesy = "Enero";
+                                break;
+                            case "02":
+                                mesy = "Febrero";
+                                break;
+                            case "03":
+                                mesy = "Marzo";
+                                break;
+                            case "04":
+                                mesy = "Abril";
+                                break;
+                            case "05":
+                                mesy = "Mayo";
+                                break;
+                            case "06":
+                                mesy = "Junio";
+                                break;
+                            case "07":
+                                mesy = "Julio";
+                                break;
+                            case "08":
+                                mesy = "Agosto";
+                                break;
+                            case "09":
+                                mesy = "Septiembre";
+                                break;
+                            case "10":
+                                mesy = "Octubre";
+                                break;
+                            case "11":
+                                mesy = "Noviembre";
+                                break;
+                            case "12":
+                                mesy = "Diciembre";
+                                break;
+
+                        }
+
+                        using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                        {
+                            db.Configuration.LazyLoadingEnabled = false;
+                            //convert(char, fecha, 103) as fecha
+
+                            string query = "   select   matricula,nombre_completo, perfil_desc,actividad_desc,entrada from Usuarios,Lista_Asistencia,Perfil,Actividades   where Usuarios.id = Lista_Asistencia.usuario_id  and Usuarios.perfil_id = Perfil.id  and Usuarios.act_id = Actividades.id and Lista_Asistencia.fecha between '" + fecha1 + "' and '" + fecha2 + "' and Usuarios.matricula='"+mat2+"' order by nombre_completo ";
+                            listaEmpleado = db.Database.SqlQuery<UsuariosCLS>(query).ToList();
+
+
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                PdfWriter.GetInstance(doc, stream);
+                                doc.Open();
+
+                                iTextSharp.text.Image image1 = iTextSharp.text.Image.GetInstance(ruta_img);
+                                //image1.ScalePercent(50f);
+                                image1.ScaleAbsoluteWidth(70);
+                                image1.ScaleAbsoluteHeight(60);
+                                image1.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(image1);
+                                Paragraph espacio = new Paragraph(" ");
+                                doc.Add(espacio);
+
+                                Paragraph title1 = new Paragraph(" SINDICATO DE TRABAJADORES Y EMPLEADOS DE LA UNIVERSIDAD JUÁREZ DEL ESTADO DE DURANGO", font2);
+                                title1.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(title1);
+                                doc.Add(espacio);
+
+                                Paragraph title = new Paragraph("Lista de Asistencia de Trabajadores Eventuales del día " + dia4_ + " de " + mesx_ + " de " + anio4_ + " al día " + dia_2_ + " de " + mesy + " de " + anio_2_, font1);
                                 title.Alignment = Element.ALIGN_CENTER;
                                 doc.Add(title);
                                 doc.Add(espacio);
