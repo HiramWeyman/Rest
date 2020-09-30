@@ -1119,7 +1119,7 @@ namespace Rest.Controllers
                     case 4:
 
                         string[] val_fe4 = fecha1.Split('-');
-                        string mes4_ = "";
+                      //  string mes4_ = "";
                         string dia4_ = val_fe4[2];
                         string mesx_ = val_fe4[1];
                         string anio4_ = val_fe4[0];
@@ -1331,6 +1331,503 @@ namespace Rest.Controllers
                 }
             }
            
+            return response;
+
+        }
+
+        [Route("api/ReporPrestamos")]
+        [HttpGet]
+        public HttpResponseMessage ReporPrestamos(int id, int tipo)
+        {
+            String ruta_img = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "imagenes\\logoSteujed.png");
+            iTextSharp.text.Font font1 = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+            iTextSharp.text.Font font2 = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            iTextSharp.text.Font font = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL);
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 40, 40, 42, 35);
+            byte[] buffer;
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest);
+
+     
+
+            List<CajaAhorroCLS> listaEmpleado = null;
+            switch (tipo) {
+
+                case 1:
+                    using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                    {
+                        db.Configuration.LazyLoadingEnabled = false;
+                        //convert(char, fecha, 103) as fecha
+
+                        string query = "  SELECT pre_id,pre_nombre,pre_matricula,pre_adscripcioon,pre_tarjeta_cuenta,pre_banco,pre_telefono,pre_cantidad,pre_fecha,pre_tipo  FROM steujedo_sindicato.steujedo_sindicato.Caja_Ahorro where pre_id="+id;
+                        listaEmpleado = db.Database.SqlQuery<CajaAhorroCLS>(query).ToList();
+
+
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            String nombre = "";
+                            Double cant = 0.00;
+                            String fecha = "";
+                            PdfWriter.GetInstance(doc, stream);
+                            doc.Open();
+
+                            iTextSharp.text.Image image1 = iTextSharp.text.Image.GetInstance(ruta_img);
+                            //image1.ScalePercent(50f);
+                            image1.ScaleAbsoluteWidth(70);
+                            image1.ScaleAbsoluteHeight(60);
+                            image1.Alignment = Element.ALIGN_LEFT;
+                            doc.Add(image1);
+                            Paragraph espacio = new Paragraph(" ");
+                            doc.Add(espacio);
+
+                            Paragraph title1 = new Paragraph(" SINDICATO DE TRABAJADORES Y EMPLEADOS DE LA UNIVERSIDAD JUÁREZ DEL ESTADO DE DURANGO", font2);
+                            title1.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title1);
+                            doc.Add(espacio);
+
+                            Paragraph title = new Paragraph("CAJA DE AHORRO", font1);
+                            title.Alignment = Element.ALIGN_CENTER;
+                            Paragraph title2 = new Paragraph("SOLICITUD DE PRESTAMO", font1);
+                            title2.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title);
+                            doc.Add(title2);
+                            doc.Add(espacio);
+
+
+
+                            ////Creando la tabla
+                            PdfPTable tabla = new PdfPTable(2);
+                            tabla.WidthPercentage = 80f;
+                            ////Asignando los anchos de las columnas
+                            float[] valores = new float[2] { 13, 40 };
+                            tabla.SetWidths(valores);
+
+                            ////Creando celdas agregando contenido
+                            ///
+
+
+                            int nroregistros = listaEmpleado.Count();
+                            for (int i = 0; i < nroregistros; i++)
+                            {
+                                nombre = listaEmpleado[i].pre_nombre;
+                                cant = Double.Parse(listaEmpleado[i].pre_cantidad.ToString());
+
+                                PdfPCell celda1 = new PdfPCell(new Phrase("NOMBRE", font));
+                                celda1.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda1.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda1);
+
+                                PdfPCell celda2 = new PdfPCell(new Phrase(listaEmpleado[i].pre_nombre.ToString(), font));
+                                celda2.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda2.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda2);
+
+
+
+                                PdfPCell celda3 = new PdfPCell(new Phrase("MATRICULA", font));
+                                celda3.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda3);
+
+                                PdfPCell celda4 = new PdfPCell(new Phrase(listaEmpleado[i].pre_matricula.ToString(), font));
+                                celda4.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda4.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda4);
+
+                                PdfPCell celda5 = new PdfPCell(new Phrase("ADSCRIPCIÓN", font));
+                                celda5.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda5.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda5);
+
+                                PdfPCell celda6 = new PdfPCell(new Phrase(listaEmpleado[i].pre_adscripcioon.ToString(), font));
+                                celda6.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda6.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda6);
+
+                                PdfPCell celda7 = new PdfPCell(new Phrase("NO. CUENTA/TARJETA", font));
+                                celda7.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda7.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda7);
+
+                                PdfPCell celda8 = new PdfPCell(new Phrase(listaEmpleado[i].pre_tarjeta_cuenta.ToString(), font));
+                                celda8.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda8.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda8);
+
+                                PdfPCell celda9 = new PdfPCell(new Phrase("BANCO", font));
+                                celda9.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda9.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda9);
+
+                                PdfPCell celda10 = new PdfPCell(new Phrase(listaEmpleado[i].pre_banco.ToString(), font));
+                                celda10.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda10.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda10);
+
+                                PdfPCell celda11 = new PdfPCell(new Phrase("TELEFONO", font));
+                                celda11.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda11.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda11);
+
+                                PdfPCell celda12 = new PdfPCell(new Phrase(listaEmpleado[i].pre_telefono.ToString(), font));
+                                celda12.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda12.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda12);
+
+                                PdfPCell celda13 = new PdfPCell(new Phrase("CANTIDAD", font));
+                                celda13.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda13);
+
+                                PdfPCell celda14 = new PdfPCell(new Phrase("$" + cant, font));
+                                celda14.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda14.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda14);
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_nombre.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_matricula.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_adscripcioon.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_tarjeta_cuenta.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_banco.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_telefono.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase("$"+cant, font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].entrada.ToString(), font))).HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                fecha = listaEmpleado[i].pre_fecha.ToString("dd/MM/yyyy");
+                                Console.WriteLine(fecha);
+                            }
+
+                            doc.Add(tabla);
+                            doc.Add(espacio);
+                            string[] fecprestamo = fecha.Split('/');
+                            //  string mes4_ = "";
+                            string diap = fecprestamo[0];
+                            string mesp = fecprestamo[1];
+                            string aniop = fecprestamo[2];
+                            string valmes = "";
+                            switch (mesp)
+                            {
+                                case "01":
+                                    valmes = "ENERO";
+                                    break;
+                                case "02":
+                                    valmes = "FEBRERO";
+                                    break;
+                                case "03":
+                                    valmes = "MARZO";
+                                    break;
+                                case "04":
+                                    valmes = "ABRIL";
+                                    break;
+                                case "05":
+                                    valmes = "MAYO";
+                                    break;
+                                case "06":
+                                    valmes = "JUNIO";
+                                    break;
+                                case "07":
+                                    valmes = "JULIO";
+                                    break;
+                                case "08":
+                                    valmes = "AGOSTO";
+                                    break;
+                                case "09":
+                                    valmes = "SEPTIEMBRE";
+                                    break;
+                                case "10":
+                                    valmes = "OCTUBRE";
+                                    break;
+                                case "11":
+                                    valmes = "NOVIEMBRE";
+                                    break;
+                                case "12":
+                                    valmes = "DICIEMBRE";
+                                    break;
+
+                            }
+
+                            Paragraph fec = new Paragraph("DURANGO,DGO A "+ diap + " DE "+ valmes + " DE "+ aniop, font2);
+                            fec.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(fec);
+                            doc.Add(espacio);
+
+                            Paragraph firma = new Paragraph("Firma:", font2);
+                            firma.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(firma);
+                            doc.Add(espacio);
+                            doc.Add(espacio);
+
+                            Paragraph linea = new Paragraph(" _______________________________________________________________", font2);
+                            linea.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(linea);
+                            Paragraph nom = new Paragraph(nombre, font2);
+                            nom.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(nom);
+
+                            doc.Close();
+                            buffer = stream.ToArray();
+                            var contentLength = buffer.Length;
+
+                            var statuscode = HttpStatusCode.OK;
+                            response = Request.CreateResponse(statuscode);
+                            response.Content = new StreamContent(new MemoryStream(buffer));
+                            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                            response.Content.Headers.ContentLength = contentLength;
+                            ContentDispositionHeaderValue contentDisposition = null;
+                            if (ContentDispositionHeaderValue.TryParse("inline; filename=Reporte.pdf", out contentDisposition))
+                            {
+                                response.Content.Headers.ContentDisposition = contentDisposition;
+                            }
+                            else
+                            {
+                                //var statuscode = HttpStatusCode.NotFound;
+                                // var message = String.Format("Unable to find file. file \"{0}\" may not exist.");
+                                // var responseData = responseDataFactory.CreateWithOnlyMetadata(statuscode, message);
+                                response = Request.CreateResponse((HttpStatusCode.NotFound));
+                            }
+                        }
+
+                    }
+
+                    break;
+
+                case 2:
+                    using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                    {
+                        db.Configuration.LazyLoadingEnabled = false;
+                        //convert(char, fecha, 103) as fecha
+
+                        string query = "  SELECT pre_id,pre_nombre,pre_matricula,pre_adscripcioon,pre_tarjeta_cuenta,pre_banco,pre_telefono,pre_cantidad,pre_fecha,pre_tipo  FROM steujedo_sindicato.steujedo_sindicato.Caja_Ahorro where pre_id=" + id;
+                        listaEmpleado = db.Database.SqlQuery<CajaAhorroCLS>(query).ToList();
+
+
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            String nombre = "";
+                            Double cant = 0.00;
+                            String fecha = "";
+                            PdfWriter.GetInstance(doc, stream);
+                            doc.Open();
+
+                            iTextSharp.text.Image image1 = iTextSharp.text.Image.GetInstance(ruta_img);
+                            //image1.ScalePercent(50f);
+                            image1.ScaleAbsoluteWidth(70);
+                            image1.ScaleAbsoluteHeight(60);
+                            image1.Alignment = Element.ALIGN_LEFT;
+                            doc.Add(image1);
+                            Paragraph espacio = new Paragraph(" ");
+                            doc.Add(espacio);
+
+                            Paragraph title1 = new Paragraph(" SINDICATO DE TRABAJADORES Y EMPLEADOS DE LA UNIVERSIDAD JUÁREZ DEL ESTADO DE DURANGO", font2);
+                            title1.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title1);
+                            doc.Add(espacio);
+
+                            Paragraph title = new Paragraph("CAJA DE AHORRO", font1);
+                            title.Alignment = Element.ALIGN_CENTER;
+                            Paragraph title2 = new Paragraph("SOLICITUD DE RETIRO PARCIAL", font1);
+                            title2.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title);
+                            doc.Add(title2);
+                            doc.Add(espacio);
+
+
+
+                            ////Creando la tabla
+                            PdfPTable tabla = new PdfPTable(2);
+                            tabla.WidthPercentage = 80f;
+                            ////Asignando los anchos de las columnas
+                            float[] valores = new float[2] { 13, 40 };
+                            tabla.SetWidths(valores);
+
+                            ////Creando celdas agregando contenido
+                            ///
+
+
+                            int nroregistros = listaEmpleado.Count();
+                            for (int i = 0; i < nroregistros; i++)
+                            {
+                                nombre = listaEmpleado[i].pre_nombre;
+                                cant = Double.Parse(listaEmpleado[i].pre_cantidad.ToString());
+
+                                PdfPCell celda1 = new PdfPCell(new Phrase("NOMBRE", font));
+                                celda1.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda1.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda1);
+
+                                PdfPCell celda2 = new PdfPCell(new Phrase(listaEmpleado[i].pre_nombre.ToString(), font));
+                                celda2.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda2.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda2);
+
+
+
+                                PdfPCell celda3 = new PdfPCell(new Phrase("MATRICULA", font));
+                                celda3.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda3);
+
+                                PdfPCell celda4 = new PdfPCell(new Phrase(listaEmpleado[i].pre_matricula.ToString(), font));
+                                celda4.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda4.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda4);
+
+                                PdfPCell celda5 = new PdfPCell(new Phrase("ADSCRIPCIÓN", font));
+                                celda5.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda5.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda5);
+
+                                PdfPCell celda6 = new PdfPCell(new Phrase(listaEmpleado[i].pre_adscripcioon.ToString(), font));
+                                celda6.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda6.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda6);
+
+                                PdfPCell celda7 = new PdfPCell(new Phrase("NO. CUENTA/TARJETA", font));
+                                celda7.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda7.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda7);
+
+                                PdfPCell celda8 = new PdfPCell(new Phrase(listaEmpleado[i].pre_tarjeta_cuenta.ToString(), font));
+                                celda8.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda8.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda8);
+
+                                PdfPCell celda9 = new PdfPCell(new Phrase("BANCO", font));
+                                celda9.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda9.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda9);
+
+                                PdfPCell celda10 = new PdfPCell(new Phrase(listaEmpleado[i].pre_banco.ToString(), font));
+                                celda10.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda10.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda10);
+
+                                PdfPCell celda11 = new PdfPCell(new Phrase("TELEFONO", font));
+                                celda11.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda11.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda11);
+
+                                PdfPCell celda12 = new PdfPCell(new Phrase(listaEmpleado[i].pre_telefono.ToString(), font));
+                                celda12.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda12.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda12);
+
+                                PdfPCell celda13 = new PdfPCell(new Phrase("CANTIDAD", font));
+                                celda13.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda13);
+
+                                PdfPCell celda14 = new PdfPCell(new Phrase("$" + cant, font));
+                                celda14.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda14.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda14);
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_nombre.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_matricula.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_adscripcioon.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_tarjeta_cuenta.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_banco.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].pre_telefono.ToString(), font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase("$"+cant, font)));
+                                //tabla.AddCell(new PdfPCell(new Phrase(listaEmpleado[i].entrada.ToString(), font))).HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                fecha = listaEmpleado[i].pre_fecha.ToString("dd/MM/yyyy");
+                                Console.WriteLine(fecha);
+                            }
+
+                            doc.Add(tabla);
+                            doc.Add(espacio);
+                            string[] fecprestamo = fecha.Split('/');
+                            //  string mes4_ = "";
+                            string diap = fecprestamo[0];
+                            string mesp = fecprestamo[1];
+                            string aniop = fecprestamo[2];
+                            string valmes = "";
+                            switch (mesp)
+                            {
+                                case "01":
+                                    valmes = "ENERO";
+                                    break;
+                                case "02":
+                                    valmes = "FEBRERO";
+                                    break;
+                                case "03":
+                                    valmes = "MARZO";
+                                    break;
+                                case "04":
+                                    valmes = "ABRIL";
+                                    break;
+                                case "05":
+                                    valmes = "MAYO";
+                                    break;
+                                case "06":
+                                    valmes = "JUNIO";
+                                    break;
+                                case "07":
+                                    valmes = "JULIO";
+                                    break;
+                                case "08":
+                                    valmes = "AGOSTO";
+                                    break;
+                                case "09":
+                                    valmes = "SEPTIEMBRE";
+                                    break;
+                                case "10":
+                                    valmes = "OCTUBRE";
+                                    break;
+                                case "11":
+                                    valmes = "NOVIEMBRE";
+                                    break;
+                                case "12":
+                                    valmes = "DICIEMBRE";
+                                    break;
+
+                            }
+
+                            Paragraph fec = new Paragraph("DURANGO,DGO A " + diap + " DE " + valmes + " DE " + aniop, font2);
+                            fec.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(fec);
+                            doc.Add(espacio);
+
+                            Paragraph firma = new Paragraph("Firma:", font2);
+                            firma.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(firma);
+                            doc.Add(espacio);
+                            doc.Add(espacio);
+
+                            Paragraph linea = new Paragraph(" _______________________________________________________________", font2);
+                            linea.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(linea);
+                            Paragraph nom = new Paragraph(nombre, font2);
+                            nom.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(nom);
+
+                            doc.Close();
+                            buffer = stream.ToArray();
+                            var contentLength = buffer.Length;
+
+                            var statuscode = HttpStatusCode.OK;
+                            response = Request.CreateResponse(statuscode);
+                            response.Content = new StreamContent(new MemoryStream(buffer));
+                            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                            response.Content.Headers.ContentLength = contentLength;
+                            ContentDispositionHeaderValue contentDisposition = null;
+                            if (ContentDispositionHeaderValue.TryParse("inline; filename=Reporte.pdf", out contentDisposition))
+                            {
+                                response.Content.Headers.ContentDisposition = contentDisposition;
+                            }
+                            else
+                            {
+                                //var statuscode = HttpStatusCode.NotFound;
+                                // var message = String.Format("Unable to find file. file \"{0}\" may not exist.");
+                                // var responseData = responseDataFactory.CreateWithOnlyMetadata(statuscode, message);
+                                response = Request.CreateResponse((HttpStatusCode.NotFound));
+                            }
+                        }
+
+                    }
+
+                    break;
+            }
+
+
+          
+
             return response;
 
         }
