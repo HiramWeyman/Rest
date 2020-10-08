@@ -49,17 +49,6 @@ namespace Rest.Controllers
                 {
 
                     Caja_Ahorro caja_ahorro = new Caja_Ahorro();
-                    /*
-                    caja_ahorro.pre_nombre = "OSCAR GUTIERREZ";
-                    caja_ahorro.pre_matricula = "180035";
-                    caja_ahorro.pre_adscripcioon = "TRABAJADOR";
-                    caja_ahorro.pre_tarjeta_cuenta = "876543210";
-                    caja_ahorro.pre_banco = "BANCOMER";
-                    caja_ahorro.pre_telefono = "618123456";
-                    caja_ahorro.pre_cantidad = "1,000";
-                    caja_ahorro.pre_tipo = tipo;
-                    caja_ahorro.pre_fecha = DateTime.Now;
-                    */
                     
                     caja_ahorro.pre_nombre = nombre;
                     caja_ahorro.pre_matricula = matricula;
@@ -84,6 +73,7 @@ namespace Rest.Controllers
             }
 
         }
+
 
     }
 }

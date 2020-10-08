@@ -16,6 +16,8 @@ namespace Rest.Models
         public string pre_tarjeta_cuenta { get; set; }
         public string pre_banco { get; set; }
         public string pre_telefono { get; set; }
+        public string pre_recibo { get; set; }
+        public string pre_ine { get; set; }
         public string pre_cantidad { get; set; }
         public System.DateTime pre_fecha { get; set; }
         public string pre_tipo { get; set; }
