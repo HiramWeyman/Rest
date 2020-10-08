@@ -33,5 +33,6 @@ namespace Rest.Models
         public string pad_situacion_base { get; set; }
         public string pad_num_contacto { get; set; }
         public string pad_observaciones { get; set; }
+        //public string pad_tipo { get; set; }
     }
 }

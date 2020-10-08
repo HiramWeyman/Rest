@@ -48,7 +48,8 @@ namespace Rest.Controllers
                     string pad_situacion_base = "";
                     string pad_num_contacto = "";
                     string pad_observaciones = "";
-                
+                    string pad_tipo = "";
+
                     try
                     {
                
@@ -79,8 +80,8 @@ namespace Rest.Controllers
                                 pad_num_contacto = partes[17];
                                 pad_observaciones = partes[18];
 
-                             
-                                
+                     
+
 
                                 padron.pad_mat = pad_mat;
                                 padron.pad_nombre = pad_nombre;
@@ -100,6 +101,7 @@ namespace Rest.Controllers
                                 padron.pad_situacion_base = pad_situacion_base;
                                 padron.pad_num_contacto = pad_num_contacto;
                                 padron.pad_observaciones = pad_observaciones;
+                         
 
                                 db.Padron_advo.Add(padron);
                                 db.SaveChanges();
