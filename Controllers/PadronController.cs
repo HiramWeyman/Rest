@@ -48,7 +48,7 @@ namespace Rest.Controllers
                     string pad_situacion_base = "";
                     string pad_num_contacto = "";
                     string pad_observaciones = "";
-                    string pad_tipo = "";
+                    
 
                     try
                     {

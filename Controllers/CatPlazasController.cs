@@ -10,6 +10,7 @@ namespace Rest.Controllers
 {
     public class CatPlazasController : ApiController
     {
+        [Route("api/CatPlazas")]
         [HttpGet]
         public IEnumerable<Cat_Plazas> Get()
         {
