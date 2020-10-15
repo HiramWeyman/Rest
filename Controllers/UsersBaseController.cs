@@ -56,11 +56,32 @@ namespace Rest.Controllers
                         byte[] byteContraCifrado = sha.ComputeHash(byteContra);
                         string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");
                     userbase.ub_password = contraCifrada;
-
-                    db.User_Base.Add(userbase);
-                    db.SaveChanges();
-                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userbase);
-                    return Mensaje;
+                    int persona = db.Database.SqlQuery<int>("select count(*) from steujedo_sindicato.User_Base where ub_user="+ userbaseCLS.ub_user)
+                    .FirstOrDefault();
+                    if (persona > 0)
+                    {
+                        var Mensaje = Request.CreateResponse(HttpStatusCode.BadRequest,"El usuario ya se encuentra registrado.");
+                     
+                        return Mensaje;
+                    }
+                    else {
+                        db.User_Base.Add(userbase);
+                        db.SaveChanges();
+                        var Mensaje = Request.CreateResponse(HttpStatusCode.Created, userbase);
+                        return Mensaje;
+                    }
+                    //var user = db.User_Base.FirstOrDefault(x => x.ub_user == userbaseCLS.ub_user && x.ub_password== userbase.ub_password);
+                    //if (user != null)
+                    //{
+                        
+                       
+                    //}
+                    //else
+                    //{
+                     
+                 
+                    //}
+                 
                 }
 
             }
