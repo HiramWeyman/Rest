@@ -17,7 +17,8 @@ namespace Rest.Controllers
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
             {
                 db.Configuration.LazyLoadingEnabled = false;
-                return db.Cat_Plazas.OrderByDescending(x => x.catp_id).ToList();
+                return db.Cat_Plazas.Where(x => x.catp_status != "S").OrderByDescending(x => x.catp_id).ToList();
+                //return db.Cat_Plazas.OrderByDescending(x => x.catp_id).ToList();
 
             }
         }
