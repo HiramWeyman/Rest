@@ -12,19 +12,14 @@ namespace Rest.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuarios_Base
+    public partial class Videos_FL
     {
-        public int id { get; set; }
-        public long matricula { get; set; }
-        public string nombre_completo { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public string celular { get; set; }
-        public string observaciones { get; set; }
-        public int act_id { get; set; }
-        public int role_id { get; set; }
-    
-        public virtual Actividade Actividade { get; set; }
-        public virtual Role Role { get; set; }
+        public int vid_id { get; set; }
+        public string vid_titulo { get; set; }
+        public int vid_ancho { get; set; }
+        public int vid_largo { get; set; }
+        public string vid_src { get; set; }
+        public string vid_u_publica { get; set; }
+        public System.DateTime vid_f_publica { get; set; }
     }
 }
