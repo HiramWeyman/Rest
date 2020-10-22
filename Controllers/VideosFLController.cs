@@ -73,7 +73,7 @@ namespace Rest.Controllers
 
         }
 
-        public HttpResponseMessage Put(int id, string usuario, VideosFLCLS videosFLCLS)
+        public HttpResponseMessage Put(int id, VideosFLCLS videosFLCLS)
         {
 
             try
@@ -92,8 +92,6 @@ namespace Rest.Controllers
                         video.vid_src = videosFLCLS.vid_src;
                         video.vid_ancho = videosFLCLS.vid_ancho;
                         video.vid_largo = videosFLCLS.vid_largo;
-                        video.vid_u_publica = usuario;
-                        video.vid_f_publica = DateTime.Now;
                         db.SaveChanges();
                         return Request.CreateResponse(HttpStatusCode.OK);
 
