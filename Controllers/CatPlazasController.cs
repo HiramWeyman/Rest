@@ -54,6 +54,8 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/CatPlazas")]
+        [HttpPost]
         public HttpResponseMessage Post(string Usuario, CatPlazasCLS catplazasCLS)
         {
 
@@ -85,6 +87,8 @@ namespace Rest.Controllers
 
         }
 
+        [Route("api/CatPlazas")]
+        [HttpPut]
         public HttpResponseMessage Put(int id, CatPlazasCLS catplazasCLS)
         {
 
@@ -121,6 +125,8 @@ namespace Rest.Controllers
 
         }
 
+        [Route("api/CatPlazas")]
+        [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
 
