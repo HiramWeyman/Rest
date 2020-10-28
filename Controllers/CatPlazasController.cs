@@ -36,6 +36,8 @@ namespace Rest.Controllers
             }
         }
 
+        [Route("api/CatPlazas/{id}")]
+        [HttpGet]
         public HttpResponseMessage Get(int id)
         {
             using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
@@ -87,7 +89,7 @@ namespace Rest.Controllers
 
         }
 
-        [Route("api/CatPlazas")]
+        [Route("api/CatPlazas/{id}")]
         [HttpPut]
         public HttpResponseMessage Put(int id, CatPlazasCLS catplazasCLS)
         {
@@ -125,7 +127,7 @@ namespace Rest.Controllers
 
         }
 
-        [Route("api/CatPlazas")]
+        [Route("api/CatPlazas/{id}")]
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
