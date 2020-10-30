@@ -58,8 +58,9 @@ namespace Rest.Controllers
                     caja_ahorro.pre_telefono = cajaahorroCLS.pre_telefono;
                     caja_ahorro.pre_cantidad = cajaahorroCLS.pre_cantidad;
                     caja_ahorro.pre_tipo = tipo;
-                    caja_ahorro.pre_fecha = DateTime.Now; 
-                    
+                    caja_ahorro.pre_fecha = DateTime.Now;
+                    caja_ahorro.pre_estatus = "PENDIENTE";
+
                     db.Caja_Ahorro.Add(caja_ahorro);
                     db.SaveChanges();
                     var Mensaje = Request.CreateResponse(HttpStatusCode.Created, cajaahorroCLS);

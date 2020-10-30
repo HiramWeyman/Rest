@@ -13,7 +13,7 @@ namespace Rest.Controllers
     public class PrestamosController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage Post(int id,string bandera)
+        public HttpResponseMessage Post(int id, string bandera)
         {
 
             HttpResponseMessage result = null;
@@ -34,10 +34,26 @@ namespace Rest.Controllers
                     try
                     {
 
-                        //Create a FTP Request Object and Specfiy a Complete Path
-                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/prestamos/" + id + "/" + postedFile.FileName);
+                        try
+                        {
+                        FtpWebRequest reqFTP = null;
+                        Stream ftpStream = null;
+                        reqFTP = (FtpWebRequest)FtpWebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/prestamos/" + id);
+                        reqFTP.Method = WebRequestMethods.Ftp.MakeDirectory;
+                        reqFTP.UseBinary = true;
+                        reqFTP.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+                        FtpWebResponse response2 = (FtpWebResponse)reqFTP.GetResponse();
+                        ftpStream = response2.GetResponseStream();
+                        ftpStream.Close();
+                        response2.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            //directory already exist I know that is weak but there is no way to check if a folder exist on ftp...
+                        }
 
                         //Call A FileUpload Method of FTP Request Object
+                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/prestamos/" + id + "/" + postedFile.FileName);
                         reqObj.Method = WebRequestMethods.Ftp.UploadFile;
 
                         //If you want to access Resourse Protected,give UserName and PWD
@@ -55,6 +71,7 @@ namespace Rest.Controllers
                         response.Close();
 
                         File.Delete(filePath);
+                        
                     }
 
                     catch (Exception Ex)
@@ -64,6 +81,7 @@ namespace Rest.Controllers
 
                 }
 
+                
                 try
                 {
 
@@ -78,11 +96,11 @@ namespace Rest.Controllers
                         {
                             if(bandera.Equals("RECIBO"))
                             {
-                                caja.pre_recibo = NombreArchivo;
+                                caja.pre_recibo = "assets/images/prestamos/"+id+"/"+NombreArchivo;
                             }
                             if (bandera.Equals("INE"))
                             {
-                                caja.pre_ine = NombreArchivo;
+                                caja.pre_ine = "assets/images/prestamos/" + id + "/" + NombreArchivo;
                             }
 
                             db.SaveChanges();
@@ -92,11 +110,12 @@ namespace Rest.Controllers
                     }
 
                 }
+                
                 catch (Exception ex)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
                 }
-
+                
                 //result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
             else
@@ -104,6 +123,38 @@ namespace Rest.Controllers
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             return result;
+        }
+
+        [HttpPut]
+        public HttpResponseMessage Put(int id, string valor)
+        {
+
+            try
+            {
+                //id = cajaahorroCLS.pre_id;
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+                    Caja_Ahorro caja = db.Caja_Ahorro.Where(p => p.pre_id.Equals(id)).First();
+                    if (caja == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Publicacion no encontrada");
+                    }
+                    else
+                    {
+                        caja.pre_estatus = valor;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
         }
     }
 }

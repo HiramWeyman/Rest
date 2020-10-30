@@ -26,5 +26,6 @@ namespace Rest.Models
         public string pre_cantidad { get; set; }
         public System.DateTime pre_fecha { get; set; }
         public string pre_tipo { get; set; }
+        public string pre_estatus { get; set; }
     }
 }
