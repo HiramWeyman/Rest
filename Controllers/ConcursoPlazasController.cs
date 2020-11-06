@@ -77,7 +77,7 @@ namespace Rest.Controllers
                 List<Concurso_Plazas> listaEmpleado = null;
                 db.Configuration.LazyLoadingEnabled = false;
                 //return db.Concurso_Plazas.Where(x => x.pad_plaza_id == id).OrderBy(x => x.pad_f_antig).ToList();
-                string query = "  SELECT  pad_id,pad_plaza_id,pad_mat,pad_nombre,pad_adscripcion,pad_categoria,pad_sueldo,pad_funcion,pad_situacion,pad_permanencia,pad_f_ingreso,pad_permisos,pad_f_antig,pad_n_insaluble,pad_adscrip_base,pad_catego_base,pad_funcion_base,pad_situacion_base,pad_num_contacto,pad_observaciones,pad_cancelado,SUBSTRING(pad_f_antig,7, 4) as anio,catp_id,catp_descrip,catp_status,catp_u_captura,catp_f_captura,catp_categoria,catp_funcion,catp_adscripcion FROM steujedo_sindicato.steujedo_sindicato.Concurso_Plazas,steujedo_sindicato.steujedo_sindicato.Cat_Plazas where pad_plaza_id=catp_id and pad_cancelado IS NULL and pad_plaza_id=" + id+ "  order by SUBSTRING(pad_f_antig,7, 4), pad_sueldo ";
+                string query = "  SELECT  pad_id,pad_plaza_id,pad_mat,pad_nombre,pad_adscripcion,pad_categoria,pad_sueldo,pad_funcion,pad_situacion,pad_permanencia,pad_f_ingreso,pad_permisos,pad_f_antig,pad_n_insaluble,pad_adscrip_base,pad_catego_base,pad_funcion_base,pad_situacion_base,pad_num_contacto,pad_observaciones,pad_string_fec,pad_cancelado,SUBSTRING(pad_f_antig,7, 4) as anio,catp_id,catp_descrip,catp_status,catp_u_captura,catp_f_captura,catp_categoria,catp_funcion,catp_adscripcion FROM steujedo_sindicato.steujedo_sindicato.Concurso_Plazas,steujedo_sindicato.steujedo_sindicato.Cat_Plazas where pad_plaza_id=catp_id and pad_cancelado IS NULL and pad_plaza_id=" + id+ "  order by SUBSTRING(pad_f_antig,7, 4), pad_sueldo ";
                 listaEmpleado = db.Database.SqlQuery<Concurso_Plazas>(query).ToList();
                 return listaEmpleado;
             }
@@ -127,7 +127,7 @@ namespace Rest.Controllers
                 List<Concurso_Plazas> listaEmpleado = null;
                 db.Configuration.LazyLoadingEnabled = false;
                 //return db.Concurso_Plazas.Where(x => x.pad_plaza_id == id).OrderBy(x => x.pad_f_antig).ToList();
-                string query = "  SELECT  pad_id,pad_plaza_id,pad_mat,pad_nombre,pad_adscripcion,pad_categoria,pad_sueldo,pad_funcion,pad_situacion,pad_permanencia,pad_f_ingreso,pad_permisos,pad_f_antig,pad_n_insaluble,pad_adscrip_base,pad_catego_base,pad_funcion_base,pad_situacion_base,pad_num_contacto,pad_observaciones,pad_cancelado,SUBSTRING(pad_f_antig,7, 4) as anio,catp_id,catp_descrip,catp_status,catp_u_captura,catp_f_captura,catp_categoria,catp_funcion,catp_adscripcion FROM steujedo_sindicato.steujedo_sindicato.Concurso_Plazas,steujedo_sindicato.steujedo_sindicato.Cat_Plazas where pad_plaza_id=catp_id and pad_cancelado IS NULL and pad_mat=" + id + "  order by SUBSTRING(pad_f_antig,7, 4), pad_sueldo ";
+                string query = "  SELECT  pad_id,pad_plaza_id,pad_mat,pad_nombre,pad_adscripcion,pad_categoria,pad_sueldo,pad_funcion,pad_situacion,pad_permanencia,pad_f_ingreso,pad_permisos,pad_f_antig,pad_n_insaluble,pad_adscrip_base,pad_catego_base,pad_funcion_base,pad_situacion_base,pad_num_contacto,pad_observaciones,pad_string_fec,pad_cancelado,SUBSTRING(pad_f_antig,7, 4) as anio,catp_id,catp_descrip,catp_status,catp_u_captura,catp_f_captura,catp_categoria,catp_funcion,catp_adscripcion FROM steujedo_sindicato.steujedo_sindicato.Concurso_Plazas,steujedo_sindicato.steujedo_sindicato.Cat_Plazas where pad_plaza_id=catp_id and pad_cancelado IS NULL and pad_mat=" + id + "  order by SUBSTRING(pad_f_antig,7, 4), pad_sueldo ";
                 listaEmpleado = db.Database.SqlQuery<Concurso_Plazas>(query).ToList();
                 return listaEmpleado;
             }
@@ -160,10 +160,11 @@ namespace Rest.Controllers
                     concurso_plazas.pad_situacion_base = concursoplazasCLS.pad_situacion_base;
                     concurso_plazas.pad_num_contacto = concursoplazasCLS.pad_num_contacto;
                     concurso_plazas.pad_observaciones = concursoplazasCLS.pad_observaciones;
+                    concurso_plazas.pad_string_fec = DateTime.Now.ToString();
 
                     db.Concurso_Plazas.Add(concurso_plazas);
                     db.SaveChanges();
-                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, concursoplazasCLS);
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, concurso_plazas);
                     return Mensaje;
                 }
 
