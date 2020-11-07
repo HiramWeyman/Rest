@@ -51,7 +51,9 @@ namespace Rest.Controllers
                     User_Base userbase = new User_Base();
                     userbase.ub_user = userbaseCLS.ub_user;
                     userbase.ub_nombre = userbaseCLS.ub_nombre;
-                        SHA256Managed sha = new SHA256Managed();
+                    userbase.ub_curp = userbaseCLS.ub_curp;
+                    userbase.ub_rfc = userbaseCLS.ub_rfc;
+                    SHA256Managed sha = new SHA256Managed();
                         byte[] byteContra = Encoding.Default.GetBytes(userbaseCLS.ub_password);
                         byte[] byteContraCifrado = sha.ComputeHash(byteContra);
                         string contraCifrada = BitConverter.ToString(byteContraCifrado).Replace("-", "");

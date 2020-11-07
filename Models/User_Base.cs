@@ -18,5 +18,7 @@ namespace Rest.Models
         public string ub_user { get; set; }
         public string ub_nombre { get; set; }
         public string ub_password { get; set; }
+        public string ub_curp { get; set; }
+        public string ub_rfc { get; set; }
     }
 }
