@@ -1388,6 +1388,7 @@ namespace Rest.Controllers
      
 
             List<CajaAhorroCLS> listaEmpleado = null;
+            List<RevolventeCLS> revolvente = null;
             switch (tipo) {
 
                 case 1:
@@ -1860,6 +1861,209 @@ namespace Rest.Controllers
 
                     }
 
+                    break;
+
+                case 3:
+                    using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                    {
+                        db.Configuration.LazyLoadingEnabled = false;
+                        //convert(char, fecha, 103) as fecha
+
+                        string query = "  SELECT [pr_id],[pr_nombre],[pr_matricula],[pr_telefono],[pr_ingreso],[pr_modificacion],[pr_tipo],[pr_estatus],[pr_recibo],[pr_ine],[pr_fecha] FROM [steujedo_sindicato].[steujedo_sindicato].[Pre_Revolvente] where [pr_id]=" + id;
+                        revolvente = db.Database.SqlQuery<RevolventeCLS>(query).ToList();
+
+
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            String nombre = "";
+                            Double cant = 0.00;
+                            String fecha = "";
+                            PdfWriter.GetInstance(doc, stream);
+                            doc.Open();
+
+                            iTextSharp.text.Image image1 = iTextSharp.text.Image.GetInstance(ruta_img);
+                            //image1.ScalePercent(50f);
+                            image1.ScaleAbsoluteWidth(70);
+                            image1.ScaleAbsoluteHeight(60);
+                            image1.Alignment = Element.ALIGN_LEFT;
+                            doc.Add(image1);
+                            Paragraph espacio = new Paragraph(" ");
+                            doc.Add(espacio);
+
+                            Paragraph title1 = new Paragraph(" SINDICATO DE TRABAJADORES Y EMPLEADOS DE LA UNIVERSIDAD JUÁREZ DEL ESTADO DE DURANGO", font2);
+                            title1.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title1);
+                            doc.Add(espacio);
+
+                            Paragraph title = new Paragraph("(S.T.E.U.J.E.D.)", font1);
+                            title.Alignment = Element.ALIGN_CENTER;
+                            Paragraph title2 = new Paragraph("CAJA DE AHORRO", font1);
+                            title2.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(title);
+                            doc.Add(title2);
+                            doc.Add(espacio);
+
+
+
+                            ////Creando la tabla
+                            PdfPTable tabla = new PdfPTable(2);
+                            tabla.WidthPercentage = 80f;
+                            ////Asignando los anchos de las columnas
+                            float[] valores = new float[2] { 13, 40 };
+                            tabla.SetWidths(valores);
+
+                            ////Creando celdas agregando contenido
+                            ///
+
+
+                            int nroregistros = revolvente.Count();
+                            for (int i = 0; i < nroregistros; i++)
+                            {
+                                nombre = revolvente[i].pr_nombre;
+                                if (revolvente[i].pr_ingreso != null)
+                                {
+                                    cant = Double.Parse(revolvente[i].pr_ingreso.ToString());
+                                }
+                                else {
+                                    cant =0.00;
+                                }
+                               
+
+                                string format = "dd/MM/yyyy HH:mm:ss";
+                                string dt = Convert.ToDateTime(revolvente[i].pr_fecha).ToString(format);
+                                PdfPCell celdafec = new PdfPCell(new Phrase("FECHA:", font));
+                                celdafec.BackgroundColor = new BaseColor(240, 240, 240);
+                                celdafec.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celdafec);
+
+                                PdfPCell celdafecdate= new PdfPCell(new Phrase(dt, font));
+                                celdafecdate.BackgroundColor = new BaseColor(240, 240, 240);
+                                celdafecdate.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celdafecdate);
+
+                                PdfPCell celda1 = new PdfPCell(new Phrase("SOLICITUD DE:", font));
+                                celda1.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda1.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda1);
+
+                                PdfPCell celda2 = new PdfPCell(new Phrase(revolvente[i].pr_tipo.ToString(), font));
+                                celda2.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda2.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda2);
+
+
+
+                                PdfPCell celda3 = new PdfPCell(new Phrase("MATRICULA", font));
+                                celda3.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda3);
+
+                                PdfPCell celda4 = new PdfPCell(new Phrase(revolvente[i].pr_matricula.ToString(), font));
+                                celda4.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda4.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda4);
+
+                                PdfPCell celda5 = new PdfPCell(new Phrase("NOMBRE:", font));
+                                celda5.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda5.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda5);
+
+                                PdfPCell celda6 = new PdfPCell(new Phrase(nombre, font));
+                                celda6.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda6.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda6);
+
+                                PdfPCell celda7 = new PdfPCell(new Phrase("TELEFONO", font));
+                                celda7.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda7.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda7);
+
+                                PdfPCell celda8 = new PdfPCell(new Phrase(revolvente[i].pr_telefono.ToString(), font));
+                                celda8.BackgroundColor = new BaseColor(240, 240, 240);
+                                celda8.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                tabla.AddCell(celda8);
+
+                        
+                            }
+
+                            doc.Add(tabla);
+                            doc.Add(espacio);
+
+                            PdfPTable tabla2 = new PdfPTable(2);
+                            tabla2.WidthPercentage = 80f;
+
+                            float[] val = new float[2] {30,13 };
+                            tabla2.SetWidths(val);
+
+                            for (int i=0;i<nroregistros;i++) {
+
+                                if (revolvente[i].pr_modificacion == null)
+                                {
+
+                                    PdfPCell celda13 = new PdfPCell(new Phrase("DESEO INGRESAR A LA CAJA DE AHORRO CON:", font));
+                                    celda13.BackgroundColor = new BaseColor(240, 240, 240);
+                                    celda13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                    tabla2.AddCell(celda13);
+
+                                    PdfPCell celda14 = new PdfPCell(new Phrase("$" + cant, font));
+                                    celda14.BackgroundColor = new BaseColor(240, 240, 240);
+                                    celda14.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                    tabla2.AddCell(celda14);
+                                }
+                                else {
+                                    PdfPCell celda13 = new PdfPCell(new Phrase("MODIFICAR LA CANTIDAD DE MI AHORRO A::", font));
+                                    celda13.BackgroundColor = new BaseColor(240, 240, 240);
+                                    celda13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                    tabla2.AddCell(celda13);
+
+                                    PdfPCell celda14 = new PdfPCell(new Phrase("$" + cant, font));
+                                    celda14.BackgroundColor = new BaseColor(240, 240, 240);
+                                    celda14.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                                    tabla2.AddCell(celda14);
+                                }
+                        
+                            }
+                            doc.Add(tabla2);
+                            doc.Add(espacio);
+                            Paragraph firma = new Paragraph("AUTORIZA:", font2);
+                            firma.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(firma);
+                            doc.Add(espacio);
+
+                            Paragraph nom = new Paragraph(nombre, font2);
+                            nom.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(nom);
+                                                        Paragraph linea = new Paragraph(" _______________________________________________________________", font2);
+                            linea.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(linea);
+                            //Paragraph nom = new Paragraph(nombre, font2);
+                            //nom.Alignment = Element.ALIGN_CENTER;
+                            //doc.Add(nom);
+
+                            doc.Close();
+                            buffer = stream.ToArray();
+                            var contentLength = buffer.Length;
+
+                            var statuscode = HttpStatusCode.OK;
+                            response = Request.CreateResponse(statuscode);
+                            response.Content = new StreamContent(new MemoryStream(buffer));
+                            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+                            response.Content.Headers.ContentLength = contentLength;
+                            ContentDispositionHeaderValue contentDisposition = null;
+                            if (ContentDispositionHeaderValue.TryParse("inline; filename=Reporte.pdf", out contentDisposition))
+                            {
+                                response.Content.Headers.ContentDisposition = contentDisposition;
+                            }
+                            else
+                            {
+                                //var statuscode = HttpStatusCode.NotFound;
+                                // var message = String.Format("Unable to find file. file \"{0}\" may not exist.");
+                                // var responseData = responseDataFactory.CreateWithOnlyMetadata(statuscode, message);
+                                response = Request.CreateResponse((HttpStatusCode.NotFound));
+                            }
+                        }
+
+                    }
                     break;
             }
 

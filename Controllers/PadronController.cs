@@ -190,6 +190,112 @@ namespace Rest.Controllers
             }
 
         }
+
+
+        [System.Web.Http.Route("api/PadDeleteAct")]
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage DeletePadAct(string[] stringArray)
+        {
+
+            try
+            {
+
+
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+
+
+
+                    try
+                    {
+                        //Padron_advo dbx = new Padron_advo();
+                        string query = "delete from Padron_advo where pad_situacion='A'";
+                        db.Database.ExecuteSqlCommand(query);
+
+
+                    }
+                    catch (DbEntityValidationException dbEx)
+                    {
+
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                Trace.TraceInformation("Property: {0} Error: {1}",
+                                    validationError.PropertyName,
+                                    validationError.ErrorMessage);
+                            }
+                        }
+
+                    }
+
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, "Archivo borrado con exito");
+                    return Mensaje;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [System.Web.Http.Route("api/PadDeleteJub")]
+        [System.Web.Http.HttpPost]
+        public HttpResponseMessage DeletePadJub(string[] stringArray)
+        {
+
+            try
+            {
+
+
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+
+
+
+                    try
+                    {
+                        //Padron_advo dbx = new Padron_advo();
+                        string query = "delete from Padron_advo where pad_situacion='J'";
+                        db.Database.ExecuteSqlCommand(query);
+
+
+                    }
+                    catch (DbEntityValidationException dbEx)
+                    {
+
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                Trace.TraceInformation("Property: {0} Error: {1}",
+                                    validationError.PropertyName,
+                                    validationError.ErrorMessage);
+                            }
+                        }
+
+                    }
+
+                    var Mensaje = Request.CreateResponse(HttpStatusCode.Created, "Archivo borrado con exito");
+                    return Mensaje;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
     }
 
 }
