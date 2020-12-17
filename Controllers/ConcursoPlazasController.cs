@@ -5,6 +5,7 @@ using System.Web.Http;
 using Rest.Models;
 using System.Net.Http;
 using System.Net;
+using System.Globalization;
 
 namespace Rest.Controllers
 {
@@ -160,7 +161,9 @@ namespace Rest.Controllers
                     concurso_plazas.pad_situacion_base = concursoplazasCLS.pad_situacion_base;
                     concurso_plazas.pad_num_contacto = concursoplazasCLS.pad_num_contacto;
                     concurso_plazas.pad_observaciones = concursoplazasCLS.pad_observaciones;
-                    concurso_plazas.pad_string_fec = DateTime.Now.ToString();
+                    var dateTime = DateTime.Now;
+                    dateTime.ToString("dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture);
+                    concurso_plazas.pad_string_fec = dateTime.ToString();
 
                     db.Concurso_Plazas.Add(concurso_plazas);
                     db.SaveChanges();

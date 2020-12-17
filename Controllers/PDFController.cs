@@ -2456,10 +2456,11 @@ namespace Rest.Controllers
 
                 if (pad_string_fec != null)
                 {
-                    string format = "dd/MM/yyyy HH:mm:ss";
+                    string format = "dd/MM/yyyy HH:mm:ss tt";
                     //DateTime dt = DateTime.ParseExact(pad_string_fec, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    //string dt = Convert.ToDateTime(pad_string_fec).ToString(format);
                     string dt = Convert.ToDateTime(pad_string_fec).ToString(format);
-
+                    //DateTime date = DateTime.ParseExact(pad_string_fec, "dd/MM/yyyy HH:mm:ss tt", null);
                     //DateTime dt = DateTime.ParseExact(pad_string_fec, format, CultureInfo.InvariantCulture);
                     //Console.WriteLine(s.ToString(format);
                     //DateTime myDate = DateTime.Parse(pad_string_fec);
