@@ -93,6 +93,42 @@ namespace Rest.Controllers
 
         }
 
+
+        [Route("api/usuariosbaseNombre")]
+        [HttpGet]
+        public HttpResponseMessage GetUserBaseNom([FromUri]string nombre)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<ComprobarCLS> usuario = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = " SELECT [ub_id],[ub_user],[ub_nombre],[ub_curp],[ub_rfc]  FROM [steujedo_sindicato].[steujedo_sindicato].[User_Base] where [ub_nombre] LIKE '"+nombre+"%'";
+                    usuario = db.Database.SqlQuery<ComprobarCLS>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuario != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
         [Route("api/updateuserbase/{user}")]
         [HttpPut]
         public HttpResponseMessage PutBaseUser(string user, UserBaseCLS userCLS)

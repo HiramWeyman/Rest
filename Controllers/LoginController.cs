@@ -70,7 +70,7 @@ namespace Rest.Controllers
                 }
                
                 db.Configuration.LazyLoadingEnabled = false;
-                var user = db.Usuarios.FirstOrDefault(e => e.user_login == log.user_login && e.password == contraCifrada && (e.role_id == 1 || e.role_id == 5 || e.role_id == 6));
+                var user = db.Usuarios.FirstOrDefault(e => e.user_login == log.user_login && e.password == contraCifrada && (e.role_id == 1 || e.role_id == 5 || e.role_id == 6 || e.role_id == 7 || e.role_id == 8 || e.role_id == 11));
                 if (user != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, user);

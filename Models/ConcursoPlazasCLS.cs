@@ -31,6 +31,11 @@ namespace Rest.Models
         public string pad_num_contacto { get; set; }
         public string pad_observaciones { get; set; }
         public string pad_string_fec { get; set; }
+        public string pad_user_cancela { get; set; }
+
+        public string pad_user_restablece { get; set; }
+
+        public string pad_fecha_restablece { get; set; }
 
         public string catp_descrip { get; set; }
 
