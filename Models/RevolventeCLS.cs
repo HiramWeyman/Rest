@@ -20,6 +20,9 @@ namespace Rest.Models
         public string pr_recibo { get; set; }
         public string pr_ine { get; set; }
         public System.DateTime pr_fecha { get; set; }
+        public string pr_adscripcioon { get; set; }
+        public string pre_tarjeta_cuenta { get; set; }
+        public string pre_banco { get; set; }
 
     }
 }

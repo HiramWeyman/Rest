@@ -48,6 +48,9 @@ namespace Rest.Controllers
                     pre_revolvente.pr_tipo = revolventeCLS.pr_tipo;
                     pre_revolvente.pr_estatus = "PENDIENTE";
                     pre_revolvente.pr_fecha = DateTime.Now;
+                    pre_revolvente.pr_adscripcioon = revolventeCLS.pr_adscripcioon;
+                    pre_revolvente.pre_tarjeta_cuenta = revolventeCLS.pre_tarjeta_cuenta;
+                    pre_revolvente.pre_banco = revolventeCLS.pre_banco;
 
                     db.Pre_Revolvente.Add(pre_revolvente);
                     db.SaveChanges();
