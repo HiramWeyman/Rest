@@ -98,5 +98,77 @@ namespace Rest.Controllers
 
         }
 
+
+        [Route("api/GetIngresoMat")]
+        [HttpGet]
+        public HttpResponseMessage GetIngresoMat([FromUri] string matricula)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Pre_Revolvente> usuario = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = "  select * from [steujedo_sindicato].[steujedo_sindicato].[Pre_Revolvente] where [pr_matricula]=" + matricula;
+                    usuario = db.Database.SqlQuery<Pre_Revolvente>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuario != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [Route("api/GetIngresoMatEstatus")]
+        [HttpGet]
+        public HttpResponseMessage GetIngresoMatEstatus([FromUri] string matricula, [FromUri] string estatus)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Pre_Revolvente> usuarios = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = "  select * from [steujedo_sindicato].[steujedo_sindicato].[Pre_Revolvente] where [pr_matricula]=" + matricula + " and [pr_estatus]='" + estatus + "'";
+                    usuarios = db.Database.SqlQuery<Pre_Revolvente>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuarios != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuarios);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
     }
 }

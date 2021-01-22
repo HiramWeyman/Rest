@@ -76,5 +76,221 @@ namespace Rest.Controllers
         }
 
 
+        [Route("api/GetCajaAhorroMat")]
+        [HttpGet]
+        public HttpResponseMessage GetCajaAhorroMat([FromUri] string matricula)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuario = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = " select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='PRESTAMO' and [pre_matricula]=" + matricula;
+                    usuario = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuario != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [Route("api/GetCajaAhorroMatEstatus")]
+        [HttpGet]
+        public HttpResponseMessage GetCajaAhorroMatEstatus([FromUri] string matricula, [FromUri] string estatus)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuarios = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = "  select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='PRESTAMO' and [pre_matricula]="+matricula+" and [pre_estatus]='" + estatus+"'";
+                    usuarios = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuarios != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuarios);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+
+        [Route("api/GetRevMat")]
+        [HttpGet]
+        public HttpResponseMessage GetRevMat([FromUri] string matricula)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuario = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = " select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='REVOLVENTE' and [pre_matricula]=" + matricula;
+                    usuario = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuario != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [Route("api/GetRevMatEstatus")]
+        [HttpGet]
+        public HttpResponseMessage GetRevMatEstatus([FromUri] string matricula, [FromUri] string estatus)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuarios = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = "   select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='REVOLVENTE' and [pre_matricula]="+matricula+" and [pre_estatus]='"+estatus+"'";
+                    usuarios = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuarios != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuarios);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+        [Route("api/GetRetiroMat")]
+        [HttpGet]
+        public HttpResponseMessage GetRetiroMat([FromUri] string matricula)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuario = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = " select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='RETIRO' and [pre_matricula]=" + matricula;
+                    usuario = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuario != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuario);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [Route("api/GetRetiroMatEstatus")]
+        [HttpGet]
+        public HttpResponseMessage GetRetiroMatEstatus([FromUri] string matricula, [FromUri] string estatus)
+        {
+
+            try
+            {
+
+                using (steujedo_sindicatoEntities db = new steujedo_sindicatoEntities())
+                {
+
+                    List<Caja_Ahorro> usuarios = null;
+                    //ComprobarCLS usuario = new ComprobarCLS();
+                    string query = "   select * from [steujedo_sindicato].[steujedo_sindicato].[Caja_Ahorro] where [pre_tipo]='RETIRO' and [pre_matricula]=" + matricula + " and [pre_estatus]='" + estatus + "'";
+                    usuarios = db.Database.SqlQuery<Caja_Ahorro>(query).ToList();
+                    //usuario = db.User_Base.FirstOrDefault(e => e.ub_user == matricula && e.ub_curp==curp && e.ub_rfc==rfc);
+                    if (usuarios != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, usuarios);
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Trabajador  no encontrado");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
     }
 }
