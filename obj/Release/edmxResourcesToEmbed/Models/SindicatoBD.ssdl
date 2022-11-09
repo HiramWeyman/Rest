@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="steujedo_sindicatoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actividades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="actividad_desc" Type="nvarchar" MaxLength="150" />
+    <Property Name="user_add" Type="varchar" MaxLength="20" />
+    <Property Name="user_mod" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Archivos">
+    <Key>
+      <PropertyRef Name="archivo_id" />
+    </Key>
+    <Property Name="archivo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="archivo_descrip" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="archivo_ruta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="archivo_seccion" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="archivo_cancela" Type="nvarchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audioteca">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar(max)" Nullable="false" />
+    <Property Name="link" Type="varchar(max)" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Caja_Ahorro">
+    <Key>
+      <PropertyRef Name="pre_id" />
+    </Key>
+    <Property Name="pre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pre_nombre" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="pre_matricula" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="pre_adscripcioon" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="pre_tarjeta_cuenta" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="pre_banco" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="pre_telefono" Type="varchar" MaxLength="50" />
+    <Property Name="pre_recibo" Type="varchar(max)" />
+    <Property Name="pre_ine" Type="varchar(max)" />
+    <Property Name="pre_cantidad" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="pre_fecha" Type="datetime" Nullable="false" />
+    <Property Name="pre_tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pre_estatus" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAlumnos">
+    <Key>
+      <PropertyRef Name="alum_id" />
+    </Key>
+    <Property Name="alum_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="alum_nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="alum_paterno" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="alum_materno" Type="varchar" MaxLength="100" />
+    <Property Name="alum_f_nacimiento" Type="date" Nullable="false" />
+    <Property Name="alum_curp" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="alum_semestre" Type="int" Nullable="false" />
+    <Property Name="alum_grupo" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="alum_afiliacion_imss" Type="varchar" MaxLength="50" />
+    <Property Name="alum_tipo_sangre" Type="varchar" MaxLength="5" />
+    <Property Name="alum_especialidad" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="alum_generacion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="alum_matricula" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="alum_calle" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="alum_num_ext" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="alum_num_int" Type="varchar" MaxLength="10" />
+    <Property Name="alum_colonia" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="alum_estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="alum_municipio" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="alum_ciudad" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="alum_cp" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="alum_tel_emergencia" Type="varchar" MaxLength="100" />
+    <Property Name="alum_cel_alumno" Type="varchar" MaxLength="50" />
+    <Property Name="alum_email" Type="varchar" MaxLength="100" />
+    <Property Name="alum_alergia" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="alum_alergia_descrip" Type="varchar" MaxLength="200" />
+    <Property Name="alum_discapacidad" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="alum_discapacidad_descrip" Type="varchar" MaxLength="200" />
+    <Property Name="alum_tratamiento" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="alum_tratamiento_descrip" Type="varchar" MaxLength="200" />
+    <Property Name="alum_responsable_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Cat_Plazas">
+    <Key>
+      <PropertyRef Name="catp_id" />
+    </Key>
+    <Property Name="catp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catp_descrip" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="catp_status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="catp_u_captura" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="catp_f_captura" Type="date" Nullable="false" />
+    <Property Name="catp_categoria" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="catp_funcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="catp_adscripcion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Servicios">
+    <Key>
+      <PropertyRef Name="cats_id" />
+    </Key>
+    <Property Name="cats_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cats_descrip" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cats_status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="cats_u_captura" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cats_f_captura" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comite_Ejecutivo">
+    <Key>
+      <PropertyRef Name="com_id" />
+    </Key>
+    <Property Name="com_id" Type="bigint" Nullable="false" />
+    <Property Name="com_descripcion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Concurso_Plazas">
+    <Key>
+      <PropertyRef Name="pad_id" />
+    </Key>
+    <Property Name="pad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pad_plaza_id" Type="int" Nullable="false" />
+    <Property Name="pad_mat" Type="bigint" Nullable="false" />
+    <Property Name="pad_nombre" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscripcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_categoria" Type="varchar" MaxLength="200" />
+    <Property Name="pad_sueldo" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_permanencia" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_ingreso" Type="varchar" MaxLength="50" />
+    <Property Name="pad_permisos" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_antig" Type="varchar" MaxLength="200" />
+    <Property Name="pad_n_insaluble" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscrip_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_catego_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_num_contacto" Type="varchar" MaxLength="200" />
+    <Property Name="pad_observaciones" Type="varchar" MaxLength="500" />
+    <Property Name="pad_cancelado" Type="varchar" MaxLength="1" />
+    <Property Name="pad_string_fec" Type="varchar" MaxLength="25" />
+    <Property Name="pad_user_cancela" Type="varchar" MaxLength="40" />
+    <Property Name="pad_user_restablece" Type="varchar" MaxLength="40" />
+    <Property Name="pad_fecha_cancelacion" Type="varchar" MaxLength="40" />
+    <Property Name="pad_fecha_restablece" Type="varchar" MaxLength="40" />
+    <Property Name="pad_tiempo_antig" Type="date" />
+    <Property Name="pad_id_estatus" Type="int" />
+    <Property Name="pad_comentarios" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Contactanos">
+    <Key>
+      <PropertyRef Name="con_id" />
+    </Key>
+    <Property Name="con_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="con_concepto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="con_texto" Type="varchar" MaxLength="250" />
+    <Property Name="con_link" Type="varchar" MaxLength="250" />
+    <Property Name="con_visible" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CResponsable">
+    <Key>
+      <PropertyRef Name="resp_id" />
+    </Key>
+    <Property Name="resp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="resp_nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resp_paterno" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resp_materno" Type="varchar" MaxLength="100" />
+    <Property Name="resp_parentesco" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resp_ocupacion" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="resp_calle" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="resp_num_ext" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="resp_num_int" Type="varchar" MaxLength="10" />
+    <Property Name="resp_colonia" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="resp_estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="resp_municipio" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resp_ciudad" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="resp_cp" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="resp_tel_casa" Type="varchar" MaxLength="50" />
+    <Property Name="resp_cel_responsable" Type="varchar" MaxLength="50" />
+    <Property Name="resp_tel_trabajo" Type="varchar" MaxLength="50" />
+    <Property Name="resp_horario" Type="varchar" MaxLength="50" />
+    <Property Name="resp_email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Descarga_Archivos">
+    <Key>
+      <PropertyRef Name="da_id" />
+    </Key>
+    <Property Name="da_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="da_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="da_matricula" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="da_nombre" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="da_fecha" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Galeria">
+    <Key>
+      <PropertyRef Name="gal_id" />
+    </Key>
+    <Property Name="gal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gal_titulo" Type="varchar(max)" Nullable="false" />
+    <Property Name="gal_ruta" Type="varchar(max)" />
+    <Property Name="gal_u_publica" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gal_f_publica" Type="date" Nullable="false" />
+    <Property Name="gal_cancela" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Integrantes">
+    <Key>
+      <PropertyRef Name="int_id" />
+    </Key>
+    <Property Name="int_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="int_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="int_puesto" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="int_ruta_imagen" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="int_cancelado" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="int_class" Type="nvarchar" MaxLength="30" />
+    <Property Name="int_orden" Type="int" />
+  </EntityType>
+  <EntityType Name="Lista_Asistencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_id" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="date" />
+    <Property Name="ruta_img" Type="nvarchar" MaxLength="200" />
+    <Property Name="entrada" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="menu_id" />
+    </Key>
+    <Property Name="menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menu_descrip" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="menu_orden" Type="int" Nullable="false" />
+    <Property Name="menu_cancelar" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="menu_routerLink" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Padron_advo">
+    <Key>
+      <PropertyRef Name="pad_id" />
+    </Key>
+    <Property Name="pad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pad_mat" Type="bigint" Nullable="false" />
+    <Property Name="pad_nombre" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscripcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_categoria" Type="varchar" MaxLength="200" />
+    <Property Name="pad_sueldo" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_permanencia" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_ingreso" Type="varchar" MaxLength="50" />
+    <Property Name="pad_permisos" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_antig" Type="varchar" MaxLength="200" />
+    <Property Name="pad_n_insaluble" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscrip_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_catego_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_num_contacto" Type="varchar" MaxLength="200" />
+    <Property Name="pad_observaciones" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Perfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="perfil_desc" Type="nvarchar" MaxLength="200" />
+    <Property Name="user_add" Type="varchar" MaxLength="20" />
+    <Property Name="user_mod" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'steujedo_sindicato.steujedo_sindicato.plaza_estatus' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="plaza_estatus">
+          <Property Name="pla_id" Type="bigint" />
+          <Property Name="pla_desc_corta" Type="nvarchar" MaxLength="50" />
+          <Property Name="pla_desc_extendida" Type="nvarchar(max)" />
+        </EntityType>-->
+  <EntityType Name="Pre_Revolvente">
+    <Key>
+      <PropertyRef Name="pr_id" />
+    </Key>
+    <Property Name="pr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pr_nombre" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="pr_matricula" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pr_telefono" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pr_ingreso" Type="varchar" MaxLength="10" />
+    <Property Name="pr_modificacion" Type="varchar" MaxLength="15" />
+    <Property Name="pr_tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pr_estatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pr_recibo" Type="varchar(max)" />
+    <Property Name="pr_ine" Type="varchar(max)" />
+    <Property Name="pr_fecha" Type="datetime" Nullable="false" />
+    <Property Name="pr_adscripcioon" Type="varchar" MaxLength="500" />
+    <Property Name="pre_tarjeta_cuenta" Type="varchar" MaxLength="250" />
+    <Property Name="pre_banco" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Pub_Categoria">
+    <Key>
+      <PropertyRef Name="catpub_id" />
+    </Key>
+    <Property Name="catpub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catpub_categoria" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Publicaciones">
+    <Key>
+      <PropertyRef Name="pub_id" />
+    </Key>
+    <Property Name="pub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pub_titulo" Type="varchar(max)" Nullable="false" />
+    <Property Name="pub_subtitulo" Type="varchar(max)" />
+    <Property Name="pub_texto" Type="varchar(max)" Nullable="false" />
+    <Property Name="pub_u_publica" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pub_f_publica" Type="date" Nullable="false" />
+    <Property Name="pub_cancela" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="pub_id_categoria" Type="int" Nullable="false" />
+    <Property Name="pub_ruta" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rol_desc" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Transparencia">
+    <Key>
+      <PropertyRef Name="tr_archivo_id" />
+    </Key>
+    <Property Name="tr_archivo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tr_archivo_descrip" Type="nvarchar(max)" />
+    <Property Name="tr_archivo_ruta" Type="nvarchar(max)" />
+    <Property Name="tr_archivo_cancela" Type="nchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Ures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ures_desc" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="User_Base">
+    <Key>
+      <PropertyRef Name="ub_id" />
+    </Key>
+    <Property Name="ub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ub_user" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ub_nombre" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="ub_password" Type="varchar(max)" Nullable="false" />
+    <Property Name="ub_curp" Type="varchar" MaxLength="50" />
+    <Property Name="ub_rfc" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="matricula" Type="bigint" Nullable="false" />
+    <Property Name="nombre_completo" Type="nvarchar" MaxLength="150" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="celular" Type="nvarchar" MaxLength="12" />
+    <Property Name="trabajador_base_rec" Type="nvarchar" MaxLength="150" />
+    <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+    <Property Name="act_id" Type="int" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="fecho_ingreso" Type="date" />
+    <Property Name="password" Type="varchar(max)" />
+    <Property Name="user_add" Type="varchar" MaxLength="20" />
+    <Property Name="user_mod" Type="varchar" MaxLength="20" />
+    <Property Name="user_login" Type="varchar" MaxLength="20" />
+    <Property Name="perfil_id" Type="int" />
+    <Property Name="user_baja" Type="date" />
+  </EntityType>
+  <EntityType Name="Videos_FL">
+    <Key>
+      <PropertyRef Name="vid_id" />
+    </Key>
+    <Property Name="vid_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vid_titulo" Type="varchar(max)" Nullable="false" />
+    <Property Name="vid_ancho" Type="int" Nullable="false" />
+    <Property Name="vid_largo" Type="int" Nullable="false" />
+    <Property Name="vid_src" Type="varchar(max)" Nullable="false" />
+    <Property Name="vid_u_publica" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="vid_f_publica" Type="date" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'steujedo_sindicato.steujedo_sindicato.concurso_antig' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="concurso_antig">
+    <Key>
+      <PropertyRef Name="pad_id" />
+      <PropertyRef Name="pad_plaza_id" />
+      <PropertyRef Name="pad_mat" />
+    </Key>
+    <Property Name="pad_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="pad_plaza_id" Type="int" Nullable="false" />
+    <Property Name="pad_mat" Type="bigint" Nullable="false" />
+    <Property Name="pad_nombre" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscripcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_categoria" Type="varchar" MaxLength="200" />
+    <Property Name="pad_sueldo" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion" Type="varchar" MaxLength="200" />
+    <Property Name="pad_permanencia" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_ingreso" Type="varchar" MaxLength="50" />
+    <Property Name="pad_permisos" Type="varchar" MaxLength="200" />
+    <Property Name="pad_f_antig" Type="varchar" MaxLength="200" />
+    <Property Name="pad_n_insaluble" Type="varchar" MaxLength="200" />
+    <Property Name="pad_adscrip_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_catego_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_funcion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_situacion_base" Type="varchar" MaxLength="200" />
+    <Property Name="pad_num_contacto" Type="varchar" MaxLength="200" />
+    <Property Name="pad_observaciones" Type="varchar" MaxLength="500" />
+    <Property Name="pad_fec_date" Type="date" />
+    <Property Name="pad_id_estatus" Type="int" />
+    <Property Name="pla_id" Type="bigint" />
+    <Property Name="pla_desc_corta" Type="nvarchar" MaxLength="50" />
+    <Property Name="pla_desc_extendida" Type="nvarchar(max)" />
+    <Property Name="pad_cancelado" Type="varchar" MaxLength="1" />
+    <Property Name="pad_comentarios" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK__Usuarios__perfil__756D6ECB">
+    <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="perfil_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Act">
+    <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="act_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_publicaciones">
+    <End Role="Pub_Categoria" Type="Self.Pub_Categoria" Multiplicity="1" />
+    <End Role="Publicaciones" Type="Self.Publicaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pub_Categoria">
+        <PropertyRef Name="catpub_id" />
+      </Principal>
+      <Dependent Role="Publicaciones">
+        <PropertyRef Name="pub_id_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Users">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Lista_Asistencia" Type="Self.Lista_Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lista_Asistencia">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="steujedo_sindicatoModelStoreContainer">
+    <EntitySet Name="Actividades" EntityType="Self.Actividades" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Audioteca" EntityType="Self.Audioteca" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Caja_Ahorro" EntityType="Self.Caja_Ahorro" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="CAlumnos" EntityType="Self.CAlumnos" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Cat_Plazas" EntityType="Self.Cat_Plazas" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Cat_Servicios" EntityType="Self.Cat_Servicios" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Comite_Ejecutivo" EntityType="Self.Comite_Ejecutivo" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Concurso_Plazas" EntityType="Self.Concurso_Plazas" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Contactanos" EntityType="Self.Contactanos" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="CResponsable" EntityType="Self.CResponsable" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Descarga_Archivos" EntityType="Self.Descarga_Archivos" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Galeria" EntityType="Self.Galeria" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Integrantes" EntityType="Self.Integrantes" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Padron_advo" EntityType="Self.Padron_advo" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Pre_Revolvente" EntityType="Self.Pre_Revolvente" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Pub_Categoria" EntityType="Self.Pub_Categoria" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Publicaciones" EntityType="Self.Publicaciones" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Transparencia" EntityType="Self.Transparencia" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Ures" EntityType="Self.Ures" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="User_Base" EntityType="Self.User_Base" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="Videos_FL" EntityType="Self.Videos_FL" Schema="steujedo_sindicato" store:Type="Tables" />
+    <EntitySet Name="concurso_antig" EntityType="Self.concurso_antig" store:Type="Views" store:Schema="steujedo_sindicato">
+      <DefiningQuery>SELECT 
+[concurso_antig].[pad_id] AS [pad_id], 
+[concurso_antig].[pad_plaza_id] AS [pad_plaza_id], 
+[concurso_antig].[pad_mat] AS [pad_mat], 
+[concurso_antig].[pad_nombre] AS [pad_nombre], 
+[concurso_antig].[pad_adscripcion] AS [pad_adscripcion], 
+[concurso_antig].[pad_categoria] AS [pad_categoria], 
+[concurso_antig].[pad_sueldo] AS [pad_sueldo], 
+[concurso_antig].[pad_funcion] AS [pad_funcion], 
+[concurso_antig].[pad_situacion] AS [pad_situacion], 
+[concurso_antig].[pad_permanencia] AS [pad_permanencia], 
+[concurso_antig].[pad_f_ingreso] AS [pad_f_ingreso], 
+[concurso_antig].[pad_permisos] AS [pad_permisos], 
+[concurso_antig].[pad_f_antig] AS [pad_f_antig], 
+[concurso_antig].[pad_n_insaluble] AS [pad_n_insaluble], 
+[concurso_antig].[pad_adscrip_base] AS [pad_adscrip_base], 
+[concurso_antig].[pad_catego_base] AS [pad_catego_base], 
+[concurso_antig].[pad_funcion_base] AS [pad_funcion_base], 
+[concurso_antig].[pad_situacion_base] AS [pad_situacion_base], 
+[concurso_antig].[pad_num_contacto] AS [pad_num_contacto], 
+[concurso_antig].[pad_observaciones] AS [pad_observaciones], 
+[concurso_antig].[pad_fec_date] AS [pad_fec_date], 
+[concurso_antig].[pad_id_estatus] AS [pad_id_estatus], 
+[concurso_antig].[pla_id] AS [pla_id], 
+[concurso_antig].[pla_desc_corta] AS [pla_desc_corta], 
+[concurso_antig].[pla_desc_extendida] AS [pla_desc_extendida], 
+[concurso_antig].[pad_cancelado] AS [pad_cancelado], 
+[concurso_antig].[pad_comentarios] AS [pad_comentarios]
+FROM [steujedo_sindicato].[concurso_antig] AS [concurso_antig]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Usuarios__perfil__756D6ECB" Association="Self.FK__Usuarios__perfil__756D6ECB">
+      <End Role="Perfil" EntitySet="Perfil" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Act" Association="Self.fk_Act">
+      <End Role="Actividades" EntitySet="Actividades" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_publicaciones" Association="Self.FK_publicaciones">
+      <End Role="Pub_Categoria" EntitySet="Pub_Categoria" />
+      <End Role="Publicaciones" EntitySet="Publicaciones" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Users" Association="Self.fk_Users">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Lista_Asistencia" EntitySet="Lista_Asistencia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

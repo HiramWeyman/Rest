@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42be4f74cbc74f0ca2d290b58a411fdb" Name="Diagram1">
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Actividades" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Archivos" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Audioteca" Width="1.5" PointX="2.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Caja_Ahorro" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.CAlumnos" Width="1.5" PointX="4.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Cat_Plazas" Width="1.5" PointX="6.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Cat_Servicios" Width="1.5" PointX="8.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Concurso_Plazas" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Contactanos" Width="1.5" PointX="10.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.CResponsable" Width="1.5" PointX="10.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Descarga_Archivos" Width="1.5" PointX="11.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Galeria" Width="1.5" PointX="12.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Integrantes" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Lista_Asistencia" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Menu" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Padron_advo" Width="1.5" PointX="12.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Perfil" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Pre_Revolvente" Width="1.5" PointX="6.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Pub_Categoria" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Publicaciones" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Roles" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Transparencia" Width="1.5" PointX="13.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Ures" Width="1.5" PointX="14.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.User_Base" Width="1.5" PointX="14.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Usuarios" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Videos_FL" Width="1.5" PointX="8.75" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="steujedo_sindicatoModel.fk_Act" ManuallyRouted="false" />
+        <AssociationConnector Association="steujedo_sindicatoModel.fk_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="steujedo_sindicatoModel.FK__Usuarios__perfil__756D6ECB" ManuallyRouted="false" />
+        <AssociationConnector Association="steujedo_sindicatoModel.FK_publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="steujedo_sindicatoModel.fk_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.concurso_antig" Width="1.5" PointX="15.375" PointY="11.75" />
+        <EntityTypeShape EntityType="steujedo_sindicatoModel.Comite_Ejecutivo" Width="1.5" PointX="16.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

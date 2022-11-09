@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http;
+using System.IO;
+
+namespace Rest.Controllers
+{
+    public class UploadBannerController : ApiController
+    {     
+            
+        public HttpResponseMessage Post(string ruta)
+        {
+
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("~/Areas/" + postedFile.FileName);
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+
+                    try
+                    {
+
+                        //Create a FTP Request Object and Specfiy a Complete Path
+                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.205.97/httpdocs/assets/images/" + ruta);
+
+                        //Call A FileUpload Method of FTP Request Object
+                        reqObj.Method = WebRequestMethods.Ftp.UploadFile;
+
+                        //If you want to access Resourse Protected,give UserName and PWD
+                        reqObj.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+
+                        // Copy the contents of the file to the byte array.
+                        byte[] fileContents = File.ReadAllBytes(filePath);
+                        reqObj.ContentLength = fileContents.Length;
+
+                        //Upload File to FTPServer
+                        Stream requestStream = reqObj.GetRequestStream();
+                        requestStream.Write(fileContents, 0, fileContents.Length);
+                        requestStream.Close();
+                        FtpWebResponse response = (FtpWebResponse)reqObj.GetResponse();
+                        response.Close();
+
+                        File.Delete(filePath);
+                    }
+
+                    catch (Exception Ex)
+                    {
+                        throw Ex;
+                    }
+                    //return true;
+
+
+
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+    }
+}

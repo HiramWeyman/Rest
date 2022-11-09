@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="steujedo_sindicatoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actividades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="actividad_desc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.fk_Act" FromRole="Actividades" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Archivos">
+    <Key>
+      <PropertyRef Name="archivo_id" />
+    </Key>
+    <Property Name="archivo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="archivo_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="archivo_ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="archivo_seccion" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="archivo_cancela" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Audioteca">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Caja_Ahorro">
+    <Key>
+      <PropertyRef Name="pre_id" />
+    </Key>
+    <Property Name="pre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pre_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_matricula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_adscripcioon" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_tarjeta_cuenta" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_banco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pre_recibo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pre_ine" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pre_cantidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pre_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pre_estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAlumnos">
+    <Key>
+      <PropertyRef Name="alum_id" />
+    </Key>
+    <Property Name="alum_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="alum_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_paterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_materno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="alum_f_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="alum_curp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_semestre" Type="Int32" Nullable="false" />
+    <Property Name="alum_grupo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_afiliacion_imss" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="alum_tipo_sangre" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="alum_especialidad" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_generacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_matricula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_calle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_num_ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_num_int" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="alum_colonia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_cp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_tel_emergencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="alum_cel_alumno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="alum_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="alum_alergia" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_alergia_descrip" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="alum_discapacidad" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_discapacidad_descrip" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="alum_tratamiento" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="alum_tratamiento_descrip" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="alum_responsable_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Cat_Plazas">
+    <Key>
+      <PropertyRef Name="catp_id" />
+    </Key>
+    <Property Name="catp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catp_descrip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catp_status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catp_u_captura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catp_f_captura" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="catp_categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catp_funcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catp_adscripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cat_Servicios">
+    <Key>
+      <PropertyRef Name="cats_id" />
+    </Key>
+    <Property Name="cats_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cats_descrip" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cats_status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cats_u_captura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cats_f_captura" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Concurso_Plazas">
+    <Key>
+      <PropertyRef Name="pad_id" />
+    </Key>
+    <Property Name="pad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pad_plaza_id" Type="Int32" Nullable="false" />
+    <Property Name="pad_mat" Type="Int64" Nullable="false" />
+    <Property Name="pad_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_sueldo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permanencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_ingreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permisos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_antig" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_n_insaluble" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscrip_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_catego_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_num_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="pad_cancelado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="pad_string_fec" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="pad_user_cancela" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="pad_user_restablece" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="pad_fecha_cancelacion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="pad_fecha_restablece" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="pad_tiempo_antig" Type="DateTime" Precision="0" />
+    <Property Name="pad_id_estatus" Type="Int32" />
+    <Property Name="pad_comentarios" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Contactanos">
+    <Key>
+      <PropertyRef Name="con_id" />
+    </Key>
+    <Property Name="con_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="con_concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="con_texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="con_link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="con_visible" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CResponsable">
+    <Key>
+      <PropertyRef Name="resp_id" />
+    </Key>
+    <Property Name="resp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="resp_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_paterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_materno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="resp_parentesco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_ocupacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_calle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_num_ext" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_num_int" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="resp_colonia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_cp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="resp_tel_casa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resp_cel_responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resp_tel_trabajo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resp_horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="resp_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Descarga_Archivos">
+    <Key>
+      <PropertyRef Name="da_id" />
+    </Key>
+    <Property Name="da_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="da_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="da_matricula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="da_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="da_fecha" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Galeria">
+    <Key>
+      <PropertyRef Name="gal_id" />
+    </Key>
+    <Property Name="gal_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gal_titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gal_ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="gal_u_publica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gal_f_publica" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="gal_cancela" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Integrantes">
+    <Key>
+      <PropertyRef Name="int_id" />
+    </Key>
+    <Property Name="int_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="int_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="int_puesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="int_ruta_imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="int_cancelado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="int_class" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="int_orden" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Lista_Asistencia">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_id" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="ruta_img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="entrada" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.fk_Users" FromRole="Lista_Asistencia" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="menu_id" />
+    </Key>
+    <Property Name="menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="menu_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="menu_orden" Type="Int32" Nullable="false" />
+    <Property Name="menu_cancelar" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="menu_routerLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Padron_advo">
+    <Key>
+      <PropertyRef Name="pad_id" />
+    </Key>
+    <Property Name="pad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pad_mat" Type="Int64" Nullable="false" />
+    <Property Name="pad_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_sueldo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permanencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_ingreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permisos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_antig" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_n_insaluble" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscrip_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_catego_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_num_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Perfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="perfil_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__perfil__756D6ECB" FromRole="Perfil" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Pre_Revolvente">
+    <Key>
+      <PropertyRef Name="pr_id" />
+    </Key>
+    <Property Name="pr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pr_nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pr_matricula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pr_telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pr_ingreso" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="pr_modificacion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="pr_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pr_estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pr_recibo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pr_ine" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pr_adscripcioon" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="pre_tarjeta_cuenta" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="pre_banco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Pub_Categoria">
+    <Key>
+      <PropertyRef Name="catpub_id" />
+    </Key>
+    <Property Name="catpub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catpub_categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Publicaciones" Relationship="Self.FK_publicaciones" FromRole="Pub_Categoria" ToRole="Publicaciones" />
+  </EntityType>
+  <EntityType Name="Publicaciones">
+    <Key>
+      <PropertyRef Name="pub_id" />
+    </Key>
+    <Property Name="pub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pub_titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pub_subtitulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pub_texto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pub_u_publica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pub_f_publica" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="pub_cancela" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pub_id_categoria" Type="Int32" Nullable="false" />
+    <Property Name="pub_ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Pub_Categoria" Relationship="Self.FK_publicaciones" FromRole="Publicaciones" ToRole="Pub_Categoria" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rol_desc" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.fk_Roles" FromRole="Roles" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Transparencia">
+    <Key>
+      <PropertyRef Name="tr_archivo_id" />
+    </Key>
+    <Property Name="tr_archivo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tr_archivo_descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tr_archivo_ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tr_archivo_cancela" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Ures">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ures_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="User_Base">
+    <Key>
+      <PropertyRef Name="ub_id" />
+    </Key>
+    <Property Name="ub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ub_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ub_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ub_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ub_curp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ub_rfc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="matricula" Type="Int64" Nullable="false" />
+    <Property Name="nombre_completo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="celular" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="trabajador_base_rec" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="act_id" Type="Int32" Nullable="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <Property Name="fecho_ingreso" Type="DateTime" Precision="0" />
+    <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="user_add" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="user_mod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="user_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="perfil_id" Type="Int32" />
+    <Property Name="user_baja" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Actividades" Relationship="Self.fk_Act" FromRole="Usuarios" ToRole="Actividades" />
+    <NavigationProperty Name="Lista_Asistencia" Relationship="Self.fk_Users" FromRole="Usuarios" ToRole="Lista_Asistencia" />
+    <NavigationProperty Name="Perfil" Relationship="Self.FK__Usuarios__perfil__756D6ECB" FromRole="Usuarios" ToRole="Perfil" />
+    <NavigationProperty Name="Roles" Relationship="Self.fk_Roles" FromRole="Usuarios" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Videos_FL">
+    <Key>
+      <PropertyRef Name="vid_id" />
+    </Key>
+    <Property Name="vid_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vid_titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vid_ancho" Type="Int32" Nullable="false" />
+    <Property Name="vid_largo" Type="Int32" Nullable="false" />
+    <Property Name="vid_src" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vid_u_publica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vid_f_publica" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <Association Name="fk_Act">
+    <End Role="Actividades" Type="Self.Actividades" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actividades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="act_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Users">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Lista_Asistencia" Type="Self.Lista_Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Lista_Asistencia">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__perfil__756D6ECB">
+    <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfil">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="perfil_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_publicaciones">
+    <End Role="Pub_Categoria" Type="Self.Pub_Categoria" Multiplicity="1" />
+    <End Role="Publicaciones" Type="Self.Publicaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pub_Categoria">
+        <PropertyRef Name="catpub_id" />
+      </Principal>
+      <Dependent Role="Publicaciones">
+        <PropertyRef Name="pub_id_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="steujedo_sindicatoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actividades" EntityType="Self.Actividades" />
+    <EntitySet Name="Archivos" EntityType="Self.Archivos" />
+    <EntitySet Name="Audioteca" EntityType="Self.Audioteca" />
+    <EntitySet Name="Caja_Ahorro" EntityType="Self.Caja_Ahorro" />
+    <EntitySet Name="CAlumnos" EntityType="Self.CAlumnos" />
+    <EntitySet Name="Cat_Plazas" EntityType="Self.Cat_Plazas" />
+    <EntitySet Name="Cat_Servicios" EntityType="Self.Cat_Servicios" />
+    <EntitySet Name="Concurso_Plazas" EntityType="Self.Concurso_Plazas" />
+    <EntitySet Name="Contactanos" EntityType="Self.Contactanos" />
+    <EntitySet Name="CResponsable" EntityType="Self.CResponsable" />
+    <EntitySet Name="Descarga_Archivos" EntityType="Self.Descarga_Archivos" />
+    <EntitySet Name="Galeria" EntityType="Self.Galeria" />
+    <EntitySet Name="Integrantes" EntityType="Self.Integrantes" />
+    <EntitySet Name="Lista_Asistencia" EntityType="Self.Lista_Asistencia" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" />
+    <EntitySet Name="Padron_advo" EntityType="Self.Padron_advo" />
+    <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+    <EntitySet Name="Pre_Revolvente" EntityType="Self.Pre_Revolvente" />
+    <EntitySet Name="Pub_Categoria" EntityType="Self.Pub_Categoria" />
+    <EntitySet Name="Publicaciones" EntityType="Self.Publicaciones" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="Transparencia" EntityType="Self.Transparencia" />
+    <EntitySet Name="Ures" EntityType="Self.Ures" />
+    <EntitySet Name="User_Base" EntityType="Self.User_Base" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <EntitySet Name="Videos_FL" EntityType="Self.Videos_FL" />
+    <AssociationSet Name="fk_Act" Association="Self.fk_Act">
+      <End Role="Actividades" EntitySet="Actividades" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Users" Association="Self.fk_Users">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Lista_Asistencia" EntitySet="Lista_Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__perfil__756D6ECB" Association="Self.FK__Usuarios__perfil__756D6ECB">
+      <End Role="Perfil" EntitySet="Perfil" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_publicaciones" Association="Self.FK_publicaciones">
+      <End Role="Pub_Categoria" EntitySet="Pub_Categoria" />
+      <End Role="Publicaciones" EntitySet="Publicaciones" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Roles" Association="Self.fk_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <EntitySet Name="concurso_antig" EntityType="steujedo_sindicatoModel.concurso_antig" />
+    <EntitySet Name="Comite_Ejecutivo" EntityType="steujedo_sindicatoModel.Comite_Ejecutivo" />
+  </EntityContainer>
+  <EntityType Name="concurso_antig">
+    <Key>
+      <PropertyRef Name="pad_id" />
+      <PropertyRef Name="pad_plaza_id" />
+      <PropertyRef Name="pad_mat" />
+    </Key>
+    <Property Name="pad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pad_plaza_id" Type="Int32" Nullable="false" />
+    <Property Name="pad_mat" Type="Int64" Nullable="false" />
+    <Property Name="pad_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_categoria" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_sueldo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permanencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_ingreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pad_permisos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_f_antig" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_n_insaluble" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_adscrip_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_catego_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_funcion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_situacion_base" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_num_contacto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pad_observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="pad_fec_date" Type="DateTime" Precision="0" />
+    <Property Name="pad_id_estatus" Type="Int32" />
+    <Property Name="pla_id" Type="Int64" />
+    <Property Name="pla_desc_corta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pla_desc_extendida" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pad_cancelado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="pad_comentarios" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Comite_Ejecutivo">
+    <Key>
+      <PropertyRef Name="com_id" />
+    </Key>
+    <Property Name="com_id" Type="Int64" Nullable="false" />
+    <Property Name="com_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

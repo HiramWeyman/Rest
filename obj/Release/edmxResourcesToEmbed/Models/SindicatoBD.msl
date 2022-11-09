@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="steujedo_sindicatoModelStoreContainer" CdmEntityContainer="steujedo_sindicatoEntities">
+    <EntitySetMapping Name="Actividades">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Actividades">
+        <MappingFragment StoreEntitySet="Actividades">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="actividad_desc" ColumnName="actividad_desc" />
+          <ScalarProperty Name="user_add" ColumnName="user_add" />
+          <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Archivos">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Archivos">
+        <MappingFragment StoreEntitySet="Archivos">
+          <ScalarProperty Name="archivo_id" ColumnName="archivo_id" />
+          <ScalarProperty Name="archivo_descrip" ColumnName="archivo_descrip" />
+          <ScalarProperty Name="archivo_ruta" ColumnName="archivo_ruta" />
+          <ScalarProperty Name="archivo_seccion" ColumnName="archivo_seccion" />
+          <ScalarProperty Name="archivo_cancela" ColumnName="archivo_cancela" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audioteca">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Audioteca">
+        <MappingFragment StoreEntitySet="Audioteca">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Caja_Ahorro">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Caja_Ahorro">
+        <MappingFragment StoreEntitySet="Caja_Ahorro">
+          <ScalarProperty Name="pre_id" ColumnName="pre_id" />
+          <ScalarProperty Name="pre_nombre" ColumnName="pre_nombre" />
+          <ScalarProperty Name="pre_matricula" ColumnName="pre_matricula" />
+          <ScalarProperty Name="pre_adscripcioon" ColumnName="pre_adscripcioon" />
+          <ScalarProperty Name="pre_tarjeta_cuenta" ColumnName="pre_tarjeta_cuenta" />
+          <ScalarProperty Name="pre_banco" ColumnName="pre_banco" />
+          <ScalarProperty Name="pre_telefono" ColumnName="pre_telefono" />
+          <ScalarProperty Name="pre_recibo" ColumnName="pre_recibo" />
+          <ScalarProperty Name="pre_ine" ColumnName="pre_ine" />
+          <ScalarProperty Name="pre_cantidad" ColumnName="pre_cantidad" />
+          <ScalarProperty Name="pre_fecha" ColumnName="pre_fecha" />
+          <ScalarProperty Name="pre_tipo" ColumnName="pre_tipo" />
+          <ScalarProperty Name="pre_estatus" ColumnName="pre_estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAlumnos">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.CAlumnos">
+        <MappingFragment StoreEntitySet="CAlumnos">
+          <ScalarProperty Name="alum_id" ColumnName="alum_id" />
+          <ScalarProperty Name="alum_nombre" ColumnName="alum_nombre" />
+          <ScalarProperty Name="alum_paterno" ColumnName="alum_paterno" />
+          <ScalarProperty Name="alum_materno" ColumnName="alum_materno" />
+          <ScalarProperty Name="alum_f_nacimiento" ColumnName="alum_f_nacimiento" />
+          <ScalarProperty Name="alum_curp" ColumnName="alum_curp" />
+          <ScalarProperty Name="alum_semestre" ColumnName="alum_semestre" />
+          <ScalarProperty Name="alum_grupo" ColumnName="alum_grupo" />
+          <ScalarProperty Name="alum_afiliacion_imss" ColumnName="alum_afiliacion_imss" />
+          <ScalarProperty Name="alum_tipo_sangre" ColumnName="alum_tipo_sangre" />
+          <ScalarProperty Name="alum_especialidad" ColumnName="alum_especialidad" />
+          <ScalarProperty Name="alum_generacion" ColumnName="alum_generacion" />
+          <ScalarProperty Name="alum_matricula" ColumnName="alum_matricula" />
+          <ScalarProperty Name="alum_calle" ColumnName="alum_calle" />
+          <ScalarProperty Name="alum_num_ext" ColumnName="alum_num_ext" />
+          <ScalarProperty Name="alum_num_int" ColumnName="alum_num_int" />
+          <ScalarProperty Name="alum_colonia" ColumnName="alum_colonia" />
+          <ScalarProperty Name="alum_estado" ColumnName="alum_estado" />
+          <ScalarProperty Name="alum_municipio" ColumnName="alum_municipio" />
+          <ScalarProperty Name="alum_ciudad" ColumnName="alum_ciudad" />
+          <ScalarProperty Name="alum_cp" ColumnName="alum_cp" />
+          <ScalarProperty Name="alum_tel_emergencia" ColumnName="alum_tel_emergencia" />
+          <ScalarProperty Name="alum_cel_alumno" ColumnName="alum_cel_alumno" />
+          <ScalarProperty Name="alum_email" ColumnName="alum_email" />
+          <ScalarProperty Name="alum_alergia" ColumnName="alum_alergia" />
+          <ScalarProperty Name="alum_alergia_descrip" ColumnName="alum_alergia_descrip" />
+          <ScalarProperty Name="alum_discapacidad" ColumnName="alum_discapacidad" />
+          <ScalarProperty Name="alum_discapacidad_descrip" ColumnName="alum_discapacidad_descrip" />
+          <ScalarProperty Name="alum_tratamiento" ColumnName="alum_tratamiento" />
+          <ScalarProperty Name="alum_tratamiento_descrip" ColumnName="alum_tratamiento_descrip" />
+          <ScalarProperty Name="alum_responsable_id" ColumnName="alum_responsable_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Plazas">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Cat_Plazas">
+        <MappingFragment StoreEntitySet="Cat_Plazas">
+          <ScalarProperty Name="catp_id" ColumnName="catp_id" />
+          <ScalarProperty Name="catp_descrip" ColumnName="catp_descrip" />
+          <ScalarProperty Name="catp_status" ColumnName="catp_status" />
+          <ScalarProperty Name="catp_u_captura" ColumnName="catp_u_captura" />
+          <ScalarProperty Name="catp_f_captura" ColumnName="catp_f_captura" />
+          <ScalarProperty Name="catp_categoria" ColumnName="catp_categoria" />
+          <ScalarProperty Name="catp_funcion" ColumnName="catp_funcion" />
+          <ScalarProperty Name="catp_adscripcion" ColumnName="catp_adscripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cat_Servicios">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Cat_Servicios">
+        <MappingFragment StoreEntitySet="Cat_Servicios">
+          <ScalarProperty Name="cats_id" ColumnName="cats_id" />
+          <ScalarProperty Name="cats_descrip" ColumnName="cats_descrip" />
+          <ScalarProperty Name="cats_status" ColumnName="cats_status" />
+          <ScalarProperty Name="cats_u_captura" ColumnName="cats_u_captura" />
+          <ScalarProperty Name="cats_f_captura" ColumnName="cats_f_captura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Concurso_Plazas">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Concurso_Plazas">
+        <MappingFragment StoreEntitySet="Concurso_Plazas">
+          <ScalarProperty Name="pad_comentarios" ColumnName="pad_comentarios" />
+          <ScalarProperty Name="pad_id_estatus" ColumnName="pad_id_estatus" />
+          <ScalarProperty Name="pad_tiempo_antig" ColumnName="pad_tiempo_antig" />
+          <ScalarProperty Name="pad_id" ColumnName="pad_id" />
+          <ScalarProperty Name="pad_plaza_id" ColumnName="pad_plaza_id" />
+          <ScalarProperty Name="pad_mat" ColumnName="pad_mat" />
+          <ScalarProperty Name="pad_nombre" ColumnName="pad_nombre" />
+          <ScalarProperty Name="pad_adscripcion" ColumnName="pad_adscripcion" />
+          <ScalarProperty Name="pad_categoria" ColumnName="pad_categoria" />
+          <ScalarProperty Name="pad_sueldo" ColumnName="pad_sueldo" />
+          <ScalarProperty Name="pad_funcion" ColumnName="pad_funcion" />
+          <ScalarProperty Name="pad_situacion" ColumnName="pad_situacion" />
+          <ScalarProperty Name="pad_permanencia" ColumnName="pad_permanencia" />
+          <ScalarProperty Name="pad_f_ingreso" ColumnName="pad_f_ingreso" />
+          <ScalarProperty Name="pad_permisos" ColumnName="pad_permisos" />
+          <ScalarProperty Name="pad_f_antig" ColumnName="pad_f_antig" />
+          <ScalarProperty Name="pad_n_insaluble" ColumnName="pad_n_insaluble" />
+          <ScalarProperty Name="pad_adscrip_base" ColumnName="pad_adscrip_base" />
+          <ScalarProperty Name="pad_catego_base" ColumnName="pad_catego_base" />
+          <ScalarProperty Name="pad_funcion_base" ColumnName="pad_funcion_base" />
+          <ScalarProperty Name="pad_situacion_base" ColumnName="pad_situacion_base" />
+          <ScalarProperty Name="pad_num_contacto" ColumnName="pad_num_contacto" />
+          <ScalarProperty Name="pad_observaciones" ColumnName="pad_observaciones" />
+          <ScalarProperty Name="pad_cancelado" ColumnName="pad_cancelado" />
+          <ScalarProperty Name="pad_string_fec" ColumnName="pad_string_fec" />
+          <ScalarProperty Name="pad_user_cancela" ColumnName="pad_user_cancela" />
+          <ScalarProperty Name="pad_user_restablece" ColumnName="pad_user_restablece" />
+          <ScalarProperty Name="pad_fecha_cancelacion" ColumnName="pad_fecha_cancelacion" />
+          <ScalarProperty Name="pad_fecha_restablece" ColumnName="pad_fecha_restablece" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contactanos">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Contactanos">
+        <MappingFragment StoreEntitySet="Contactanos">
+          <ScalarProperty Name="con_id" ColumnName="con_id" />
+          <ScalarProperty Name="con_concepto" ColumnName="con_concepto" />
+          <ScalarProperty Name="con_texto" ColumnName="con_texto" />
+          <ScalarProperty Name="con_link" ColumnName="con_link" />
+          <ScalarProperty Name="con_visible" ColumnName="con_visible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CResponsable">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.CResponsable">
+        <MappingFragment StoreEntitySet="CResponsable">
+          <ScalarProperty Name="resp_id" ColumnName="resp_id" />
+          <ScalarProperty Name="resp_nombre" ColumnName="resp_nombre" />
+          <ScalarProperty Name="resp_paterno" ColumnName="resp_paterno" />
+          <ScalarProperty Name="resp_materno" ColumnName="resp_materno" />
+          <ScalarProperty Name="resp_parentesco" ColumnName="resp_parentesco" />
+          <ScalarProperty Name="resp_ocupacion" ColumnName="resp_ocupacion" />
+          <ScalarProperty Name="resp_calle" ColumnName="resp_calle" />
+          <ScalarProperty Name="resp_num_ext" ColumnName="resp_num_ext" />
+          <ScalarProperty Name="resp_num_int" ColumnName="resp_num_int" />
+          <ScalarProperty Name="resp_colonia" ColumnName="resp_colonia" />
+          <ScalarProperty Name="resp_estado" ColumnName="resp_estado" />
+          <ScalarProperty Name="resp_municipio" ColumnName="resp_municipio" />
+          <ScalarProperty Name="resp_ciudad" ColumnName="resp_ciudad" />
+          <ScalarProperty Name="resp_cp" ColumnName="resp_cp" />
+          <ScalarProperty Name="resp_tel_casa" ColumnName="resp_tel_casa" />
+          <ScalarProperty Name="resp_cel_responsable" ColumnName="resp_cel_responsable" />
+          <ScalarProperty Name="resp_tel_trabajo" ColumnName="resp_tel_trabajo" />
+          <ScalarProperty Name="resp_horario" ColumnName="resp_horario" />
+          <ScalarProperty Name="resp_email" ColumnName="resp_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Descarga_Archivos">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Descarga_Archivos">
+        <MappingFragment StoreEntitySet="Descarga_Archivos">
+          <ScalarProperty Name="da_id" ColumnName="da_id" />
+          <ScalarProperty Name="da_descripcion" ColumnName="da_descripcion" />
+          <ScalarProperty Name="da_matricula" ColumnName="da_matricula" />
+          <ScalarProperty Name="da_nombre" ColumnName="da_nombre" />
+          <ScalarProperty Name="da_fecha" ColumnName="da_fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Galeria">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Galeria">
+        <MappingFragment StoreEntitySet="Galeria">
+          <ScalarProperty Name="gal_id" ColumnName="gal_id" />
+          <ScalarProperty Name="gal_titulo" ColumnName="gal_titulo" />
+          <ScalarProperty Name="gal_ruta" ColumnName="gal_ruta" />
+          <ScalarProperty Name="gal_u_publica" ColumnName="gal_u_publica" />
+          <ScalarProperty Name="gal_f_publica" ColumnName="gal_f_publica" />
+          <ScalarProperty Name="gal_cancela" ColumnName="gal_cancela" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Integrantes">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Integrantes">
+        <MappingFragment StoreEntitySet="Integrantes">
+          <ScalarProperty Name="int_orden" ColumnName="int_orden" />
+          <ScalarProperty Name="int_id" ColumnName="int_id" />
+          <ScalarProperty Name="int_nombre" ColumnName="int_nombre" />
+          <ScalarProperty Name="int_puesto" ColumnName="int_puesto" />
+          <ScalarProperty Name="int_ruta_imagen" ColumnName="int_ruta_imagen" />
+          <ScalarProperty Name="int_cancelado" ColumnName="int_cancelado" />
+          <ScalarProperty Name="int_class" ColumnName="int_class" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lista_Asistencia">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Lista_Asistencia">
+        <MappingFragment StoreEntitySet="Lista_Asistencia">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="ruta_img" ColumnName="ruta_img" />
+          <ScalarProperty Name="entrada" ColumnName="entrada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="menu_id" ColumnName="menu_id" />
+          <ScalarProperty Name="menu_descrip" ColumnName="menu_descrip" />
+          <ScalarProperty Name="menu_orden" ColumnName="menu_orden" />
+          <ScalarProperty Name="menu_cancelar" ColumnName="menu_cancelar" />
+          <ScalarProperty Name="menu_routerLink" ColumnName="menu_routerLink" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Padron_advo">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Padron_advo">
+        <MappingFragment StoreEntitySet="Padron_advo">
+          <ScalarProperty Name="pad_id" ColumnName="pad_id" />
+          <ScalarProperty Name="pad_mat" ColumnName="pad_mat" />
+          <ScalarProperty Name="pad_nombre" ColumnName="pad_nombre" />
+          <ScalarProperty Name="pad_adscripcion" ColumnName="pad_adscripcion" />
+          <ScalarProperty Name="pad_categoria" ColumnName="pad_categoria" />
+          <ScalarProperty Name="pad_sueldo" ColumnName="pad_sueldo" />
+          <ScalarProperty Name="pad_funcion" ColumnName="pad_funcion" />
+          <ScalarProperty Name="pad_situacion" ColumnName="pad_situacion" />
+          <ScalarProperty Name="pad_permanencia" ColumnName="pad_permanencia" />
+          <ScalarProperty Name="pad_f_ingreso" ColumnName="pad_f_ingreso" />
+          <ScalarProperty Name="pad_permisos" ColumnName="pad_permisos" />
+          <ScalarProperty Name="pad_f_antig" ColumnName="pad_f_antig" />
+          <ScalarProperty Name="pad_n_insaluble" ColumnName="pad_n_insaluble" />
+          <ScalarProperty Name="pad_adscrip_base" ColumnName="pad_adscrip_base" />
+          <ScalarProperty Name="pad_catego_base" ColumnName="pad_catego_base" />
+          <ScalarProperty Name="pad_funcion_base" ColumnName="pad_funcion_base" />
+          <ScalarProperty Name="pad_situacion_base" ColumnName="pad_situacion_base" />
+          <ScalarProperty Name="pad_num_contacto" ColumnName="pad_num_contacto" />
+          <ScalarProperty Name="pad_observaciones" ColumnName="pad_observaciones" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perfil">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Perfil">
+        <MappingFragment StoreEntitySet="Perfil">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="perfil_desc" ColumnName="perfil_desc" />
+          <ScalarProperty Name="user_add" ColumnName="user_add" />
+          <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pre_Revolvente">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Pre_Revolvente">
+        <MappingFragment StoreEntitySet="Pre_Revolvente">
+          <ScalarProperty Name="pr_id" ColumnName="pr_id" />
+          <ScalarProperty Name="pr_nombre" ColumnName="pr_nombre" />
+          <ScalarProperty Name="pr_matricula" ColumnName="pr_matricula" />
+          <ScalarProperty Name="pr_telefono" ColumnName="pr_telefono" />
+          <ScalarProperty Name="pr_ingreso" ColumnName="pr_ingreso" />
+          <ScalarProperty Name="pr_modificacion" ColumnName="pr_modificacion" />
+          <ScalarProperty Name="pr_tipo" ColumnName="pr_tipo" />
+          <ScalarProperty Name="pr_estatus" ColumnName="pr_estatus" />
+          <ScalarProperty Name="pr_recibo" ColumnName="pr_recibo" />
+          <ScalarProperty Name="pr_ine" ColumnName="pr_ine" />
+          <ScalarProperty Name="pr_fecha" ColumnName="pr_fecha" />
+          <ScalarProperty Name="pr_adscripcioon" ColumnName="pr_adscripcioon" />
+          <ScalarProperty Name="pre_tarjeta_cuenta" ColumnName="pre_tarjeta_cuenta" />
+          <ScalarProperty Name="pre_banco" ColumnName="pre_banco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pub_Categoria">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Pub_Categoria">
+        <MappingFragment StoreEntitySet="Pub_Categoria">
+          <ScalarProperty Name="catpub_id" ColumnName="catpub_id" />
+          <ScalarProperty Name="catpub_categoria" ColumnName="catpub_categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publicaciones">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Publicaciones">
+        <MappingFragment StoreEntitySet="Publicaciones">
+          <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+          <ScalarProperty Name="pub_titulo" ColumnName="pub_titulo" />
+          <ScalarProperty Name="pub_subtitulo" ColumnName="pub_subtitulo" />
+          <ScalarProperty Name="pub_texto" ColumnName="pub_texto" />
+          <ScalarProperty Name="pub_u_publica" ColumnName="pub_u_publica" />
+          <ScalarProperty Name="pub_f_publica" ColumnName="pub_f_publica" />
+          <ScalarProperty Name="pub_cancela" ColumnName="pub_cancela" />
+          <ScalarProperty Name="pub_id_categoria" ColumnName="pub_id_categoria" />
+          <ScalarProperty Name="pub_ruta" ColumnName="pub_ruta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transparencia">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Transparencia">
+        <MappingFragment StoreEntitySet="Transparencia">
+          <ScalarProperty Name="tr_archivo_id" ColumnName="tr_archivo_id" />
+          <ScalarProperty Name="tr_archivo_descrip" ColumnName="tr_archivo_descrip" />
+          <ScalarProperty Name="tr_archivo_ruta" ColumnName="tr_archivo_ruta" />
+          <ScalarProperty Name="tr_archivo_cancela" ColumnName="tr_archivo_cancela" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ures">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Ures">
+        <MappingFragment StoreEntitySet="Ures">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ures_desc" ColumnName="ures_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Base">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.User_Base">
+        <MappingFragment StoreEntitySet="User_Base">
+          <ScalarProperty Name="ub_id" ColumnName="ub_id" />
+          <ScalarProperty Name="ub_user" ColumnName="ub_user" />
+          <ScalarProperty Name="ub_nombre" ColumnName="ub_nombre" />
+          <ScalarProperty Name="ub_password" ColumnName="ub_password" />
+          <ScalarProperty Name="ub_curp" ColumnName="ub_curp" />
+          <ScalarProperty Name="ub_rfc" ColumnName="ub_rfc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="nombre_completo" ColumnName="nombre_completo" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="trabajador_base_rec" ColumnName="trabajador_base_rec" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="act_id" ColumnName="act_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="fecho_ingreso" ColumnName="fecho_ingreso" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_add" ColumnName="user_add" />
+          <ScalarProperty Name="user_mod" ColumnName="user_mod" />
+          <ScalarProperty Name="user_login" ColumnName="user_login" />
+          <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
+          <ScalarProperty Name="user_baja" ColumnName="user_baja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos_FL">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Videos_FL">
+        <MappingFragment StoreEntitySet="Videos_FL">
+          <ScalarProperty Name="vid_id" ColumnName="vid_id" />
+          <ScalarProperty Name="vid_titulo" ColumnName="vid_titulo" />
+          <ScalarProperty Name="vid_ancho" ColumnName="vid_ancho" />
+          <ScalarProperty Name="vid_largo" ColumnName="vid_largo" />
+          <ScalarProperty Name="vid_src" ColumnName="vid_src" />
+          <ScalarProperty Name="vid_u_publica" ColumnName="vid_u_publica" />
+          <ScalarProperty Name="vid_f_publica" ColumnName="vid_f_publica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="concurso_antig">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.concurso_antig">
+        <MappingFragment StoreEntitySet="concurso_antig">
+          <ScalarProperty Name="pad_comentarios" ColumnName="pad_comentarios" />
+          <ScalarProperty Name="pad_cancelado" ColumnName="pad_cancelado" />
+          <ScalarProperty Name="pla_desc_extendida" ColumnName="pla_desc_extendida" />
+          <ScalarProperty Name="pla_desc_corta" ColumnName="pla_desc_corta" />
+          <ScalarProperty Name="pla_id" ColumnName="pla_id" />
+          <ScalarProperty Name="pad_id_estatus" ColumnName="pad_id_estatus" />
+          <ScalarProperty Name="pad_fec_date" ColumnName="pad_fec_date" />
+          <ScalarProperty Name="pad_observaciones" ColumnName="pad_observaciones" />
+          <ScalarProperty Name="pad_num_contacto" ColumnName="pad_num_contacto" />
+          <ScalarProperty Name="pad_situacion_base" ColumnName="pad_situacion_base" />
+          <ScalarProperty Name="pad_funcion_base" ColumnName="pad_funcion_base" />
+          <ScalarProperty Name="pad_catego_base" ColumnName="pad_catego_base" />
+          <ScalarProperty Name="pad_adscrip_base" ColumnName="pad_adscrip_base" />
+          <ScalarProperty Name="pad_n_insaluble" ColumnName="pad_n_insaluble" />
+          <ScalarProperty Name="pad_f_antig" ColumnName="pad_f_antig" />
+          <ScalarProperty Name="pad_permisos" ColumnName="pad_permisos" />
+          <ScalarProperty Name="pad_f_ingreso" ColumnName="pad_f_ingreso" />
+          <ScalarProperty Name="pad_permanencia" ColumnName="pad_permanencia" />
+          <ScalarProperty Name="pad_situacion" ColumnName="pad_situacion" />
+          <ScalarProperty Name="pad_funcion" ColumnName="pad_funcion" />
+          <ScalarProperty Name="pad_sueldo" ColumnName="pad_sueldo" />
+          <ScalarProperty Name="pad_categoria" ColumnName="pad_categoria" />
+          <ScalarProperty Name="pad_adscripcion" ColumnName="pad_adscripcion" />
+          <ScalarProperty Name="pad_nombre" ColumnName="pad_nombre" />
+          <ScalarProperty Name="pad_mat" ColumnName="pad_mat" />
+          <ScalarProperty Name="pad_plaza_id" ColumnName="pad_plaza_id" />
+          <ScalarProperty Name="pad_id" ColumnName="pad_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comite_Ejecutivo">
+      <EntityTypeMapping TypeName="steujedo_sindicatoModel.Comite_Ejecutivo">
+        <MappingFragment StoreEntitySet="Comite_Ejecutivo">
+          <ScalarProperty Name="com_descripcion" ColumnName="com_descripcion" />
+          <ScalarProperty Name="com_id" ColumnName="com_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
