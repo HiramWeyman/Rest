@@ -58,7 +58,7 @@ namespace Rest.Controllers
                     db.SaveChanges();
                     var Mensaje = Request.CreateResponse(HttpStatusCode.Created, galeria);
 
-                    WebRequest request = WebRequest.Create("ftp://65.99.205.97/httpdocs/assets/images/galeria/" + galeria.gal_id);
+                    WebRequest request = WebRequest.Create("ftp://localhost/httpdocs/assets/images/galeria/" + galeria.gal_id);
                     request.Method = WebRequestMethods.Ftp.MakeDirectory;
                     request.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
                     using (var resp = (FtpWebResponse)request.GetResponse())
@@ -128,7 +128,7 @@ namespace Rest.Controllers
                     else
                     {
                         /*
-                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.252.110/httpdocs/assets/images/galeria/" + id);
+                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://localhost/httpdocs/assets/images/galeria/" + id);
                         reqObj.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
 
                         //reqObj.UsePassive = FtpModeUsePassive;
