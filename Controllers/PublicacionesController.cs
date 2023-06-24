@@ -104,9 +104,9 @@ namespace Rest.Controllers
                     db.SaveChanges();
                     var Mensaje = Request.CreateResponse(HttpStatusCode.Created, publicacion);
 
-                    WebRequest request = WebRequest.Create("ftp://65.99.205.97/httpdocs/assets/images/noticias/" + publicacion.pub_id);
+                    WebRequest request = WebRequest.Create("ftp://localhost/httpdocs/assets/images/noticias/" + publicacion.pub_id);
                     request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                    request.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+                    request.Credentials = new NetworkCredential("", "");
                     using (var resp = (FtpWebResponse)request.GetResponse())
                     {
                         //return Request.CreateResponse(resp.StatusCode);
