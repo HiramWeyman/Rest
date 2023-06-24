@@ -60,7 +60,7 @@ namespace Rest.Controllers
 
                     WebRequest request = WebRequest.Create("ftp://localhost/httpdocs/assets/images/galeria/" + galeria.gal_id);
                     request.Method = WebRequestMethods.Ftp.MakeDirectory;
-                    request.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+                    request.Credentials = new NetworkCredential("", "");
                     using (var resp = (FtpWebResponse)request.GetResponse())
                     {
                         //return Request.CreateResponse(resp.StatusCode);
