@@ -35,13 +35,13 @@ namespace Rest.Controllers
                     {
 
                         //Create a FTP Request Object and Specfiy a Complete Path
-                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://65.99.205.97/httpdocs/assets/images/noticias/" + id+"/"+ postedFile.FileName);
+                        FtpWebRequest reqObj = (FtpWebRequest)WebRequest.Create("ftp://localhost/httpdocs/assets/images/noticias/" + id+"/"+ postedFile.FileName);
 
                         //Call A FileUpload Method of FTP Request Object
                         reqObj.Method = WebRequestMethods.Ftp.UploadFile;
 
                         //If you want to access Resourse Protected,give UserName and PWD
-                        reqObj.Credentials = new NetworkCredential("steujedo", "Sindicato#1586");
+                        reqObj.Credentials = new NetworkCredential("", "");
 
                         // Copy the contents of the file to the byte array.
                         byte[] fileContents = File.ReadAllBytes(filePath);
